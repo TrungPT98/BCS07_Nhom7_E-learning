@@ -1,10 +1,12 @@
 #homePage {
   .sliderHome {
+    align-items: center;
     .sliderHomeLeft {
       .sliderHomeTitle {
         .title {
           font-size: 50px;
           font-weight: 700;
+          padding: 0;
         }
         h3 {
           font-weight: 700;
@@ -42,7 +44,11 @@
         position: relative;
         overflow: hidden;
         padding: 25px;
+        transition: all .5s;
         border-radius: 4px;
+        &:hover {
+          transform: scale(0.97);
+        }
       }
       .infoItemA {
         grid-row: 1 / span 2;

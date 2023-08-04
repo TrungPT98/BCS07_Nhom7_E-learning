@@ -9,11 +9,15 @@
 }
 
 .card {
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
   padding-bottom: 50px;
   .cardItem {
     margin-top: 20px;
+    transition: all 0.5s;
+    &:hover {
+      transform: translateY(-10px);
+    }
     a {
       position: relative;
       display: flex;

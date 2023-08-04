@@ -2,7 +2,9 @@ import React from "react";
 import { Input, Button, Space } from "antd";
 const Footer = () => {
   return (
-    <div className="bg-blue-100 p-3">
+    <div
+    style={{background: '#f0f8ff'}}
+    className=" p-3">
       <div className="flex justify-between container py-3 px-10">
         <div className="w-30% p-2 ">
           <a

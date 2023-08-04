@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { DownOutlined } from "@ant-design/icons";
 import { Dropdown, Space, Input } from "antd";
 import { khoaHocServ } from "../../services/khoaHocService";
-
+import './Header.scss'
 // ant design
 const Header = () => {
   const [danhMuc, setDanhMuc] = useState([]);
@@ -21,6 +21,24 @@ const Header = () => {
   }, []);
   // console.log(danhMuc);
   // map DanhMuc
+  
+  // add class sticky
+  useEffect(()=>{
+    const handleScroll = () =>{
+      const header = document.getElementById('header');
+      const scrollPosition = window.scrollY;
+      if(scrollPosition > 0){
+        header.classList.add('sticky')
+      }else{
+        header.classList.remove('sticky')
+
+      }
+    }
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  })
   const items = danhMuc.map((item) => ({
     label: (
       <a target="_blank" rel="" href="">
@@ -30,7 +48,7 @@ const Header = () => {
     key: item.maDanhMuc,
   }));
   return (
-    <header className="bg-transparent py-3">
+    <header id="header" className=" py-3 ">
       <nav className=" border-gray-200 px-4 lg:px-6 py-2.5 ">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
           <a href="#" className="flex items-center">
@@ -44,7 +62,7 @@ const Header = () => {
           <div className="flex items-center lg:order-2">
             <div>
               <Dropdown
-                className="text-white bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-yellow-600 dark:hover:bg-yellow-700 focus:outline-none dark:focus:ring-yellow-800"
+                className="buttonDropdown text-white bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-yellow-600 dark:hover:bg-yellow-700 focus:outline-none dark:focus:ring-yellow-800"
                 menu={{
                   items,
                 }}
@@ -98,39 +116,36 @@ const Header = () => {
             className="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1"
             id="mobile-menu-2"
           >
-            <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
+            <ul className="navList flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
               <li>
                 <NavLink
+                  className="navlinkItem block py-2 pr-4 pl-3  rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 "
                  to='/khoahoc'
-                  className="block py-2 pr-4 pl-3  rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 "
                   aria-current="page"
                 >
                   Khoá học
                 </NavLink>
               </li>
               <li>
-                <a
-                  href="#"
-                  className="text-black block py-2 pr-4 pl-3  border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:p-0   dark:hover:bg-gray-700  lg:dark:hover:bg-transparent dark:border-gray-700"
+                <NavLink
+                  className="navlinkItem text-black block py-2 pr-4 pl-3  border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:p-0   dark:hover:bg-gray-700  lg:dark:hover:bg-transparent dark:border-gray-700"
                 >
                   Blogs
-                </a>
+                </NavLink>
               </li>
               <li>
-                <a
-                  href="#"
-                  className="text-black block py-2 pr-4 pl-3  border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:p-0   dark:hover:bg-gray-700  lg:dark:hover:bg-transparent dark:border-gray-700"
+                <NavLink
+                  className="navlinkItem text-black block py-2 pr-4 pl-3  border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:p-0   dark:hover:bg-gray-700  lg:dark:hover:bg-transparent dark:border-gray-700"
                 >
                   Sự kiện
-                </a>
+                </NavLink>
               </li>
               <li>
-                <a
-                  href="#"
-                  className="text-black block py-2 pr-4 pl-3  border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:p-0   dark:hover:bg-gray-700  lg:dark:hover:bg-transparent dark:border-gray-700"
+                <NavLink
+                  className="navlinkItem text-black block py-2 pr-4 pl-3  border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:p-0   dark:hover:bg-gray-700  lg:dark:hover:bg-transparent dark:border-gray-700"
                 >
                   Thông tin
-                </a>
+                </NavLink>
               </li>
             </ul>
           </div>

@@ -8,6 +8,10 @@
   #cardItemThaoKhao {
     display: flex;
     justify-content: center;
+    transition: all 0.5s;
+    &:hover {
+      transform: translateY(-10px);
+    }
     a {
       position: relative;
       display: flex;
@@ -42,13 +46,13 @@
           min-height: 54px;
         }
         .cardTKDetails {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
           span {
             color: #8c8c8c;
             i {
-                margin-right: 8px;
+              margin-right: 8px;
             }
           }
         }
@@ -58,7 +62,7 @@
         justify-content: space-between;
         align-items: center;
         padding: 10px 20px;
-        border-top: 1px solid rgba(0,0,0,.125);
+        border-top: 1px solid rgba(0, 0, 0, 0.125);
         .cardTKFooterLeft {
           display: flex;
           align-items: center;
@@ -79,14 +83,13 @@
             }
           }
         }
-        .cardTKFooterRight{
-            color: #41b294;
-            font-size: 18px;
-            .textFooterPrice{
-                margin-right: 3px;
-            }
+        .cardTKFooterRight {
+          color: #41b294;
+          font-size: 18px;
+          .textFooterPrice {
+            margin-right: 3px;
+          }
         }
-        
       }
     }
   }
