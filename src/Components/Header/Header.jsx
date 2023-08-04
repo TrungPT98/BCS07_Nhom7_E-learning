@@ -19,7 +19,7 @@ const Header = () => {
         console.log(err);
       });
   }, []);
-  console.log(danhMuc);
+  // console.log(danhMuc);
   // map DanhMuc
   const items = danhMuc.map((item) => ({
     label: (
@@ -30,12 +30,12 @@ const Header = () => {
     key: item.maDanhMuc,
   }));
   return (
-    <header>
-      <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
+    <header className="bg-transparent py-3">
+      <nav className=" border-gray-200 px-4 lg:px-6 py-2.5 ">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
           <a href="#" className="flex items-center">
             <img
-              src="/src/assets/image/headerLogo.png"
+              src="../../assets/image/headerLogo.png"
               className="mr-3 h-6 sm:h-9"
               alt="dadad"
             />
@@ -52,7 +52,6 @@ const Header = () => {
                 <a onClick={(e) => e.preventDefault()}>
                   <Space>
                     Danh mục
-                    <DownOutlined />
                   </Space>
                 </a>
               </Dropdown>
@@ -103,7 +102,7 @@ const Header = () => {
               <li>
                 <a
                   href="#"
-                  className="block py-2 pr-4 pl-3 text-white rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 dark:text-white"
+                  className="block py-2 pr-4 pl-3  rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 "
                   aria-current="page"
                 >
                   Khoá học
@@ -112,7 +111,7 @@ const Header = () => {
               <li>
                 <a
                   href="#"
-                  className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
+                  className="text-black block py-2 pr-4 pl-3  border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:p-0   dark:hover:bg-gray-700  lg:dark:hover:bg-transparent dark:border-gray-700"
                 >
                   Blogs
                 </a>
@@ -120,7 +119,7 @@ const Header = () => {
               <li>
                 <a
                   href="#"
-                  className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
+                  className="text-black block py-2 pr-4 pl-3  border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:p-0   dark:hover:bg-gray-700  lg:dark:hover:bg-transparent dark:border-gray-700"
                 >
                   Sự kiện
                 </a>
@@ -128,7 +127,7 @@ const Header = () => {
               <li>
                 <a
                   href="#"
-                  className="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-primary-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700"
+                  className="text-black block py-2 pr-4 pl-3  border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:p-0   dark:hover:bg-gray-700  lg:dark:hover:bg-transparent dark:border-gray-700"
                 >
                   Thông tin
                 </a>
