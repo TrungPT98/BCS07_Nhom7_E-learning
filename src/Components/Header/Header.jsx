@@ -12,11 +12,11 @@ const Header = () => {
     khoaHocServ
       .layDanhMucKhocHoc()
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setDanhMuc(res.data);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   }, []);
   // console.log(danhMuc);
@@ -100,13 +100,13 @@ const Header = () => {
           >
             <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
               <li>
-                <a
-                  href="#"
+                <NavLink
+                 to='/khoahoc'
                   className="block py-2 pr-4 pl-3  rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 "
                   aria-current="page"
                 >
                   Khoá học
-                </a>
+                </NavLink>
               </li>
               <li>
                 <a

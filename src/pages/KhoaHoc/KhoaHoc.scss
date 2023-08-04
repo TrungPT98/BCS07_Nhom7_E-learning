@@ -1,0 +1,44 @@
+.titleCourse {
+  background-color: #ffd60a;
+  padding: 50px;
+  color: #fff;
+  text-transform: uppercase;
+  h3 {
+    font-size: 30px;
+    font-weight: 600;
+  }
+  p {
+    font-size: 18px;
+  }
+}
+.coures {
+  padding: 50px;
+  .couresContent {
+    display: flex;
+    justify-content: space-between;
+    .couresItems {
+      text-align: center;
+      flex: 1;
+      .couresItem {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        color: #fff;
+        text-transform: uppercase;
+        height: 100%;
+        padding: 30px 20px;
+        h6 {
+          font-size: 18px;
+        }
+        i {
+            padding: 10px 0;
+            font-size: 20px;
+        }
+        p {
+          font-size: 20px;
+        }
+      }
+    }
+  }
+}

@@ -8,14 +8,14 @@ const KhMobile = () => {
     khoaHocServ
       .layKhoaHocTheoDanhMuc("DiDong")
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setKhoaHoc(res.data);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   }, []);
-  console.log(khoaHoc);
+  // console.log(khoaHoc);
   return (
     <Fragment>
       <h3 className="title">Khóa học Mobile</h3>
