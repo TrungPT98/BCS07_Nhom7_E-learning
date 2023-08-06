@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Fragment } from "react";
 import "./KhThamKhao.scss";
+import {NavLink} from 'react-router-dom'
 import { khoaHocServ } from "../../../services/khoaHocService";
 const KhFullStack = () => {
   const [khoaHoc, setKhoaHoc] = useState([]);
@@ -23,7 +24,7 @@ const KhFullStack = () => {
         {khoaHoc.slice(0, 4).map((item) => {
           return (
             <div key={item.maKhoaHoc} id="cardItemThaoKhao" className="w-1/4">
-              <a href="">
+              <NavLink to={`/detail/${item.maKhoaHoc}`}>
                 <img
                   className="itemImg"
                   src={item.hinhAnh}
@@ -69,7 +70,7 @@ const KhFullStack = () => {
                   </div>
                 </div>
                 <div></div>
-              </a>
+              </NavLink>
             </div>
           );
         })}

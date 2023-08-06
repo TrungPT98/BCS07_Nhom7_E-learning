@@ -13,5 +13,8 @@ export const khoaHocServ = {
     },
     layDanhSachKhoaHocPhanTrang: (data) =>{
         return https.get(`https://elearningnew.cybersoft.edu.vn/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc_PhanTrang?page=${data}&pageSize=8  &MaNhom=GP01`)
+    },
+    layThongTinKhoaHoc: (data) =>{
+        return https.get(`https://elearningnew.cybersoft.edu.vn/api/QuanLyKhoaHoc/LayThongTinKhoaHoc?maKhoaHoc=${data}`)
     }
 }

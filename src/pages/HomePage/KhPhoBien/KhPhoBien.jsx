@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { khoaHocServ } from "../../../services/khoaHocService";
 import "./KhPhoBien.scss";
+import {NavLink} from 'react-router-dom'
 const KhPhoBien = () => {
   const [khoaHoc, setKhoaHoc] = useState([]);
   useEffect(() => {
@@ -24,7 +25,7 @@ const KhPhoBien = () => {
          if(item.luotXem > 80){
             return (
                 <div key={item.maKhoaHoc} id="cardItem" className="w-1/4">
-                  <a href="">
+                  <NavLink to={`/detail/${item.maKhoaHoc}`}>
                     <img className="cardImg" src={item.hinhAnh} alt={item.moTa} />
                     <span className="tagTitle">{item.tenKhoaHoc}</span>
                     <div className="cardBody">
@@ -48,7 +49,7 @@ const KhPhoBien = () => {
                       </div>
                     </div>
                     <div></div>
-                  </a>
+                  </NavLink>
                 </div>
               );
          }

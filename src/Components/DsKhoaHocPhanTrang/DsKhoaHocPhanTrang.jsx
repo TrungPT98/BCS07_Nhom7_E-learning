@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { khoaHocServ } from "../../services/khoaHocService";
 import { Pagination } from "antd";
+import {NavLink} from 'react-router-dom'
 import './DsKhoaHocPhanTrang.scss'
 const DsKhoaHocPhanTrang = () => {
     const [currentPage, setCurrentPage] = useState(1)
@@ -9,7 +10,7 @@ const DsKhoaHocPhanTrang = () => {
     khoaHocServ
       .layDanhSachKhoaHocPhanTrang(currentPage)
       .then((res) => {
-        console.log(res.data.items);
+        // console.log(res.data.items);
         setKhoaHoc(res.data.items)
       })
       .catch((err) => {
@@ -30,7 +31,7 @@ const DsKhoaHocPhanTrang = () => {
         {khoaHoc.map((item)=>{
             return (
               <div key={item.maKhoaHoc} className="cardItem w-1/4">
-                <a href="">
+                <NavLink to={`/detail/${item.maKhoaHoc}`}>
                   <img
                     className="cardImg"
                     src={item.hinhAnh}
@@ -56,7 +57,7 @@ const DsKhoaHocPhanTrang = () => {
                     </div>
                   </div>
                   <div></div>
-                </a>
+                </NavLink>
               </div>
             );
         })}
