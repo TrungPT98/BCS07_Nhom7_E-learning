@@ -25,12 +25,12 @@ const KhPhoBien = () => {
          if(item.luotXem > 80){
             return (
                 <div key={item.maKhoaHoc} id="cardItem" className="w-1/4">
-                  <NavLink to={`/detail/${item.maKhoaHoc}`}>
+                  <NavLink className='cardItemLink' to={`/detail/${item.maKhoaHoc}`}>
                     <img className="cardImg" src={item.hinhAnh} alt={item.moTa} />
                     <span className="tagTitle">{item.tenKhoaHoc}</span>
                     <div className="cardBody">
                       <h6
-                      className=" line-clamp-2"
+                      className=" line-clamp-1"
                       >{item.moTa}</h6>
                       <div className="cardAvatar">
                         <div className="avatar">

@@ -46,9 +46,9 @@ const KhDanhMuc = () => {
                       src={item.hinhAnh}
                       alt="zxczxczxc"
                     />
-                    <span className="tagTitle">{item.tenKhoaHoc}</span>
+                    <span className="tagTitle line-clamp-1" >{item.tenKhoaHoc}</span>
                     <div className="coursesBody">
-                      <h6 className="line-clamp-2">{item.moTa}</h6>
+                      <h6 className="line-clamp-1">{item.moTa}</h6>
                       <div className="coursesDetails">
                         <span>
                           <i

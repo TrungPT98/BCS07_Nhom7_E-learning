@@ -12,7 +12,7 @@
     &:hover{
         transform: translateY(-10px);
     }
-    a{
+    .cardItemLink{
         position: relative;
     display: flex;
     flex-direction: column;
@@ -42,11 +42,12 @@
         min-height: 1px;
         padding: 20px;
         h6{
-            font-size: 18px;
-            min-height: 54px
+              font-size: 18px;
+          padding-top: 20px;
         };
         .cardAvatar{
             display: flex;
+          padding-top: 20px;
             align-items: center;
             .avatar{
                 height: 40px;
