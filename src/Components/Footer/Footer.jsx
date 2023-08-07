@@ -2,9 +2,11 @@ import React from "react";
 import { Input, Button, Space } from "antd";
 const Footer = () => {
   return (
-    <div className="bg-blue-100 p-3">
+    <div
+    style={{background: '#f0f8ff'}}
+    className=" p-3">
       <div className="flex justify-between container py-3 px-10">
-        <div className="w-w-30 p-2 ">
+        <div className="w-30% p-2 ">
           <a
             style={{ textShadow: "5px -2px 3px #54d2c0", color: "#252525" }}
             className="text-2xl font-semibold"
@@ -91,7 +93,7 @@ const Footer = () => {
             </li>
           </ul>
         </div>
-        <div className="w-w-30 p-2">
+        <div className="w-30% p-2">
           <h3 className="text-2xl font-semibold">Đăng kí tư vấn</h3>
           <Input className="my-1" placeholder="Họ và tên" />
           <Input className="my-1" placeholder="Email" />

@@ -1,0 +1,25 @@
+#header{
+    transition: all .5s;
+}
+.sticky{
+    position: sticky;
+    top: 0;
+    z-index: 99999;
+    box-shadow: 0 2px 24px 0 rgba(0,0,0,.15);
+    padding: 5px 50px;
+    transition: all .5s;
+    background-color: #f0f8ff;
+}
+
+.buttonDropdown{
+    cursor: pointer;
+}
+.navList{
+    li{
+        .navlinkItem{
+            &:hover{
+                opacity: 0.6; 
+            }
+        }
+    }
+}

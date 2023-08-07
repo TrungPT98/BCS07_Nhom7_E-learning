@@ -1,0 +1,96 @@
+.title {
+  font-weight: 600;
+  font-size: 18px;
+  padding-bottom: 40px;
+}
+#cardThamKhao {
+  padding-bottom: 50px;
+  #cardItemThaoKhao {
+    display: flex;
+    justify-content: center;
+    transition: all 0.5s;
+    &:hover {
+      transform: translateY(-10px);
+    }
+    a {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.5s;
+      width: 280px;
+      min-width: 280px;
+      min-height: 370px;
+      background-color: #fff;
+      background-clip: border-box;
+      border: 1px solid rgba(0, 0, 0, 0.125);
+      box-shadow: 0 0 10px 4px rgba(0, 0, 0, 0.2);
+      .itemImg {
+        min-height: 185px;
+        height: 185px;
+      }
+      .imgTag {
+        display: inline-block;
+        position: absolute;
+        z-index: 10;
+        top: 174px;
+        padding: 0 10px;
+        color: #fff;
+        background-color: #41b294;
+      }
+      .cardTKBody {
+        flex: 1;
+        min-height: 1px;
+        padding: 20px;
+        h6 {
+          font-size: 18px;
+          min-height: 54px;
+        }
+        .cardTKDetails {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          span {
+            color: #8c8c8c;
+            i {
+              margin-right: 8px;
+            }
+          }
+        }
+      }
+      .cardTKFooter {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        border-top: 1px solid rgba(0, 0, 0, 0.125);
+        .cardTKFooterLeft {
+          display: flex;
+          align-items: center;
+          .avatar {
+            height: 40px;
+            width: 40px;
+            padding: 2px;
+            margin-right: 15px;
+            border-color: #f6ba35 transparent;
+            border-left: 1px solid transparent;
+            border-right: 1px solid transparent;
+            border-bottom: 1px solid #f6ba35;
+            border-radius: 50%;
+            border-top: 1px solid #f6ba35;
+            img {
+              width: 100%;
+              border-radius: 50%;
+            }
+          }
+        }
+        .cardTKFooterRight {
+          color: #41b294;
+          font-size: 18px;
+          .textFooterPrice {
+            margin-right: 3px;
+          }
+        }
+      }
+    }
+  }
+}
