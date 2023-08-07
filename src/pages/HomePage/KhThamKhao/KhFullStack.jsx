@@ -60,7 +60,7 @@ const KhFullStack = () => {
                 <div className="cardTKFooter">
                   <div className="cardTKFooterLeft">
                     <div className="avatar">
-                      <img src="" alt="Messi" />
+                      <img src="https://i.pravatar.cc/300" alt="Messi" />
                     </div>
                     <span className="avatarTitle">Messi</span>
                   </div>

@@ -3,6 +3,7 @@ import UserTemplate from './template/UserTemplate';
 import HomePage from './pages/HomePage/HomePage';
 import KhoaHoc from './pages/KhoaHoc/KhoaHoc';
 import KhDetail from './Components/KhDetail/KhDetail';
+import KhDanhMuc from './Components/KhDanhMuc/KhDanhMuc';
 function App() {
   return (
     <BrowserRouter>
@@ -11,6 +12,7 @@ function App() {
           <Route index element={<HomePage/>}/>
           <Route path='/khoahoc' element={<KhoaHoc/>} />
           <Route path='/detail/:id' element={<KhDetail/>} />
+          <Route path='/danhMuc/:id' element={<KhDanhMuc/>} />
         </Route>
       </Routes>
     </BrowserRouter>

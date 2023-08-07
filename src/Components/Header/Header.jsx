@@ -41,9 +41,9 @@ const Header = () => {
   })
   const items = danhMuc.map((item) => ({
     label: (
-      <a target="_blank" rel="" href="">
+      <NavLink to={`/danhMuc/${item.maDanhMuc}`} rel="" >
         {item.tenDanhMuc}
-      </a>
+      </NavLink>
     ),
     key: item.maDanhMuc,
   }));

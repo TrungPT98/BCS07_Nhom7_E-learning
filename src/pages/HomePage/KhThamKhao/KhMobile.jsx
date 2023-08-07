@@ -60,7 +60,7 @@ const KhMobile = () => {
                 <div className="cardTKFooter">
                   <div className="cardTKFooterLeft">
                     <div className="avatar">
-                      <img src="" alt="Messi" />
+                      <img src="https://i.pravatar.cc/150?img=2" alt="Messi" />
                     </div>
                     <span className="avatarTitle">Messi</span>
                   </div>
