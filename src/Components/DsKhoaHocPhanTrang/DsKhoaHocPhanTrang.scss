@@ -8,17 +8,18 @@
   }
 }
 
-.card {
+.cardPhanTrang {
   display: flex;
   flex-wrap: wrap;
   padding-bottom: 50px;
+  flex-direction: row;
   .cardItem {
     margin-top: 20px;
     transition: all 0.5s;
     &:hover {
       transform: translateY(-10px);
     }
-    a {
+    .cardItemLink {
       position: relative;
       display: flex;
       flex-direction: column;
@@ -49,11 +50,12 @@
         padding: 20px;
         h6 {
           font-size: 18px;
-          min-height: 54px;
+          padding-top: 20px;
         }
         .cardAvatar {
           display: flex;
           align-items: center;
+          padding-top: 20px;
           .avatar {
             height: 40px;
             width: 40px;

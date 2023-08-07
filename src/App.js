@@ -5,6 +5,7 @@ import KhoaHoc from './pages/KhoaHoc/KhoaHoc';
 import KhDetail from './Components/KhDetail/KhDetail';
 import InfoPage from "./pages/InfoPage/InfoPage";
 import EventPage from "./pages/EventPage/EventPage";
+import KhDanhMuc from './Components/KhDanhMuc/KhDanhMuc';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route index element={<HomePage/>}/>
           <Route path='/khoahoc' element={<KhoaHoc/>} />
           <Route path='/detail/:id' element={<KhDetail/>} />
+          <Route path='/danhMuc/:id' element={<KhDanhMuc/>} />
         </Route>
         <Route path="/info" element={<UserTemplate />}>
           <Route index element={<InfoPage />} />

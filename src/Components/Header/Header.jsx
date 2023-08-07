@@ -41,14 +41,14 @@ const Header = () => {
   })
   const items = danhMuc.map((item) => ({
     label: (
-      <a target="_blank" rel="" href="">
+      <NavLink to={`/danhMuc/${item.maDanhMuc}`} rel="" >
         {item.tenDanhMuc}
-      </a>
+      </NavLink>
     ),
     key: item.maDanhMuc,
   }));
   return (
-    <header id="header" className=" py-3 ">
+    <header id="header" className="py-3 m-0">
       <nav className=" border-gray-200 px-4 lg:px-6 py-2.5 ">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
           <NavLink to={'http://localhost:3000/'} className="flex items-center">

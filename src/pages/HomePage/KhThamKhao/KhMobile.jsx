@@ -24,7 +24,7 @@ const KhMobile = () => {
         {khoaHoc.slice(0, 4).map((item) => {
           return (
             <div key={item.maKhoaHoc} id="cardItemThaoKhao" className="w-1/4">
-              <NavLink to={`/detail/${item.maKhoaHoc}`}>
+              <NavLink className='cardItemLink' to={`/detail/${item.maKhoaHoc}`}>
                 <img
                   className="itemImg"
                   src={item.hinhAnh}
@@ -32,7 +32,7 @@ const KhMobile = () => {
                 />
                 <span className="imgTag">{item.tenKhoaHoc}</span>
                 <div className="cardTKBody">
-                  <h6 className=" line-clamp-2">{item.moTa}</h6>
+                  <h6 className=" line-clamp-1">{item.moTa}</h6>
                   <div className="cardTKDetails">
                     <span>
                       <i
@@ -60,7 +60,7 @@ const KhMobile = () => {
                 <div className="cardTKFooter">
                   <div className="cardTKFooterLeft">
                     <div className="avatar">
-                      <img src="" alt="Messi" />
+                      <img src="https://i.pravatar.cc/150?img=2" alt="Messi" />
                     </div>
                     <span className="avatarTitle">Messi</span>
                   </div>
