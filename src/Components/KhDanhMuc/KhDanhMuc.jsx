@@ -44,10 +44,10 @@ const KhDanhMuc = () => {
           </button>
         </div>
         <div className="coursesContent">
+            <Fade bottom duration={1500}>
           <div className="coursesItems flex">
             {khoaHocDm.map((item) => {
               return (
-              <Fade bottom duration={1500}>
                   <div key={item.maKhoaHoc} className="coursesItem w-1/4">
                   <NavLink
                     to={`/detail/${item.maKhoaHoc}`}
@@ -100,10 +100,10 @@ const KhDanhMuc = () => {
                     </div>
                   </NavLink>
                 </div>
-              </Fade>
               );
             })}
           </div>
+            </Fade>
         </div>
       </div>
     </>

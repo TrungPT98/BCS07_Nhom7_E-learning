@@ -27,10 +27,10 @@ const KhFullStack = () => {
   return (
     <Fragment>
       <h3 className="title">Khóa học Fullstack</h3>
+        <Fade bottom duration={1500}>
       <div id="cardThamKhao" className="flex">
         {khoaHoc.slice(0, 4).map((item) => {
           return (
-           <Fade bottom duration={1500}>
              <div key={item.maKhoaHoc} id="cardItemThaoKhao" className="w-1/4">
               <NavLink className='cardItemLink' to={`/detail/${item.maKhoaHoc}`}>
                 <img
@@ -80,10 +80,10 @@ const KhFullStack = () => {
                 <div></div>
               </NavLink>
             </div>
-           </Fade>
           );
         })}
       </div>
+        </Fade>
     </Fragment>
   );
 };

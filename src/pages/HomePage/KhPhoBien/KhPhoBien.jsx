@@ -30,11 +30,11 @@ const KhPhoBien = () => {
   return (
     <frameElement>
       <h3 className="pb-10 cardTitle">Khoá học phổ biến</h3>
+        <Fade bottom duration={1500}>
       <div id="card" className="flex">
         {khoaHoc.slice(0, 4).map((item) => {
           if (item.luotXem > 80) {
             return (
-              <Fade bottom duration={1500}>
                 <div key={item.maKhoaHoc} id="cardItem" className="w-1/4">
                 <NavLink
                   className="cardItemLink"
@@ -63,11 +63,11 @@ const KhPhoBien = () => {
                   <div></div>
                 </NavLink>
               </div>
-              </Fade>
             );
           }
         })}
       </div>
+      </Fade>
     </frameElement>
   );
 };

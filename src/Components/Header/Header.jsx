@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { DownOutlined } from "@ant-design/icons";
 import { Dropdown, Space, Input } from "antd";
 import { khoaHocServ } from "../../services/khoaHocService";
-import './Header.scss'
+import "./Header.scss";
 // ant design
 const Header = () => {
   const [danhMuc, setDanhMuc] = useState([]);
@@ -21,27 +21,26 @@ const Header = () => {
   }, []);
   // console.log(danhMuc);
   // map DanhMuc
-  
-  // add class sticky
-  useEffect(()=>{
-    const handleScroll = () =>{
-      const header = document.getElementById('header');
-      const scrollPosition = window.scrollY;
-      if(scrollPosition > 0){
-        header.classList.add('sticky')
-      }else{
-        header.classList.remove('sticky')
 
+  // add class sticky
+  useEffect(() => {
+    const handleScroll = () => {
+      const header = document.getElementById("header");
+      const scrollPosition = window.scrollY;
+      if (scrollPosition > 0) {
+        header.classList.add("sticky");
+      } else {
+        header.classList.remove("sticky");
       }
-    }
+    };
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  })
+  });
   const items = danhMuc.map((item) => ({
     label: (
-      <NavLink to={`/danhMuc/${item.maDanhMuc}`} rel="" >
+      <NavLink to={`/danhMuc/${item.maDanhMuc}`} rel="">
         {item.tenDanhMuc}
       </NavLink>
     ),
@@ -51,7 +50,7 @@ const Header = () => {
     <header id="header" className="py-3 m-0">
       <nav className=" border-gray-200 px-4 lg:px-6 py-2.5 ">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
-          <NavLink to={'http://localhost:3000/'} className="flex items-center">
+          <NavLink to={"http://localhost:3000/"} className="flex items-center">
             <img
               src="../../assets/image/headerLogo.png"
               className="mr-3 h-6 sm:h-9"
@@ -60,21 +59,6 @@ const Header = () => {
           </NavLink>
           <Input className="w-1/4" placeholder="Tìm kiếm" />
           <div className="flex items-center lg:order-2">
-            <div>
-              <Dropdown
-                className="buttonDropdown text-white bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-yellow-600 dark:hover:bg-yellow-700 focus:outline-none dark:focus:ring-yellow-800"
-                menu={{
-                  items,
-                }}
-              >
-                <a onClick={(e) => e.preventDefault()}>
-                  <Space>
-                    Danh mục
-                  </Space>
-                </a>
-              </Dropdown>
-            </div>
-
             <NavLink className="text-white bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-yellow-600 dark:hover:bg-yellow-700 focus:outline-none dark:focus:ring-yellow-800">
               Đăng nhập
             </NavLink>
@@ -116,36 +100,47 @@ const Header = () => {
             className="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1"
             id="mobile-menu-2"
           >
-            <ul className="navList flex flex-col font-medium lg:flex-row lg:space-x-8 lg:mt-0">
+            <ul className="navList flex flex-col font-medium lg:flex-row lg:space-x-8 lg:mt-0 items-center">
               <li>
                 <NavLink
-                  className="navlinkItem block py-2 pr-4 pl-3  rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 "
-                 to='/khoahoc'
+                  className="navlinkItem block    rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 "
+                  to="/khoahoc"
                   aria-current="page"
                 >
                   Khoá học
                 </NavLink>
               </li>
               <li>
-                <NavLink
-                  className="navlinkItem text-black block py-2 pr-4 pl-3  border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:p-0   dark:hover:bg-gray-700  lg:dark:hover:bg-transparent dark:border-gray-700"
-                >
+                <NavLink className="navlinkItem text-black block    border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:p-0   dark:hover:bg-gray-700  lg:dark:hover:bg-transparent dark:border-gray-700">
                   Blogs
                 </NavLink>
               </li>
               <li>
-                <NavLink
-                  className="navlinkItem text-black block py-2 pr-4 pl-3  border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:p-0   dark:hover:bg-gray-700  lg:dark:hover:bg-transparent dark:border-gray-700"
-                >
+                <NavLink className="navlinkItem text-black block    border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:p-0   dark:hover:bg-gray-700  lg:dark:hover:bg-transparent dark:border-gray-700">
                   Sự kiện
                 </NavLink>
               </li>
               <li>
-                <NavLink
-                  className="navlinkItem text-black block py-2 pr-4 pl-3  border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:p-0   dark:hover:bg-gray-700  lg:dark:hover:bg-transparent dark:border-gray-700"
-                >
+                <NavLink className="navlinkItem text-black block    border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:p-0   dark:hover:bg-gray-700  lg:dark:hover:bg-transparent dark:border-gray-700">
                   Thông tin
                 </NavLink>
+              </li>
+              <li>
+                <div>
+                  <Dropdown
+                    className="buttonDropdown"
+                    menu={{
+                      items,
+                    }}
+                  >
+                    <a onClick={(e) => e.preventDefault()}>
+                      <Space>
+                        Danh mục
+                        <i class="fa-solid fa-chevron-down"></i>
+                      </Space>
+                    </a>
+                  </Dropdown>
+                </div>
               </li>
             </ul>
           </div>

@@ -42,13 +42,13 @@ const DsKhoaHocPhanTrang = () => {
         <i class="fa-solid fa-bookmark"></i>
         Danh sách khóa học
       </h3>
+        <Fade bottom duration={1500}>
       <div className="cardPhanTrang">
         {loading ? (
           <Lottie options={defaultOptions} width={200} />
         ) : (
           khoaHoc.map((item) => {
             return (
-              <Fade bottom duration={1500}>
                 <div key={item.maKhoaHoc} className="cardItem w-1/4">
                 <NavLink
                   className="cardItemLink"
@@ -81,11 +81,11 @@ const DsKhoaHocPhanTrang = () => {
                   <div></div>
                 </NavLink>
               </div>
-              </Fade>
             );
           })
-        )}
+          )}
       </div>
+          </Fade>
       <Pagination
         className="text-center"
         current={currentPage}

@@ -1,6 +1,6 @@
 import React from "react";
 import Fade from "react-reveal/Fade";
-import Slide from 'react-reveal/Slide';
+import Slide from "react-reveal/Slide";
 import Lottie from "react-lottie";
 import animationHome from "../../assets/animation/animationHome.json";
 import animationFeedback from "../../assets/animation/animationFeedback.json";
@@ -11,6 +11,7 @@ import KhMobile from "./KhThamKhao/KhMobile";
 // react countup
 import CountUp from "react-countup";
 import "./HomePages.scss";
+import BackToTop from "../../Components/BackToTop/BackToTop";
 const HomePage = () => {
   // lottie
   const defaultOptions = {
@@ -37,11 +38,14 @@ const HomePage = () => {
         <div className="sliderHome flex h-screen">
           <Fade left duration={3000}>
             <div className="sliderHomeLeft w-1/2">
+              <div className="triangleTopRight"></div>
+              <div className="smallBox smallBoxLeftTop"></div>
+              <div className="smallBox smallBoxRightTop"></div>
+              <div className="smallBox smallBoxRightBottom"></div>
+              <div className="smallBox smallBoxRightBottom doubleBox"></div>
               <div className="sliderHomeTitle">
                 <h1 className="title">Chào mừng đến với môi trường</h1>
                 <h3> Vlearning</h3>
-              </div>
-              <div className="btn">
                 <button className="btnSliderHome">bắt đầu nào</button>
               </div>
             </div>
@@ -54,8 +58,8 @@ const HomePage = () => {
         </div>
         {/* info */}
         <div className="info">
-         <Slide left duration={2000}>
-         <div className="infoContent">
+          <Slide left duration={2000}>
+            <div className="infoContent">
               <div className="infoItem infoItemA">
                 <div className="infoItemTitle">
                   <h3>Khóa học</h3>
@@ -205,8 +209,8 @@ const HomePage = () => {
                   </ul>
                 </div>
               </div>
-          </div>
-         </Slide>
+            </div>
+          </Slide>
         </div>
 
         {/* khoá học đề xuất  */}
@@ -415,6 +419,11 @@ const HomePage = () => {
       {/* feedback */}
       <div className="feedback">
         <div className="feedbackContent">
+          <Fade right duration={3000}>
+            <div className="smallBox smallBoxRightTop"></div>
+            <div className="smallBox smallBoxRightBottom"></div>
+            <div className="smallBox smallBoxLeftBottom"></div>
+          </Fade>
           <div className="feedbackItem">
             <Fade left duration={3000}>
               <div className="feedbackItemLeft w-1/2">
@@ -424,7 +433,7 @@ const HomePage = () => {
             <Fade right duration={3000}>
               <div className="feedbackItemRight w-1/2">
                 <p className="feedbackText">
-                  <i class="fa-solid fa-quote-left"></i>
+                  <i class="fa-solid fa-quote-left mr-2"></i>
                   Chương trình giảng dạy được biên soạn dành riêng cho các bạn
                   Lập trình từ trái ngành hoặc đã có kiến thức theo cường độ
                   cao, luôn được tinh chỉnh và tối ưu hóa theo thời gian bởi các
@@ -438,6 +447,10 @@ const HomePage = () => {
           </div>
         </div>
       </div>
+
+
+      {/* backToTop */}
+      <BackToTop/>
     </div>
   );
 };
