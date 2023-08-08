@@ -3,57 +3,70 @@ import { useParams } from "react-router-dom";
 import { khoaHocServ } from "../../services/khoaHocService";
 import { NavLink } from "react-router-dom";
 import { Button, Space } from "antd";
+import KhPhoBien from "../../pages/HomePage/KhPhoBien/KhPhoBien";
+import { useDispatch } from "react-redux";
+import {
+  set_loading_ended,
+  set_loading_started,
+} from "../../redux/slices/loadingSlice";
+import Zoom from "react-reveal/Zoom";
 import "./KhDetail.scss";
-import KhPhoBien from '../../pages/HomePage/KhPhoBien/KhPhoBien'
 const KhDetail = () => {
+  const dispatch = useDispatch();
   const { id } = useParams();
-  const [detail, setDetail] = useState([])
+  const [detail, setDetail] = useState([]);
   useEffect(() => {
+    dispatch(set_loading_started);
     khoaHocServ
       .layThongTinKhoaHoc(id)
       .then((res) => {
-        console.log(res);
-        setDetail(res.data)
+        // console.log(res);
+        setDetail(res.data);
+        dispatch(set_loading_ended);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
+        dispatch(set_loading_ended);
       });
   }, []);
-  console.log(detail)
+  // console.log(detail)
   return (
     <>
       <div className="titleCourse">
-        <h3>THÔNG TIN KHÓA HỌC</h3>
-        <p>TIẾN LÊN VÀ KHÔNG CHẦN CHỪ !!!</p>
+        <Zoom>
+          <h3>THÔNG TIN KHÓA HỌC</h3>
+        </Zoom>
+        <Zoom>
+          <p>TIẾN LÊN VÀ KHÔNG CHẦN CHỪ !!!</p>
+        </Zoom>
       </div>
       <div className="details">
         <div className="detailsContent">
           <div className="detailsItemLeft  w-2/3">
-            <h4 className="title">
-              {detail?.tenKhoaHoc}
-            </h4>
+            <h4 className="title">{detail?.tenKhoaHoc}</h4>
             <div className="itemLeftInfo">
               <div className="w-1/3">
-                <div className="infoLeft">
+                <div className="infoItemLeft">
                   <p className="subTitle">Giảng viên</p>
                   <p className="title">Messi</p>
                 </div>
               </div>
               <div className="w-1/3">
-                <div className="infoCenter">
+                <div className="infoItemCenter">
                   <p className="subTitle">Danh mục</p>
-                  <p className="title">{detail?.danhMucKhoaHoc?.maDanhMucKhoahoc}</p>
+                  <p className="title">
+                    {detail?.danhMucKhoaHoc?.tenDanhMucKhoaHoc}
+                  </p>
                 </div>
               </div>
               <div className="w-1/3">
-                <div className="infoRight">
+                <div className="infoItemRight">
                   <span>
                     <i class="fa-solid fa-star"></i>
                     <i class="fa-solid fa-star"></i>
                     <i class="fa-solid fa-star"></i>
                     <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    5
+                    <i class="fa-solid fa-star"></i>5
                   </span>
                   <p className="subTitle">Đánh giá</p>
                 </div>
@@ -76,27 +89,27 @@ const KhDetail = () => {
                 <div className="w-1/2 learnListLeft">
                   <ul>
                     <li>
-                     <i class="fa-solid fa-check"></i>
+                      <i class="fa-solid fa-check"></i>
                       <span>
                         Tạo ra ứng dụng và sản phẩm kỹ thuật số, biến ý tưởng
                         thành hiện thực và thể hiện sáng tạo
                       </span>
                     </li>
                     <li>
-                     <i class="fa-solid fa-check"></i>
+                      <i class="fa-solid fa-check"></i>
                       <span>
                         Tăng cơ hội việc làm trong lĩnh vực công nghệ thông tin
                         và phát triển phần mềm.
                       </span>
                     </li>
                     <li>
-                     <i class="fa-solid fa-check"></i>
+                      <i class="fa-solid fa-check"></i>
                       <span>
                         Rèn luyện khả năng giải quyết vấn đề và tư duy logic.
                       </span>
                     </li>
                     <li>
-                     <i class="fa-solid fa-check"></i>
+                      <i class="fa-solid fa-check"></i>
                       <span>
                         Đem lại niềm vui và sự sáng tạo trong quá trình tạo ra
                         sản phẩm hoặc giải quyết bài toán.
@@ -108,26 +121,26 @@ const KhDetail = () => {
                 <div className="w-1/2 learnListRight">
                   <ul>
                     <li>
-                     <i class="fa-solid fa-check"></i>
+                      <i class="fa-solid fa-check"></i>
                       <span>
                         Tự động hóa công việc, giúp tiết kiệm thời gian và giảm
                         sai sót.
                       </span>
                     </li>
                     <li>
-                     <i class="fa-solid fa-check"></i>
+                      <i class="fa-solid fa-check"></i>
                       <span>
                         Tăng thu nhập nhờ vào các kỹ năng lập trình giá trị cao.
                       </span>
                     </li>
                     <li>
-                     <i class="fa-solid fa-check"></i>
+                      <i class="fa-solid fa-check"></i>
                       <span>
                         Hiểu rõ công nghệ thông tin và cuộc sống hiện đại.
                       </span>
                     </li>
                     <li>
-                     <i class="fa-solid fa-check"></i>
+                      <i class="fa-solid fa-check"></i>
                       <span>
                         Tiếp cận nguồn thông tin phong phú và tiếp tục học hỏi
                         suốt đời.
@@ -190,11 +203,8 @@ const KhDetail = () => {
                     </span>
                   </div>
                 </div>
-
-                
               </div>
             </div>
-
 
             <div className="itemLeftContent">
               <div className="leftContentDetails">
@@ -247,8 +257,6 @@ const KhDetail = () => {
                     </span>
                   </div>
                 </div>
-
-                
               </div>
             </div>
 
@@ -303,14 +311,16 @@ const KhDetail = () => {
                     </span>
                   </div>
                 </div>
-
-                
               </div>
             </div>
           </div>
           <div className="detailsItemRight w-1/3">
             <div className="itemRightSidebar">
-              <img className="sidebarImg" src={detail?.hinhAnh} alt={detail?.moTa} />
+              <img
+                className="sidebarImg"
+                src={detail?.hinhAnh}
+                alt={detail?.moTa}
+              />
               <div className="sidebarPrice">
                 <i class="fa-solid fa-heart"></i>
                 <span className="priceTitle">500.000</span>
@@ -358,11 +368,10 @@ const KhDetail = () => {
               </div>
             </div>
           </div>
-
-          </div>
-       <div className="mt-5">
-       <KhPhoBien/>
-       </div>
+        </div>
+        <div className="mt-5">
+          <KhPhoBien />
+        </div>
       </div>
     </>
   );

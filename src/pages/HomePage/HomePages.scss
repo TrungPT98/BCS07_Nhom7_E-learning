@@ -1,34 +1,37 @@
 #homePage {
-  .sliderHome {
-    align-items: center;
-    .sliderHomeLeft {
-      .sliderHomeTitle {
-        .title {
-          font-size: 50px;
-          font-weight: 700;
-          padding: 0;
+  .homePageContent{
+    padding: 0 50px;
+    .sliderHome {
+      align-items: center;
+      .sliderHomeLeft {
+        .sliderHomeTitle {
+          .title {
+            font-size: 50px;
+            font-weight: 700;
+            padding: 0;
+          }
+          h3 {
+            font-weight: 700;
+            font-size: 65px;
+            color: #41b294;
+            overflow: hidden;
+            animation: animationText 5s steps(10) infinite;
+            display: inline-block;
+          }
         }
-        h3 {
-          font-weight: 700;
-          font-size: 65px;
-          color: #41b294;
-          overflow: hidden;
-          animation: animationText 5s steps(10) infinite;
-          display: inline-block;
-        }
-      }
-      .btn {
-        .btnSliderHome {
-          padding: 10px 20px;
-          color: #fff;
-          background-color: #f6ba35;
-          border: none;
-          transition: all 0.5s;
-          text-transform: uppercase;
-          font-size: 18px;
-          border-radius: 4px;
-          &:hover {
-            transform: scale(0.97);
+        .btn {
+          .btnSliderHome {
+            padding: 10px 20px;
+            color: #fff;
+            background-color: #f6ba35;
+            border: none;
+            transition: all 0.5s;
+            text-transform: uppercase;
+            font-size: 18px;
+            border-radius: 4px;
+            &:hover {
+              transform: scale(0.97);
+            }
           }
         }
       }
@@ -185,6 +188,9 @@
           border-radius: 5px;
           border: none;
           transition: all 0.5s;
+          &:hover{
+            box-shadow: 0 0 10px 6px rgba(0,0,0,.13);
+          }
           .itemImg {
             height: 80px;
             width: 80px;
