@@ -47,8 +47,8 @@ const Header = () => {
     key: item.maDanhMuc,
   }));
   return (
-    <header id="header" className="py-3 m-0">
-      <nav className=" border-gray-200 px-4 lg:px-6 py-2.5 ">
+    <header id="header" className="pt-3 m-0">
+      <nav className=" border-gray-200 px-4 lg:px-6 py-2 ">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
           <NavLink to={"http://localhost:3000/"} className="flex items-center">
             <img
@@ -59,7 +59,8 @@ const Header = () => {
           </NavLink>
           <Input className="w-1/4" placeholder="Tìm kiếm" />
           <div className="flex items-center lg:order-2">
-            <NavLink className="text-white bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-yellow-600 dark:hover:bg-yellow-700 focus:outline-none dark:focus:ring-yellow-800">
+            <NavLink
+            className="btnLogin text-white font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 ">
               Đăng nhập
             </NavLink>
             <button
@@ -128,7 +129,7 @@ const Header = () => {
               <li>
                 <div>
                   <Dropdown
-                    className="buttonDropdown"
+                    className="buttonDropdown "
                     menu={{
                       items,
                     }}
