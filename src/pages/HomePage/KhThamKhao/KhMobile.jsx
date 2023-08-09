@@ -1,29 +1,37 @@
 import React, { useEffect, useState } from "react";
+import Fade from "react-reveal/Fade";
 import { Fragment } from "react";
 import "./KhThamKhao.scss";
 import {NavLink} from 'react-router-dom'
 import { khoaHocServ } from "../../../services/khoaHocService";
+import { useDispatch } from "react-redux";
+import { set_loading_ended, set_loading_started } from "../../../redux/slices/loadingSlice";
 const KhMobile = () => {
+  const dispatch = useDispatch()
   const [khoaHoc, setKhoaHoc] = useState([]);
   useEffect(() => {
+    dispatch(set_loading_started)
     khoaHocServ
       .layKhoaHocTheoDanhMuc("DiDong")
       .then((res) => {
         // console.log(res);
         setKhoaHoc(res.data);
+        dispatch(set_loading_ended)
       })
       .catch((err) => {
         // console.log(err);
+        dispatch(set_loading_ended)
       });
   }, []);
   // console.log(khoaHoc);
   return (
     <Fragment>
       <h3 className="title">Khóa học Mobile</h3>
+        <Fade bottom duration={1500}>
       <div id="cardThamKhao" className="flex">
         {khoaHoc.slice(0, 4).map((item) => {
           return (
-            <div key={item.maKhoaHoc} id="cardItemThaoKhao" className="w-1/4">
+              <div key={item.maKhoaHoc} id="cardItemThaoKhao" className="w-1/4">
               <NavLink className='cardItemLink' to={`/detail/${item.maKhoaHoc}`}>
                 <img
                   className="itemImg"
@@ -75,6 +83,7 @@ const KhMobile = () => {
           );
         })}
       </div>
+        </Fade>
     </Fragment>
   );
 };

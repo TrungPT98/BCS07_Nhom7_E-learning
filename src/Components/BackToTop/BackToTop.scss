@@ -1,0 +1,27 @@
+.back-to-top{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #f6ba35;
+    color: #fff;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    cursor: pointer;
+    transition: opacity 0.3s, transform 0.3s;
+    opacity: 0;
+    transform: translateY(100%);
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .back-to-top:hover {
+    opacity: 0.7;
+  }

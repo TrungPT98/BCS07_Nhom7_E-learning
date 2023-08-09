@@ -1,13 +1,18 @@
 import React, { Fragment } from "react";
-import "./KhoaHoc.scss";
+import Zoom from "react-reveal/Zoom";
 import DsKhoaHocPhanTrang from "../../Components/DsKhoaHocPhanTrang/DsKhoaHocPhanTrang";
+import "./KhoaHoc.scss";
 const KhoaHoc = () => {
   return (
     <Fragment>
       {/* titleCoures */}
       <div className="titleCourse">
-        <h3>Khóa học</h3>
-        <p>Bắt đầu hành trình nào!!!</p>
+        <Zoom>
+          <h3>Khóa học</h3>
+        </Zoom>
+        <Zoom>
+          <p>Bắt đầu hành trình nào!!!</p>
+        </Zoom>
       </div>
 
       {/* courses */}
@@ -57,7 +62,7 @@ const KhoaHoc = () => {
           </div>
         </div>
 
-        <DsKhoaHocPhanTrang/>
+        <DsKhoaHocPhanTrang />
       </div>
     </Fragment>
   );

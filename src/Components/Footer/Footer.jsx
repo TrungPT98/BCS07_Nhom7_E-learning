@@ -1,33 +1,32 @@
 import React from "react";
 import { Input, Button, Space } from "antd";
+import './Footer.scss'
 const Footer = () => {
   return (
-    <div
-    style={{background: '#f0f8ff'}}
-    className=" p-3">
+    <div style={{ background: "#f0f8ff" }} className=" p-3">
       <div className="flex justify-between container py-3 px-10">
         <div className="w-30% p-2 ">
           <a
             style={{ textShadow: "5px -2px 3px #54d2c0", color: "#252525" }}
-            className="text-2xl font-semibold"
+            className="text-3xl font-semibold"
           >
-            <span className="text-4xl text-emerald-700">V</span>
+            <span className="text-5xl text-emerald-700">V</span>
             learning
           </a>
           <ul>
-            <li className="py-1 hover:-translate-y-0.5 transition ease-linear hover:text-emerald-700">
+            <li className="py-1  ">
               <a href="">
                 <i class="fa-solid fa-phone mr-3 w-10 h-10 bg-emerald-700 rounded-full text-center  leading-10 text-white"></i>
                 <span>1800-123-4567</span>
               </a>
             </li>
-            <li className="py-1  hover:-translate-y-0.5 transition ease-linear hover:text-emerald-700">
+            <li className="py-1   ">
               <a href="">
                 <i class="fa-solid fa-envelope-open-text mr-3 w-10 h-10 bg-emerald-700 rounded-full text-center  leading-10 text-white"></i>
                 <span>devit@gmail.com</span>
               </a>
             </li>
-            <li className=" py-1 hover:-translate-y-0.5 transition ease-linear hover:text-emerald-700">
+            <li className=" py-1  ">
               <a href="">
                 <i class="fa-solid fa-location-dot mr-3 w-10 h-10 bg-emerald-700 rounded-full text-center  leading-10 text-white"></i>
                 <span>Đà Nẵng</span>
@@ -38,25 +37,25 @@ const Footer = () => {
         <div className="w-1/5 p-2">
           <h3 className="text-2xl font-semibold">Liên kết</h3>
           <ul>
-            <li className="py-2 hover:-translate-y-0.5 transition ease-linear hover:text-emerald-700">
+            <li className="py-2  ">
               <a>
                 <i class="fa-solid fa-chevron-right mr-1"></i>
                 <span>Trang chủ</span>
               </a>
             </li>
-            <li className="py-2 hover:-translate-y-0.5 transition ease-linear hover:text-emerald-700">
+            <li className="py-2  ">
               <a>
                 <i class="fa-solid fa-chevron-right mr-1"></i>
                 <span>Dịch vụ</span>
               </a>
             </li>
-            <li className="py-2 hover:-translate-y-0.5 transition ease-linear hover:text-emerald-700">
+            <li className="py-2  ">
               <a>
                 <i class="fa-solid fa-chevron-right mr-1"></i>
                 <span>Nhóm</span>
               </a>
             </li>
-            <li className="py-2 hover:-translate-y-0.5 transition ease-linear hover:text-emerald-700">
+            <li className="py-2  ">
               <a>
                 <i class="fa-solid fa-chevron-right mr-1"></i>
                 <span>Blog</span>
@@ -67,25 +66,25 @@ const Footer = () => {
         <div className="w-1/5 p-2">
           <h3 className="text-2xl font-semibold">Khóa học</h3>
           <ul>
-            <li className="py-2 hover:-translate-y-0.5 transition ease-linear hover:text-emerald-700">
+            <li className="py-2  ">
               <a>
                 <i class="fa-solid fa-chevron-right mr-1"></i>
                 <span>Front End</span>
               </a>
             </li>
-            <li className="py-2 hover:-translate-y-0.5 transition ease-linear hover:text-emerald-700">
+            <li className="py-2  ">
               <a>
                 <i class="fa-solid fa-chevron-right mr-1"></i>
                 <span>Back End</span>
               </a>
             </li>
-            <li className="py-2 hover:-translate-y-0.5 transition ease-linear hover:text-emerald-700">
+            <li className="py-2  ">
               <a>
                 <i class="fa-solid fa-chevron-right mr-1"></i>
                 <span>Full stack</span>
               </a>
             </li>
-            <li className="py-2 hover:-translate-y-0.5 transition ease-linear hover:text-emerald-700">
+            <li className="py-2  ">
               <a>
                 <i class="fa-solid fa-chevron-right mr-1"></i>
                 <span>Node Js</span>
@@ -99,8 +98,25 @@ const Footer = () => {
           <Input className="my-1" placeholder="Email" />
           <Input className="my-1" placeholder="Số điện thoại" />
           <Button
-          className="bg-yellow-600 mt-2 hover:bg-yellow-400 text-white"
-          type="">Đăng ký</Button>
+            className="bg-yellow-600 mt-2 hover:bg-yellow-400 text-white"
+            type=""
+          >
+            Đăng ký
+          </Button>
+        </div>
+      </div>
+
+      <div className="footerBottom">
+        <div className="footerBottomLeft">
+          <p>
+          Copyright © 2021. All rights reserved.
+          </p>
+        </div>
+        <div className="footerBottomRight">
+        <i class="fa-brands fa-facebook-f"></i>
+        <i class="fa-brands fa-instagram"></i>
+        <i class="fa-brands fa-twitter"></i>
+        <i class="fa-brands fa-linkedin-in"></i>
         </div>
       </div>
     </div>

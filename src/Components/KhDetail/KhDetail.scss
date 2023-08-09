@@ -25,7 +25,7 @@
       .itemLeftInfo {
         padding: 30px 0;
         display: flex;
-        .infoLeft {
+        .infoItemLeft { 
           .title {
             font-size: 18px;
           }
@@ -34,7 +34,7 @@
             color: #8c8c8c;
           }
         }
-        .infoCenter {
+        .infoItemCenter {
           .title {
             font-size: 18px;
           }
@@ -43,7 +43,7 @@
             color: #8c8c8c;
           }
         }
-        .infoRight {
+        .infoItemRight {
           span {
             font-weight: 600;
             i {
