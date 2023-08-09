@@ -28,7 +28,7 @@ const KhMobile = () => {
     <Fragment>
       <h3 className="title">Khóa học Mobile</h3>
         <Fade bottom duration={1500}>
-      <div id="cardThamKhao" className="flex">
+      <div id="cardThamKhao" className="flex flex-wrap">
         {khoaHoc.slice(0, 4).map((item) => {
           return (
               <div key={item.maKhoaHoc} id="cardItemThaoKhao" className="w-1/4">

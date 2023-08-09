@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { set_loading_ended, set_loading_started } from "../../redux/slices/loadingSlice";
 import Zoom from 'react-reveal/Zoom';
 import Fade from 'react-reveal/Fade';
+import BackToTop from "../../Components/BackToTop/BackToTop";
 import "./KhDanhMuc.scss";
 const KhDanhMuc = () => {
   const dispatch = useDispatch()
@@ -106,6 +107,7 @@ const KhDanhMuc = () => {
             </Fade>
         </div>
       </div>
+            <BackToTop/>
     </>
   );
 };

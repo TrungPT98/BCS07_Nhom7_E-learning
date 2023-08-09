@@ -31,11 +31,11 @@ const KhPhoBien = () => {
     <frameElement>
       <h3 className="pb-10 cardTitle">Khoá học phổ biến</h3>
         <Fade bottom duration={1500}>
-      <div id="card" className="flex">
+      <div id="card" className="flex flex-wrap">
         {khoaHoc.slice(0, 4).map((item) => {
           if (item.luotXem > 80) {
             return (
-                <div key={item.maKhoaHoc} id="cardItem" className="w-1/4">
+                <div key={item.maKhoaHoc} id="cardItem" className="w-1/4 ">
                 <NavLink
                   className="cardItemLink"
                   to={`/detail/${item.maKhoaHoc}`}

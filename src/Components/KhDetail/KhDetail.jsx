@@ -10,6 +10,7 @@ import {
   set_loading_started,
 } from "../../redux/slices/loadingSlice";
 import Zoom from "react-reveal/Zoom";
+import BackToTop from "../../Components/BackToTop/BackToTop";
 import "./KhDetail.scss";
 const KhDetail = () => {
   const dispatch = useDispatch();
@@ -373,6 +374,7 @@ const KhDetail = () => {
           <KhPhoBien />
         </div>
       </div>
+      <BackToTop/>
     </>
   );
 };

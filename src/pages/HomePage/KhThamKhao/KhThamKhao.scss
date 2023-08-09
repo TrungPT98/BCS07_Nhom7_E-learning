@@ -95,3 +95,17 @@
     }
   }
 }
+
+
+@media (max-width: 1280px) {
+  #cardItemThaoKhao{
+      width: 50%;
+      margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 780px) {
+  #cardItemThaoKhao{
+      width: 100%;
+  }
+}

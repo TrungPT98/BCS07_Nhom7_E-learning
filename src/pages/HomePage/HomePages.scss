@@ -24,7 +24,7 @@
           position: absolute;
           z-index: 1;
           height: 10%;
-          width: 10%;
+          width: 11%;
           background-image: radial-gradient(#41b294 10%, transparent 11%),
             radial-gradient(#41b294 10%, transparent 11%);
           background-size: 10px 10px;
@@ -38,7 +38,7 @@
         .smallBoxRightTop {
           top: -50%;
           right: 0;
-          height: 20%;
+          height: 23%;
           transform: rotate(45deg);
           background-image: radial-gradient(#f6ba35 10%, transparent 11%);
         }
@@ -91,6 +91,7 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 20px;
+      font-size: 18px;
       .infoItem {
         position: relative;
         overflow: hidden;
@@ -141,6 +142,7 @@
               padding-right: 10px;
             }
             span {
+              font-size: 18px;
             }
           }
         }
@@ -202,6 +204,7 @@
   .coutingContent {
     display: flex;
     justify-content: space-around;
+    flex-wrap: wrap;
     // margin-left: -15px;
     // margin-right: -15px;
     .coutingItems {
@@ -233,11 +236,31 @@
     font-size: 18px;
     font-weight: 600;
   }
+  .carousel1,.carousel2 {
+   .carousel{
+    .control-dots{
+      .dot{
+        display: none;
+      }
+    }
+   }
+  }
+
+  .mainCarousel {
+    .carousel{
+     .control-dots{
+      margin-top: 30px;
+       .dot{
+       }
+     }
+    }
+   }
+
+ 
   .teacherContent {
     display: flex;
     flex-wrap: nowrap;
     margin-top: 30px;
-    justify-content: space-between;
     //   transform: translateX(0);
     // transition: .8s ease-out;
     .teacherItems {
@@ -351,7 +374,7 @@
   }
 }
 
-// animatiob
+// animation
 @keyframes animationText {
   0% {
     clip-path: inset(0 100% 0 0); // Hiện toàn bộ chữ
@@ -361,5 +384,85 @@
   }
   100% {
     clip-path: inset(0); // Hiện toàn bộ chữ
+  }
+}
+
+// responsive
+
+@media (max-width: 1024px) {
+  #homePage {
+    .homePageContent {
+      .sliderHome {
+        flex-direction: row;
+        .sliderHomeLeft {
+          .smallBoxRightTop {
+            top: -25%;
+          }
+          .smallBoxLeftTop {
+            top: -25%;
+          }
+          .triangleTopRight {
+            top: -32%;
+          }
+        }
+      }
+    }
+    .feedback{
+      .feedbackContent{
+        .feedbackItem{
+          flex-direction: column;
+        }
+      }
+    }
+    .couting {
+      .coursesItems {
+        .coutingItem {
+          width: 50%;
+        }
+      }
+    }
+    .info {
+      .infoContent {
+        grid-template-columns: 1fr;
+      }
+    }
+  }
+}
+@media (max-width: 865px) {
+  #homePage {
+    .homePageContent {
+      .sliderHome {
+        .sliderHomeLeft {
+          .smallBoxRightTop {
+            top: -25%;
+          }
+          .smallBoxLeftTop {
+            top: -25%;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  #homePage {
+    .sliderHome {
+      .sliderHomeLeft {
+        width: 100%;
+        .smallBoxLeftTop {
+          top: -50% !important;
+        }
+        .triangleTopRight {
+          top: -65% !important;
+        }
+      }
+      .sliderHomeRight {
+        display: none;
+      }
+    }
+    .smallBoxLeftTop {
+      left: 4%;
+    }
   }
 }

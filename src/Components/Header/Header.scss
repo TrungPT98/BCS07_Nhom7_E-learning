@@ -31,3 +31,60 @@
         }
     }
 }
+
+$small-screen: 768px;
+$medium-screen: 1024px;
+
+@media (max-width:$medium-screen) {
+#header{
+    .sticky{
+        position: sticky;
+        top: 0;
+        z-index: 99999;
+        box-shadow: 0 2px 24px 0 rgba(0,0,0,.15);
+        transition: all .5s;
+        background-color: #f0f8ff;
+    }
+      .inputHeader{
+        display: none;
+      }
+      .navList{
+        li{
+            margin-left: 20px;
+            .navlinkItem{
+                font-size: 15px;
+                margin-left: 0;
+            }
+            .buttonDropdown{
+                font-size: 15px;
+                margin-left: 0;
+            }
+        }
+      }
+    }
+}
+@media (max-width: 767px) {
+    .sticky{
+        position: static; 
+     }
+    #mobile-menu-2{
+        transition: all .5s!important;
+
+        .navList{
+        margin-top: 10px;
+        padding: 10px 30px;
+        li{
+            padding: 10px 0;
+            border-bottom: 2px solid black;
+            .navlinkItem{
+                font-size: 16px;
+                margin-left: 0;
+            }
+            .buttonDropdown{
+                font-size: 16px;
+                margin-left: 0;
+            }
+        }
+        }
+    }
+}
