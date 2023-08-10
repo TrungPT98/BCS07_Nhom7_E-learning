@@ -18,7 +18,7 @@ const KhoaHoc = () => {
 
       {/* courses */}
       <div className="coures">
-        <div className="couresContent">
+        <div className="couresContent flex-wrap">
           <div style={{ background: "#264653" }} className="couresItems">
             <div className="couresItem">
               <h6>CHƯƠNG TRÌNH </h6>

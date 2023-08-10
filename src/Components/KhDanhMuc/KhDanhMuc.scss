@@ -44,6 +44,8 @@
       .coursesItem {
         margin-top: 20px;
         transition: all 0.5s;
+        display: flex;
+        justify-content: center;
         &:hover {
           transform: translateY(-10px);
         }
@@ -133,5 +135,22 @@
         }
       }
     }
+  }
+}
+
+
+// responsive
+// 1280px
+@media (max-width: 1280px) {
+  .coursesItem{
+      width: 50%;
+      margin-bottom: 20px;
+    }
+}
+
+// 780px
+@media (max-width: 780px) {
+  .coursesItem{
+      width: 100%;
   }
 }

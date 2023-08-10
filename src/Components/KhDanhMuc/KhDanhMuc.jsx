@@ -46,7 +46,7 @@ const KhDanhMuc = () => {
         </div>
         <div className="coursesContent">
             <Fade bottom duration={1500}>
-          <div className="coursesItems flex">
+          <div className="coursesItems flex flex-wrap">
             {khoaHocDm.map((item) => {
               return (
                   <div key={item.maKhoaHoc} className="coursesItem w-1/4">
