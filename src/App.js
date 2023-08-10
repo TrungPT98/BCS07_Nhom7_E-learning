@@ -3,6 +3,7 @@ import UserTemplate from "./template/UserTemplate";
 import HomePage from "./pages/HomePage/HomePage";
 import InfoPage from "./pages/InfoPage/InfoPage";
 import EventPage from "./pages/EventPage/EventPage";
+import Page404 from "./pages/Page404/Page404";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/event" element={<UserTemplate />}>
           <Route index element={<EventPage />} />
         </Route>
+        <Route path="*" element={<Page404 />} />
       </Routes>
     </BrowserRouter>
   );
