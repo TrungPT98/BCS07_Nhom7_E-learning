@@ -2,32 +2,36 @@ import React, { useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import { khoaHocServ } from "../../services/khoaHocService";
 import { useDispatch } from "react-redux";
+// loading
 import { set_loading_ended, set_loading_started } from "../../redux/slices/loadingSlice";
+// zoom react-reveal
 import Zoom from 'react-reveal/Zoom';
+// fade react-reveal
 import Fade from 'react-reveal/Fade';
+// backToTop
 import BackToTop from "../../Components/BackToTop/BackToTop";
+// main css
 import "./KhDanhMuc.scss";
 const KhDanhMuc = () => {
   const dispatch = useDispatch()
   const { id } = useParams();
   const [khoaHocDm, setKhoaHocDm] = useState([]);
+  // gọi apu
   useEffect(() => {
     dispatch(set_loading_started)
     khoaHocServ
       .layKhoaHocTheoDanhMuc(id)
       .then((res) => {
-        // console.log(res)
         setKhoaHocDm(res.data);
         dispatch(set_loading_ended)
       })
       .catch((err) => {
-        // console.log(err);
         dispatch(set_loading_ended)
       });
   }, [id]);
-  // console.log(khoaHocDm);
   return (
     <>
+    {/* title */}
       <div className="titleCourse">
         <Zoom>
         <h3>KHÓA HỌC THEO DANH MỤC</h3>
@@ -37,6 +41,7 @@ const KhDanhMuc = () => {
         </Zoom>
       </div>
 
+    {/* danhSachKhoaHoc */}
       <div className="listCourses">
         <div className="coursesText">
           <button>
@@ -47,6 +52,7 @@ const KhDanhMuc = () => {
         <div className="coursesContent">
             <Fade bottom duration={1500}>
           <div className="coursesItems flex flex-wrap">
+            {/* listKhoaHoc */}
             {khoaHocDm.map((item) => {
               return (
                   <div key={item.maKhoaHoc} className="coursesItem w-1/4">

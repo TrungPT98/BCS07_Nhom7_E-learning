@@ -1,12 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { khoaHocServ } from "../../services/khoaHocService";
+// pagination antd
 import { Pagination } from "antd";
+
 import { NavLink } from "react-router-dom";
+
+// lottie
 import Lottie from "react-lottie";
 import animationLoading from "../../assets/animation/animationLoading.json";
+
+// fade react-reveal
 import Fade from 'react-reveal/Fade';
+
+// main css
 import "./DsKhoaHocPhanTrang.scss";
 const DsKhoaHocPhanTrang = () => {
+  // lottie
   const defaultOptions = {
     loop: true,
     autoplay: true,
@@ -18,30 +27,30 @@ const DsKhoaHocPhanTrang = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [khoaHoc, setKhoaHoc] = useState([]);
   const [loading, setLoading] = useState(true);
+  // gọi apu
   useEffect(() => {
     khoaHocServ
       .layDanhSachKhoaHocPhanTrang(currentPage)
       .then((res) => {
-        // console.log(res.data.items);
         setKhoaHoc(res.data.items);
         setLoading(false);
       })
       .catch((err) => {
-        // console.log(err);
         setLoading(false);
       });
   }, [currentPage]);
-  //   console.log(khoaHoc)
 
   const handleChangePage = (page) => {
     setCurrentPage(page);
   };
   return (
     <div className="mt-10">
+      {/* title */}
       <h3 className="title">
         <i class="fa-solid fa-bookmark"></i>
         Danh sách khóa học
       </h3>
+      {/* cardPhanTrang */}
         <Fade bottom duration={1500}>
       <div className="cardPhanTrang">
         {loading ? (
@@ -49,11 +58,13 @@ const DsKhoaHocPhanTrang = () => {
         ) : (
           khoaHoc.map((item) => {
             return (
+              // cardItem
                 <div key={item.maKhoaHoc} className="cardItem w-1/4">
                 <NavLink
                   className="cardItemLink"
                   to={`/detail/${item.maKhoaHoc}`}
                 >
+                  // img
                   <img
                     className="cardImg"
                     src={item.hinhAnh}

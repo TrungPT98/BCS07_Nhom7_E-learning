@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { DownOutlined } from "@ant-design/icons";
+
+// antd
 import { Dropdown, Space, Input } from "antd";
 import { khoaHocServ } from "../../services/khoaHocService";
+// main css
 import "./Header.scss";
 // ant design
 const Header = () => {
@@ -16,15 +18,12 @@ const Header = () => {
     khoaHocServ
       .layDanhMucKhocHoc()
       .then((res) => {
-        // console.log(res);
         setDanhMuc(res.data);
       })
       .catch((err) => {
-        // console.log(err);
       });
   }, []);
-  // console.log(danhMuc);
-  // map DanhMuc
+
 
   // add class sticky
   useEffect(() => {
@@ -42,6 +41,8 @@ const Header = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   });
+
+  // lấy api khoaHocDanhMuc
   const items = danhMuc.map((item) => ({
     label: (
       <NavLink to={`/danhMuc/${item.maDanhMuc}`} rel="">
@@ -51,9 +52,11 @@ const Header = () => {
     key: item.maDanhMuc,
   }));
   return (
+    // header
     <header id="header" className="pt-3 m-0">
       <nav className=" border-gray-200 px-4 md:px-6 py-2 ">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
+          {/* logo */}
           <NavLink to={"http://localhost:3000/"} className="flex items-center">
             <img
               src="../../assets/image/headerLogo.png"
@@ -61,11 +64,15 @@ const Header = () => {
               alt="dadad"
             />
           </NavLink>
+          {/* input */}
           <Input className="w-1/4 inputHeader" placeholder="Tìm kiếm" />
           <div className="flex items-center md:order-2">
+            {/* button đăng nhập */}
             <NavLink className="btnLogin text-white font-medium rounded-md text-md px-4 md:px-5 py-2 md:py-2.5 mr-2 ">
               Đăng nhập
             </NavLink>
+
+            {/* buttom open Menu mobile */}
             <button
               data-collapse-toggle="mobile-menu-2"
               type="button"
@@ -101,6 +108,7 @@ const Header = () => {
               </svg>
             </button>
           </div>
+          {/* menu mobile */}
           <div
             className={`navListContent justify-between items-center w-full md:flex md:w-auto md:order-1 ${
               isMenuOpen ? "block" : "hidden"
@@ -109,6 +117,7 @@ const Header = () => {
           >
             <ul className="navList flex flex-col font-medium md:flex-row md:space-x-8 md:mt-0 items-center ">
               <li>
+                {/*  */}
                 <NavLink
                   className="navlinkItem block    rounded    md:p-0 "
                   to="/khoahoc"
@@ -134,6 +143,7 @@ const Header = () => {
               </li>
               <li>
                 <div>
+                  {/* khoá học danh mục */}
                   <Dropdown
                     className="buttonDropdown "
                     menu={{

@@ -1,38 +1,42 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { khoaHocServ } from "../../services/khoaHocService";
-import { NavLink } from "react-router-dom";
-import { Button, Space } from "antd";
+// antd
+import { Button} from "antd";
 import KhPhoBien from "../../pages/HomePage/KhPhoBien/KhPhoBien";
 import { useDispatch } from "react-redux";
+
+// loading 
 import {
   set_loading_ended,
   set_loading_started,
 } from "../../redux/slices/loadingSlice";
+// zoom react-reveal
 import Zoom from "react-reveal/Zoom";
+// backToTop
 import BackToTop from "../../Components/BackToTop/BackToTop";
+// main css
 import "./KhDetail.scss";
 const KhDetail = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
   const [detail, setDetail] = useState([]);
+  // gọi api
   useEffect(() => {
     dispatch(set_loading_started);
     khoaHocServ
       .layThongTinKhoaHoc(id)
       .then((res) => {
-        // console.log(res);
         setDetail(res.data);
         dispatch(set_loading_ended);
       })
       .catch((err) => {
-        // console.log(err);
         dispatch(set_loading_ended);
       });
   }, []);
-  // console.log(detail)
   return (
     <>
+        {/* title */}
       <div className="titleCourse">
         <Zoom>
           <h3>THÔNG TIN KHÓA HỌC</h3>
@@ -41,18 +45,20 @@ const KhDetail = () => {
           <p>TIẾN LÊN VÀ KHÔNG CHẦN CHỪ !!!</p>
         </Zoom>
       </div>
+      {/* khoaHocDetails */}
       <div className="details">
         <div className="detailsContent">
+          {/* itemLeft */}
           <div className="detailsItemLeft  w-2/3">
             <h4 className="title">{detail?.tenKhoaHoc}</h4>
             <div className="itemLeftInfo">
-              <div className="w-1/3">
+              <div className="itemDetails w-1/3">
                 <div className="infoItemLeft">
                   <p className="subTitle">Giảng viên</p>
                   <p className="title">Messi</p>
                 </div>
               </div>
-              <div className="w-1/3">
+              <div className="itemDetails w-1/3">
                 <div className="infoItemCenter">
                   <p className="subTitle">Danh mục</p>
                   <p className="title">
@@ -60,7 +66,7 @@ const KhDetail = () => {
                   </p>
                 </div>
               </div>
-              <div className="w-1/3">
+              <div className="itemDetails w-1/3">
                 <div className="infoItemRight">
                   <span>
                     <i class="fa-solid fa-star"></i>
@@ -315,6 +321,7 @@ const KhDetail = () => {
               </div>
             </div>
           </div>
+          {/* itemRight */}
           <div className="detailsItemRight w-1/3">
             <div className="itemRightSidebar">
               <img
@@ -370,6 +377,8 @@ const KhDetail = () => {
             </div>
           </div>
         </div>
+
+        {/* khPhoBien */}
         <div className="mt-5">
           <KhPhoBien />
         </div>

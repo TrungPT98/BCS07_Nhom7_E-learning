@@ -1,19 +1,29 @@
 import React from "react";
+// Fade react-reveal
 import Fade from "react-reveal/Fade";
+// Slide react-reveal
 import Slide from "react-reveal/Slide";
+// Lottie
 import Lottie from "react-lottie";
 import animationHome from "../../assets/animation/animationHome.json";
 import animationFeedback from "../../assets/animation/animationFeedback.json";
+
 import KhPhoBien from "./KhPhoBien/KhPhoBien";
 import KhThamKhao from "./KhThamKhao/KhFullStack";
 import KhFullStack from "./KhThamKhao/KhFullStack";
 import KhMobile from "./KhThamKhao/KhMobile";
+
 // react countup
 import CountUp from "react-countup";
+
+//back to top
 import BackToTop from "../../Components/BackToTop/BackToTop";
+
+// carousel
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
+// main css
 import "./HomePages.scss";
 const HomePage = () => {
   

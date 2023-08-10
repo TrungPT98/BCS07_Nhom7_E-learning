@@ -18,6 +18,7 @@
     display: flex;
     margin-left: -15px;
     margin-right: -15px;
+    flex-wrap: wrap;
     .detailsItemLeft {
       .title {
         font-size: 30px;
@@ -219,6 +220,296 @@
           &:hover {
             opacity: 0.8;
           }
+        }
+      }
+    }
+  }
+}
+
+
+
+// responsive 
+// 1080px
+@media (max-width: 1080px) {
+  .details{
+    .detailsContent{
+      flex-direction: column-reverse;
+      .detailsItemLeft {
+        margin-top: 20px;
+        width: 100%;
+        .title {
+        }
+        .itemLeftInfo {
+          .itemDetails{
+            .infoItemRight{
+              text-align: right;
+            }
+          }
+          .infoItemLeft { 
+            .title {
+            }
+            .subTitle {
+             
+            }
+          }
+          .infoItemCenter {
+            .title {
+            }
+            .subTitle {
+              
+            }
+          }
+          .infoItemRight {
+            span {
+              i {
+              
+              }
+            }
+            .subTitle {
+              
+            }
+          }
+        }
+        .itemLeftText {
+         
+        }
+        .itemLeftLearn {
+          h3 {
+          
+          }
+          .itemLearnList {
+            .learnListLeft {
+              ul {
+                li {
+                  i {
+                   
+                  }
+                  span {
+                  }
+                }
+              }
+            }
+            .learnListRight {
+              ul {
+                li {
+                  i {
+                  
+                  }
+                  span {
+                  }
+                }
+              }
+            }
+          }
+        }
+        .itemLeftContent {
+          h3 {
+           
+          }
+          .leftContentDetails {
+            .contentTitle {
+             
+              span {
+               
+              }
+              button {
+              
+              }
+            }
+          }
+          p {
+            padding: 0 10px;
+          }
+          .contentLesson {
+            .itemLesson {
+              
+              span {
+                i {
+               
+                }
+              }
+            }
+          }
+        }
+      }
+      .detailsItemRight {
+        width: 100%;
+        .itemRightSidebar {
+         
+          .sidebarPrice {
+            padding: 10px 0;
+            i {
+            }
+            .priceTitle {
+         
+            }
+            .priceSubTitle {
+             
+            }
+          }
+          .sidebarContent {
+            ul {
+              li {
+                padding: 12px 0;
+                p {
+                  span {
+                    
+                  }
+                  i {
+                  }
+                }
+              }
+            }
+          }
+         
+        }
+      }
+    }
+  }
+}
+
+
+// 767px
+@media (max-width: 767px) {
+  .details{
+    height: 100%!important;
+    padding: 50px!important ;
+    .detailsContent{
+      flex-direction: column-reverse;
+      .detailsItemLeft {
+        margin-top: 20px;
+        width: 100%;
+        .title {
+        }
+        .itemLeftInfo {
+          .itemDetails{
+            .infoItemRight{
+              text-align: right;
+            }
+          }
+          .infoItemLeft { 
+            .title {
+            }
+            .subTitle {
+             
+            }
+          }
+          .infoItemCenter {
+            .title {
+            }
+            .subTitle {
+              
+            }
+          }
+          .infoItemRight {
+            span {
+              i {
+              
+              }
+            }
+            .subTitle {
+              
+            }
+          }
+        }
+        .itemLeftText {
+          font-size: 16px;
+         
+        }
+        .itemLeftLearn {
+          h3 {
+          font-size: 24px;
+          }
+          .itemLearnList {
+            .learnListLeft {
+              ul {
+                li {
+                  font-size: 16px;
+                  i {
+                   
+                  }
+                  span {
+                  }
+                }
+              }
+            }
+            .learnListRight {
+              ul {
+                li {
+                  font-size: 16px;
+                  i {
+                  
+                  }
+                  span {
+                  }
+                }
+              }
+            }
+          }
+        }
+        .itemLeftContent {
+          h3 {
+           
+          }
+          .leftContentDetails {
+            .contentTitle {
+             
+              span {
+               
+              }
+              button {
+              
+              }
+            }
+          }
+          p {
+            padding: 10px 10px 0;
+            font-size: 18px;
+          }
+          .contentLesson {
+            .itemLesson {
+              
+              span {
+                font-size: 16px;
+                i {
+               
+                }
+              }
+            }
+          }
+        }
+      }
+      .detailsItemRight {
+        width: 100%;
+        .itemRightSidebar {
+         
+          .sidebarPrice {
+            padding: 10px 0;
+            i {
+            }
+            .priceTitle {
+         
+            }
+            .priceSubTitle {
+             
+            }
+          }
+          .sidebarContent {
+            ul {
+              li {
+                padding: 12px 0;
+                font-size: 18px;
+                p {
+                  span {
+                    
+                  }
+                  i {
+                  }
+                }
+              }
+            }
+          }
+         
         }
       }
     }
