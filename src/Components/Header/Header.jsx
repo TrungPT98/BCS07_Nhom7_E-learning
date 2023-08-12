@@ -1,26 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { DownOutlined } from "@ant-design/icons";
+
+// antd
 import { Dropdown, Space, Input } from "antd";
 import { khoaHocServ } from "../../services/khoaHocService";
+// main css
 import "./Header.scss";
 // ant design
 const Header = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
   const [danhMuc, setDanhMuc] = useState([]);
   // lấy dữ liệu danh mục
   useEffect(() => {
     khoaHocServ
       .layDanhMucKhocHoc()
       .then((res) => {
-        // console.log(res);
         setDanhMuc(res.data);
       })
       .catch((err) => {
-        // console.log(err);
       });
   }, []);
-  // console.log(danhMuc);
-  // map DanhMuc
+
 
   // add class sticky
   useEffect(() => {
@@ -38,6 +41,8 @@ const Header = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   });
+
+  // lấy api khoaHocDanhMuc
   const items = danhMuc.map((item) => ({
     label: (
       <NavLink to={`/danhMuc/${item.maDanhMuc}`} rel="">
@@ -47,28 +52,34 @@ const Header = () => {
     key: item.maDanhMuc,
   }));
   return (
+    // header
     <header id="header" className="pt-3 m-0">
-      <nav className=" border-gray-200 px-4 lg:px-6 py-2 ">
+      <nav className=" border-gray-200 px-4 md:px-6 py-2 ">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
+          {/* logo */}
           <NavLink to={"http://localhost:3000/"} className="flex items-center">
             <img
               src="../../assets/image/headerLogo.png"
-              className="mr-3 h-6 sm:h-9"
+              className="mr-3 h-6 md:h-9"
               alt="dadad"
             />
           </NavLink>
-          <Input className="w-1/4" placeholder="Tìm kiếm" />
-          <div className="flex items-center lg:order-2">
-            <NavLink
-            className="btnLogin text-white font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 ">
+          {/* input */}
+          <Input className="w-1/4 inputHeader" placeholder="Tìm kiếm" />
+          <div className="flex items-center md:order-2">
+            {/* button đăng nhập */}
+            <NavLink className="btnLogin text-white font-medium rounded-md text-md px-4 md:px-5 py-2 md:py-2.5 mr-2 ">
               Đăng nhập
             </NavLink>
+
+            {/* buttom open Menu mobile */}
             <button
               data-collapse-toggle="mobile-menu-2"
               type="button"
-              className="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+              className="inline-flex items-center p-2 ml-1 text-md text-gray-500 rounded-md md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
               aria-controls="mobile-menu-2"
               aria-expanded="false"
+              onClick={toggleMenu}
             >
               <span className="sr-only">Open main menu</span>
               <svg
@@ -97,14 +108,18 @@ const Header = () => {
               </svg>
             </button>
           </div>
+          {/* menu mobile */}
           <div
-            className="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1"
+            className={`navListContent justify-between items-center w-full md:flex md:w-auto md:order-1 ${
+              isMenuOpen ? "block" : "hidden"
+            } `}
             id="mobile-menu-2"
           >
-            <ul className="navList flex flex-col font-medium lg:flex-row lg:space-x-8 lg:mt-0 items-center">
+            <ul className="navList flex flex-col font-medium md:flex-row md:space-x-8 md:mt-0 items-center ">
               <li>
+                {/*  */}
                 <NavLink
-                  className="navlinkItem block    rounded bg-primary-700 lg:bg-transparent lg:text-primary-700 lg:p-0 "
+                  className="navlinkItem block    rounded    md:p-0 "
                   to="/khoahoc"
                   aria-current="page"
                 >
@@ -112,22 +127,23 @@ const Header = () => {
                 </NavLink>
               </li>
               <li>
-                <NavLink className="navlinkItem text-black block    border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:p-0   dark:hover:bg-gray-700  lg:dark:hover:bg-transparent dark:border-gray-700">
+                <NavLink className="navlinkItem text-black block   md:hover:bg-transparent md:p-0      ">
                   Blogs
                 </NavLink>
               </li>
               <li>
-                <NavLink className="navlinkItem text-black block    border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:p-0   dark:hover:bg-gray-700  lg:dark:hover:bg-transparent dark:border-gray-700">
+                <NavLink className="navlinkItem text-black block      md:p-0    ">
                   Sự kiện
                 </NavLink>
               </li>
               <li>
-                <NavLink className="navlinkItem text-black block    border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:p-0   dark:hover:bg-gray-700  lg:dark:hover:bg-transparent dark:border-gray-700">
+                <NavLink className="navlinkItem text-black block     hover:bg-gray-50 ">
                   Thông tin
                 </NavLink>
               </li>
               <li>
                 <div>
+                  {/* khoá học danh mục */}
                   <Dropdown
                     className="buttonDropdown "
                     menu={{

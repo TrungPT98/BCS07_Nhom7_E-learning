@@ -1,18 +1,33 @@
 import React from "react";
+// Fade react-reveal
 import Fade from "react-reveal/Fade";
+// Slide react-reveal
 import Slide from "react-reveal/Slide";
+// Lottie
 import Lottie from "react-lottie";
 import animationHome from "../../assets/animation/animationHome.json";
 import animationFeedback from "../../assets/animation/animationFeedback.json";
+
 import KhPhoBien from "./KhPhoBien/KhPhoBien";
 import KhThamKhao from "./KhThamKhao/KhFullStack";
 import KhFullStack from "./KhThamKhao/KhFullStack";
 import KhMobile from "./KhThamKhao/KhMobile";
+
 // react countup
 import CountUp from "react-countup";
-import "./HomePages.scss";
+
+//back to top
 import BackToTop from "../../Components/BackToTop/BackToTop";
+
+// carousel
+import { Carousel } from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
+
+// main css
+import "./HomePages.scss";
 const HomePage = () => {
+  
+
   // lottie
   const defaultOptions = {
     loop: true,
@@ -37,7 +52,7 @@ const HomePage = () => {
         {/* slider */}
         <div className="sliderHome flex h-screen">
           <Fade left duration={3000}>
-            <div className="sliderHomeLeft w-1/2">
+            <div className="sliderHomeLeft w-1/2 ">
               <div className="triangleTopRight"></div>
               <div className="smallBox smallBoxLeftTop"></div>
               <div className="smallBox smallBoxRightTop"></div>
@@ -51,7 +66,7 @@ const HomePage = () => {
             </div>
           </Fade>
           <Fade right duration={3000}>
-            <div className="sliderHomeRight w-1/2">
+            <div className="sliderHomeRight w-1/2 ">
               <Lottie options={defaultOptions} />
             </div>
           </Fade>
@@ -275,8 +290,10 @@ const HomePage = () => {
       {/* teacher */}
       <div className="teacher">
         <h3 className="teacherTitle">Giảng viên hàng đầu</h3>
+          <Carousel className="mainCarousel">
+          <Carousel className="carousel1">
         <div className="teacherContent">
-          <div className="teacherItems">
+        <div className="teacherItems">
             <div className="teacherItem">
               <img
                 className="itemImg"
@@ -415,6 +432,62 @@ const HomePage = () => {
             </div>
           </div>
         </div>
+          </Carousel>
+          <Carousel className="carousel2">
+        <div className="teacherContent">
+        <div className="teacherItems">
+            <div className="teacherItem">
+              <img
+                className="itemImg"
+                src="../../assets/image/imgTeacher/DadMoon.jpg"
+                alt="asasdasd"
+              />
+              <h6 className="itemName">Big DadMoon</h6>
+              <div className="itemRole">
+                <p>Chuyên gia lĩnh vực</p>
+                <p>lập trình</p>
+              </div>
+              <div className="itemReview">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <span>4.9</span>
+              </div>
+              <p className="itemCmt">100 Đánh giá</p>
+            </div>
+          </div>
+          <div className="teacherItems">
+            <div className="teacherItem">
+              <img
+                className="itemImg"
+                src="../../assets/image/imgTeacher/DadMoon.jpg"
+                alt="asasdasd"
+              />
+              <h6 className="itemName">IcarDi MenBor</h6>
+              <div className="itemRole">
+                <p>Chuyên gia ngôn ngữ </p>
+                <p>Vue Js</p>
+              </div>
+              <div className="itemReview">
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <i class="fa-solid fa-star"></i>
+                <span>4.9</span>
+              </div>
+              <p className="itemCmt">100 Đánh giá</p>
+            </div>
+          </div>
+          
+         
+        </div>
+          </Carousel>
+          </Carousel>
+
+
       </div>
       {/* feedback */}
       <div className="feedback">
@@ -448,9 +521,8 @@ const HomePage = () => {
         </div>
       </div>
 
-
       {/* backToTop */}
-      <BackToTop/>
+      <BackToTop />
     </div>
   );
 };

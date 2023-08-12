@@ -1,41 +1,47 @@
 import React, { useEffect, useState } from "react";
+// fade react-reveal
 import Fade from "react-reveal/Fade";
 import { khoaHocServ } from "../../../services/khoaHocService";
-import "./KhPhoBien.scss";
 import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import {
   set_loading_ended,
   set_loading_started,
 } from "../../../redux/slices/loadingSlice";
+
+// main css
+import "./KhPhoBien.scss";
 const KhPhoBien = () => {
   const dispatch = useDispatch();
   const [khoaHoc, setKhoaHoc] = useState([]);
+
+  // gọi apu
   useEffect(() => {
     dispatch(set_loading_started());
     khoaHocServ
       .layDanhSachKhoaHoc()
       .then((res) => {
-        // console.log(res);
         setKhoaHoc(res.data);
         dispatch(set_loading_ended());
       })
       .catch((err) => {
-        // console.log(err);
         dispatch(set_loading_ended());
       });
   }, []);
-  // console.log(khoaHoc);
 
   return (
     <frameElement>
+      {/* title */}
       <h3 className="pb-10 cardTitle">Khoá học phổ biến</h3>
         <Fade bottom duration={1500}>
-      <div id="card" className="flex">
+
+          {/* card */}
+      <div id="card" className="flex flex-wrap">
         {khoaHoc.slice(0, 4).map((item) => {
           if (item.luotXem > 80) {
             return (
-                <div key={item.maKhoaHoc} id="cardItem" className="w-1/4">
+              // cardItem
+                <div key={item.maKhoaHoc} id="cardItem" className="w-1/4 ">
                 <NavLink
                   className="cardItemLink"
                   to={`/detail/${item.maKhoaHoc}`}

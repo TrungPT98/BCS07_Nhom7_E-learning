@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import Zoom from "react-reveal/Zoom";
 import DsKhoaHocPhanTrang from "../../Components/DsKhoaHocPhanTrang/DsKhoaHocPhanTrang";
+import BackToTop from "../../Components/BackToTop/BackToTop";
 import "./KhoaHoc.scss";
 const KhoaHoc = () => {
   return (
@@ -17,7 +18,7 @@ const KhoaHoc = () => {
 
       {/* courses */}
       <div className="coures">
-        <div className="couresContent">
+        <div className="couresContent flex-wrap">
           <div style={{ background: "#264653" }} className="couresItems">
             <div className="couresItem">
               <h6>CHƯƠNG TRÌNH </h6>
@@ -63,7 +64,9 @@ const KhoaHoc = () => {
         </div>
 
         <DsKhoaHocPhanTrang />
+        
       </div>
+      <BackToTop/>
     </Fragment>
   );
 };

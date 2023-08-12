@@ -1,55 +1,97 @@
-ul{
-    li{
-        cursor: pointer;
-        transition: all .5s;
-        &:hover{
-            transform: translateY(-2px);
-            a{
-                color: #01877e;
-            }
-        }
-        a{
-            
-            i{
-
-            }
-            span{
-                
-            }
-        }
+ul {
+  li {
+    cursor: pointer;
+    transition: all 0.5s;
+    &:hover {
+      transform: translateY(-2px);
+      a {
+        color: #01877e;
+      }
     }
-    li.py-2{
-        transition: all .5s;
-        cursor: pointer;
-        &:hover{
-            transform: translateY(-2px);
-                color: #01877e;
-        }
+    a {
+      i {
+      }
+      span {
+      }
     }
+  }
+  li.py-2 {
+    transition: all 0.5s;
+    cursor: pointer;
+    &:hover {
+      transform: translateY(-2px);
+      color: #01877e;
+    }
+  }
 }
 
-.footerBottom{
-    display: flex;
-    justify-content: space-between;
-    padding: 15px 50px 0;
-    border-top: 1px solid #d0d0d0;
-    .footerBottomLeft{
+.footerBottom {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 50px 0;
+  border-top: 1px solid #d0d0d0;
+  .footerBottomLeft {
+  }
+  .footerBottomRight {
+    padding: 0;
+    i {
+      width: 30px;
+      height: 30px;
+      line-height: 30px;
+      margin: 0 5px;
+      transition: all 0.5s;
+      display: inline-block;
+      text-align: center;
+      font-size: 20px;
+      &:hover {
+        color: #01877e;
+      }
+    }
+  }
+}
 
+@media (max-width: 780px) {
+  .footer {
+    ul {
+      li {
+        a {
+          span {
+            font-size: 18px;
+          }
+        }
+      }
     }
-    .footerBottomRight{
-        padding: 0;
-            i{
-                width: 30px;
-                height: 30px;
-                line-height: 30px;
-                margin: 0 5px;
-                transition: all .5s;
-                display: inline-block;
-                text-align: center;
-                font-size: 20px;
-                &:hover{
-                    color: #01877e;
-                }
-            }
+    .footerItem1 {
+      width: 50% !important;
     }
+    .footerItem2 {
+      width: 50% !important;
+    }
+    .footerItem3 {
+      width: 50% !important;
+    }
+    .footerItem4 {
+      width: 50% !important;
+    }
+    button{
+        width: 100%;
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .footer {
+    .footerItem1 {
+      width: 100% !important;
+    }
+    .footerItem2 {
+      width: 50% !important;
+    }
+    .footerItem3 {
+      width: 50% !important;
+    }
+    .footerItem4 {
+      width: 100% !important;
+    }
+  }
 }

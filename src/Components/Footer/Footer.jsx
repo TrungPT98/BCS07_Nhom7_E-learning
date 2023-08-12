@@ -1,11 +1,15 @@
 import React from "react";
+// antd
 import { Input, Button, Space } from "antd";
-import './Footer.scss'
+// main css
+import "./Footer.scss";
 const Footer = () => {
   return (
     <div style={{ background: "#f0f8ff" }} className=" p-3">
-      <div className="flex justify-between container py-3 px-10">
-        <div className="w-30% p-2 ">
+      {/* footer */}
+      <div className="footer flex justify-between container py-3 px-10 flex-wrap">
+        {/* footerItem */}
+        <div className="footerItem1  w-30%   p-2 pt-0 ">
           <a
             style={{ textShadow: "5px -2px 3px #54d2c0", color: "#252525" }}
             className="text-3xl font-semibold"
@@ -34,7 +38,7 @@ const Footer = () => {
             </li>
           </ul>
         </div>
-        <div className="w-1/5 p-2">
+        <div className="footerItem2  w-1/5   p-2">
           <h3 className="text-2xl font-semibold">Liên kết</h3>
           <ul>
             <li className="py-2  ">
@@ -63,7 +67,7 @@ const Footer = () => {
             </li>
           </ul>
         </div>
-        <div className="w-1/5 p-2">
+        <div className="footerItem3  w-1/5  p-2">
           <h3 className="text-2xl font-semibold">Khóa học</h3>
           <ul>
             <li className="py-2  ">
@@ -92,7 +96,7 @@ const Footer = () => {
             </li>
           </ul>
         </div>
-        <div className="w-30% p-2">
+        <div className="footerItem4 w-30%     p-2">
           <h3 className="text-2xl font-semibold">Đăng kí tư vấn</h3>
           <Input className="my-1" placeholder="Họ và tên" />
           <Input className="my-1" placeholder="Email" />
@@ -106,17 +110,16 @@ const Footer = () => {
         </div>
       </div>
 
+      {/* footerBottom */}
       <div className="footerBottom">
         <div className="footerBottomLeft">
-          <p>
-          Copyright © 2021. All rights reserved.
-          </p>
+          <p>Copyright © 2021. All rights reserved.</p>
         </div>
         <div className="footerBottomRight">
-        <i class="fa-brands fa-facebook-f"></i>
-        <i class="fa-brands fa-instagram"></i>
-        <i class="fa-brands fa-twitter"></i>
-        <i class="fa-brands fa-linkedin-in"></i>
+          <i class="fa-brands fa-facebook-f"></i>
+          <i class="fa-brands fa-instagram"></i>
+          <i class="fa-brands fa-twitter"></i>
+          <i class="fa-brands fa-linkedin-in"></i>
         </div>
       </div>
     </div>
