@@ -7,6 +7,8 @@ import InfoPage from "./pages/InfoPage/InfoPage";
 import EventPage from "./pages/EventPage/EventPage";
 import KhDanhMuc from './Components/KhDanhMuc/KhDanhMuc';
 import Loading from './pages/Loading/Loading';
+import Page404 from "./pages/Page404/Page404";
+
 
 function App() {
   return (
@@ -25,6 +27,7 @@ function App() {
           <Route index element={<EventPage />} />
         </Route>
         <Route path='/loading' element={<Loading/>} />
+        <Route path="*" element={<Page404 />} />
       </Routes>
     </BrowserRouter>
   );
