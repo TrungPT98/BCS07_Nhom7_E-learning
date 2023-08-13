@@ -2,7 +2,7 @@
 
 // import axios
 import axios from "axios";
-import { layDuLieuLocal } from "../utils/localStore";
+import { layDuLieuLocal } from "../util/localStore";
 // tạo biến để chứa đường dẫn trùng
 const BASE_URL = "https://elearningnew.cybersoft.edu.vn";
 //tạo biến để chứ tokenCybersoft

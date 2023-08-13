@@ -1,0 +1,497 @@
+#homePage {
+  .homePageContent {
+    padding: 0 50px;
+    .sliderHome {
+      align-items: center;
+      .sliderHomeLeft {
+        display: flex;
+        position: relative;
+        z-index: 10;
+        justify-content: center;
+        align-items: center;
+        .triangleTopRight {
+          transform: rotate(-45deg);
+          position: absolute;
+          top: -50%;
+          left: 10%;
+          width: 0;
+          height: 0;
+          border-left: 20px solid transparent;
+          border-right: 20px solid transparent;
+          border-bottom: 50px solid #f6ba35;
+        }
+        .smallBox {
+          position: absolute;
+          z-index: 1;
+          height: 10%;
+          width: 11%;
+          background-image: radial-gradient(#41b294 10%, transparent 11%),
+            radial-gradient(#41b294 10%, transparent 11%);
+          background-size: 10px 10px;
+        }
+        .smallBoxLeftTop {
+          top: -40%;
+          left: 10%;
+          height: 70px;
+          width: 20%;
+        }
+        .smallBoxRightTop {
+          top: -50%;
+          right: 0;
+          height: 23%;
+          transform: rotate(45deg);
+          background-image: radial-gradient(#f6ba35 10%, transparent 11%);
+        }
+        .smallBoxRightBottom {
+          bottom: -10%;
+          left: 60%;
+          height: 20%;
+          width: 10%;
+          background-image: radial-gradient(#ed85ab 10%, transparent 11%);
+        }
+        .doubleBox {
+          left: 64%;
+        }
+        .sliderHomeTitle {
+          .title {
+            font-size: 50px;
+            font-weight: 700;
+            padding: 0;
+          }
+          h3 {
+            font-weight: 700;
+            font-size: 65px;
+            color: #41b294;
+            overflow: hidden;
+            animation: animationText 5s steps(10) infinite;
+            display: inline-block;
+          }
+          .btnSliderHome {
+            display: block;
+            margin-top: 30px;
+            padding: 10px 20px;
+            color: #fff;
+            background-color: #f6ba35;
+            border: none;
+            transition: all 0.5s;
+            text-transform: uppercase;
+            font-size: 18px;
+            border-radius: 4px;
+            &:hover {
+              transform: scale(0.9);
+            }
+          }
+        }
+      }
+    }
+  }
+  .info {
+    padding: 50px 0;
+    .infoContent {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      font-size: 18px;
+      .infoItem {
+        position: relative;
+        overflow: hidden;
+        padding: 25px;
+        transition: all 0.5s;
+        border-radius: 4px;
+        &::before {
+          content: "";
+          width: 50%;
+          height: 100%;
+          position: absolute;
+          top: 0;
+          left: -100%;
+          display: block;
+          background: linear-gradient(
+            to right,
+            rgba(255, 255, 255, 0) 0%,
+            rgba(255, 255, 255, 0.3) 100%
+          );
+          transform: skewX(-25deg);
+          transition: all 0.75s;
+        }
+        &:hover::before {
+          left: 125%;
+        }
+      }
+    }
+    .infoItemA {
+      grid-row: 1 / span 2;
+      background-color: #41b294;
+      color: #fff;
+      .infoItemTitle {
+        font-size: 18px;
+        h3 {
+          text-transform: uppercase;
+          font-weight: 600;
+          font-size: 30px;
+        }
+        p {
+          font-weight: 300;
+          span {
+          }
+        }
+        ul {
+          li {
+            padding: 5px;
+            i {
+              padding-right: 10px;
+            }
+            span {
+              font-size: 18px;
+            }
+          }
+        }
+      }
+    }
+    .infoItemB {
+      background-color: #f6ba35;
+      color: #fff;
+      h3 {
+        font-size: 25px;
+      }
+      ul {
+        li {
+          padding: 10px 0;
+        }
+      }
+    }
+    .infoItemC {
+      background-color: #5c8295;
+      color: #fff;
+      h3 {
+        font-size: 25px;
+      }
+      ul {
+        li {
+          padding: 10px 0;
+        }
+      }
+    }
+    .infoItemD {
+      background-color: #f6ba35;
+      color: #fff;
+      h3 {
+        font-size: 25px;
+      }
+      ul {
+        li {
+          padding: 10px 0;
+        }
+      }
+    }
+    .infoItemE {
+      background-color: #63c0a8;
+      color: #fff;
+      h3 {
+        font-size: 25px;
+      }
+      ul {
+        li {
+          padding: 10px 0;
+        }
+      }
+    }
+  }
+}
+.couting {
+  padding: 50px;
+  background-color: #f0f8ff;
+  .coutingContent {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    // margin-left: -15px;
+    // margin-right: -15px;
+    .coutingItems {
+      padding: 24px;
+      .coutingItem {
+        width: 100%;
+        text-align: center;
+        div {
+          i {
+            font-size: 80px;
+          }
+        }
+        .coutingItemNumber {
+          color: #41b294;
+          font-size: 50px;
+        }
+        .coutingItemTitle {
+          font-size: 18px;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+}
+.teacher {
+  margin-top: 50px;
+  padding: 0 50px;
+  .teacherTitle {
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .carousel1,
+  .carousel2 {
+    .carousel {
+      .control-dots {
+        .dot {
+          display: none;
+        }
+      }
+    }
+  }
+
+  .mainCarousel {
+    .carousel {
+      .control-dots {
+        margin-top: 30px;
+        .dot {
+        }
+      }
+    }
+  }
+
+  .teacherContent {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 30px;
+    //   transform: translateX(0);
+    // transition: .8s ease-out;
+    .teacherItems {
+      padding: 0 15px;
+      .teacherItem {
+        display: flex;
+        height: 100%;
+        justify-content: space-between;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 15px;
+        border-radius: 5px;
+        border: none;
+        transition: all 0.5s;
+        &:hover {
+          box-shadow: 0 0 10px 6px rgba(0, 0, 0, 0.13);
+        }
+        .itemImg {
+          height: 80px;
+          width: 80px;
+          object-fit: cover;
+          border-radius: 50%;
+        }
+        .itemName {
+          padding-bottom: 5px;
+          font-weight: 700;
+        }
+        .itemRole {
+          padding: 5px 0;
+          p {
+          }
+        }
+        .itemReview {
+          padding: 4px 0;
+          color: #f6ba35;
+          i {
+          }
+          span {
+            margin-left: 6px;
+          }
+        }
+        .itemCmt {
+          font-size: 13px;
+          color: #8c8c8c;
+        }
+      }
+    }
+  }
+}
+.feedback {
+  padding: 20px 50px;
+  .feedbackContent {
+    padding: 50px 0;
+    position: relative;
+    .smallBox {
+      position: absolute;
+      z-index: 1;
+      height: 10%;
+      width: 10%;
+      background-image: radial-gradient(#41b294 10%, transparent 11%),
+        radial-gradient(#41b294 10%, transparent 11%);
+      background-size: 10px 10px;
+    }
+    .smallBoxRightTop {
+      width: 100px;
+      background-image: radial-gradient(#41b294 10%, transparent 11%);
+      top: 10%;
+      right: 33%;
+      height: 60px;
+    }
+    .smallBoxRightBottom {
+      bottom: 23%;
+    right: 10%;
+      height: 61px;
+      background-image: radial-gradient(#f6ba35 10%, transparent 11%);
+    }
+    .smallBoxLeftBottom {
+      border-radius: 50%;
+      bottom: 11%;
+      left: 60%;
+      height: 80px;
+      width: 80px;
+      background-image: radial-gradient(#41b294 10%, transparent 11%);
+    }
+    .feedbackItem {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      margin-left: -15px;
+      margin-right: -15px;
+      .feedbackItemRight {
+        .feedbackText {
+          font-size: 20px;
+          line-height: 1.8;
+          i {
+            color: #ed85ab;
+          }
+        }
+        .feedbackName {
+          padding: 10px 0;
+          color: #ed85ab;
+          font-weight: 600;
+          font-size: 18px;
+        }
+        .feedbackSubTitle {
+          color: #8c8c8c;
+        }
+      }
+    }
+  }
+}
+
+// animation
+@keyframes animationText {
+  0% {
+    clip-path: inset(0 100% 0 0); // Hiện toàn bộ chữ
+  }
+  50% {
+    clip-path: inset(0 50% 0 0); // Hiện nửa chữ
+  }
+  100% {
+    clip-path: inset(0); // Hiện toàn bộ chữ
+  }
+}
+
+// responsive
+// 1068px
+@media (max-width: 1080px) {
+  #homePage{
+    .feedback {
+      .smallBoxRightTop{
+        top: 0%;
+      }
+      .smallBoxLeftBottom{
+        bottom: -1%;
+      }
+     
+    }
+  }
+}
+// 1024px
+@media (max-width: 1024px) {
+  #homePage {
+    .homePageContent {
+      .sliderHome {
+        flex-direction: row;
+        .sliderHomeLeft {
+          .smallBoxRightTop {
+            top: -25%;
+          }
+          .smallBoxLeftTop {
+            top: -25%;
+          }
+          .triangleTopRight {
+            top: -32%;
+          }
+        }
+      }
+    }
+    .feedback {
+      .feedbackContent {
+        .feedbackItem {
+          flex-direction: column;
+        }
+      }
+    }
+    .couting {
+      .coursesItems {
+        .coutingItem {
+          width: 50%;
+        }
+      }
+    }
+    .info {
+      .infoContent {
+        grid-template-columns: 1fr;
+      }
+    }
+  }
+}
+// 865px
+@media (max-width: 865px) {
+  #homePage {
+    .homePageContent {
+      .sliderHome {
+        .sliderHomeLeft {
+          .smallBoxRightTop {
+            top: -25%;
+          }
+          .smallBoxLeftTop {
+            top: -25%;
+          }
+        }
+      }
+    }
+  }
+}
+// 768px
+@media (max-width: 768px) {
+  #homePage {
+    .sliderHome {
+      .sliderHomeLeft {
+        width: 100%;
+        .smallBoxLeftTop {
+          top: -50% !important;
+        }
+        .triangleTopRight {
+          top: -65% !important;
+        }
+      }
+      .sliderHomeRight {
+        display: none;
+      }
+    }
+    .smallBoxLeftTop {
+      left: 4%;
+    }
+    .feedback {
+      .smallBoxRightTop{
+        top: -7%;
+      }
+      .smallBoxLeftBottom{
+        left: 30%;
+      }
+      .feedbackItemLeft {
+        display: none;
+      }
+      .feedbackItemRight {
+        width: 100%;
+      }
+    }
+  }
+}
