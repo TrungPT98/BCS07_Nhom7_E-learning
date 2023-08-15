@@ -127,7 +127,7 @@ const Header = () => {
                 </NavLink>
               </li>
               <li>
-                <NavLink className="navlinkItem text-black block   md:hover:bg-transparent md:p-0      ">
+                <NavLink to='/blogs' className="navlinkItem text-black block   md:hover:bg-transparent md:p-0      ">
                   Blogs
                 </NavLink>
               </li>

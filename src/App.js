@@ -7,6 +7,7 @@ import InfoPage from "./pages/InfoPage/InfoPage";
 import EventPage from "./pages/EventPage/EventPage";
 import KhDanhMuc from './Components/KhDanhMuc/KhDanhMuc';
 import Loading from './pages/Loading/Loading';
+import Blogs from './pages/Blogs/Blogs';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path='/' element={<UserTemplate/>}>
           <Route index element={<HomePage/>}/>
           <Route path='/khoahoc' element={<KhoaHoc/>} />
+          <Route path='/blogs' element={<Blogs/>} />
           <Route path='/detail/:id' element={<KhDetail/>} />
           <Route path='/danhMuc/:id' element={<KhDanhMuc/>} />
         </Route>

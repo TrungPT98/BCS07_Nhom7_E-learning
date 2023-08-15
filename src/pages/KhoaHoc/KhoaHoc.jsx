@@ -4,6 +4,9 @@ import DsKhoaHocPhanTrang from "../../Components/DsKhoaHocPhanTrang/DsKhoaHocPha
 import BackToTop from "../../Components/BackToTop/BackToTop";
 import "./KhoaHoc.scss";
 const KhoaHoc = () => {
+
+  
+
   return (
     <Fragment>
       {/* titleCoures */}
