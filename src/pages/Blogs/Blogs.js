@@ -195,7 +195,17 @@ const Blogs = () => {
                 </ul>
               </div>
 
-              <div></div>
+            <div className="contentRightImg">
+            <div className="contentRightImg1">
+                    <img src="./assets/image/imgBlogs/image1.jpg" alt="asdas" />
+                
+              </div>
+
+              <div className="contentRightImg2">
+                    <img src="./assets/image/imgBlogs/image2.jpg" alt="asdas" />
+                
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -320,7 +320,7 @@ const HomePage = () => {
             <div className="teacherItem">
               <img
                 className="itemImg"
-                src="../../assets/image/imgTeacher/DadMoon.jpg"
+                src="../../assets/image/imgTeacher/Icardi.jpg"
                 alt="asasdasd"
               />
               <h6 className="itemName">IcarDi MenBor</h6>
@@ -343,7 +343,7 @@ const HomePage = () => {
             <div className="teacherItem">
               <img
                 className="itemImg"
-                src="../../assets/image/imgTeacher/DadMoon.jpg"
+                src="../../assets/image/imgTeacher/Bladin.jpg"
                 alt="asasdasd"
               />
               <h6 className="itemName">Bladin Slaham</h6>
@@ -366,7 +366,7 @@ const HomePage = () => {
             <div className="teacherItem">
               <img
                 className="itemImg"
-                src="../../assets/image/imgTeacher/DadMoon.jpg"
+                src="../../assets/image/imgTeacher/Chirst.jpg"
                 alt="asasdasd"
               />
               <h6 className="itemName">Chris Andersan</h6>
@@ -389,7 +389,7 @@ const HomePage = () => {
             <div className="teacherItem">
               <img
                 className="itemImg"
-                src="../../assets/image/imgTeacher/DadMoon.jpg"
+                src="../../assets/image/imgTeacher/Vuelo.jpg"
                 alt="asasdasd"
               />
               <h6 className="itemName">VueLo Gadi</h6>
@@ -412,7 +412,7 @@ const HomePage = () => {
             <div className="teacherItem">
               <img
                 className="itemImg"
-                src="../../assets/image/imgTeacher/DadMoon.jpg"
+                src="../../assets/image/imgTeacher/Savani.jpg"
                 alt="asasdasd"
               />
               <h6 className="itemName">David Ngô Savani</h6>
@@ -462,7 +462,7 @@ const HomePage = () => {
             <div className="teacherItem">
               <img
                 className="itemImg"
-                src="../../assets/image/imgTeacher/DadMoon.jpg"
+                src="../../assets/image/imgTeacher/Savani.jpg"
                 alt="asasdasd"
               />
               <h6 className="itemName">IcarDi MenBor</h6>

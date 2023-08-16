@@ -59,7 +59,7 @@ const Header = () => {
           {/* logo */}
           <NavLink to={"http://localhost:3000/"} className="flex items-center">
             <img
-              src="../../assets/image/headerLogo.png"
+              src="./assets/image/headerLogo.png"
               className="mr-3 h-6 md:h-9"
               alt="dadad"
             />
