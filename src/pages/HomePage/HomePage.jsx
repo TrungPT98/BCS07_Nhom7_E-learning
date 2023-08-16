@@ -240,7 +240,7 @@ const HomePage = () => {
           <div className="coutingItems">
             <div className="coutingItem">
               <div>
-                <i class="fa-solid fa-graduation-cap"></i>
+               <img src="./assets/image/imgCouting/students.png" alt="student" />
               </div>
               <h3 className="coutingItemNumber">
                 <CountUp start={0} end={9000} duration={5} />
@@ -251,7 +251,7 @@ const HomePage = () => {
           <div className="coutingItems">
             <div className="coutingItem">
               <div>
-                <i class="fa-solid fa-graduation-cap"></i>
+              <img src="./assets/image/imgCouting/coures.png" alt="coures" />
               </div>
               <h3 className="coutingItemNumber">
                 {" "}
@@ -263,7 +263,7 @@ const HomePage = () => {
           <div className="coutingItems">
             <div className="coutingItem">
               <div>
-                <i class="fa-solid fa-graduation-cap"></i>
+              <img src="./assets/image/imgCouting/time.png" alt="time" />
               </div>
               <h3 className="coutingItemNumber">
                 {" "}
@@ -275,7 +275,7 @@ const HomePage = () => {
           <div className="coutingItems">
             <div className="coutingItem">
               <div>
-                <i class="fa-solid fa-graduation-cap"></i>
+              <img src="./assets/image/imgCouting/teacher.png" alt="teacher" />
               </div>
               <h3 className="coutingItemNumber">
                 {" "}
