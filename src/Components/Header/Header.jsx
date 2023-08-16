@@ -59,7 +59,7 @@ const Header = () => {
           {/* logo */}
           <NavLink to={"http://localhost:3000/"} className="flex items-center">
             <img
-              src="../../assets/image/headerLogo.png"
+              src="./assets/image/headerLogo.png"
               className="mr-3 h-6 md:h-9"
               alt="dadad"
             />
@@ -127,7 +127,7 @@ const Header = () => {
                 </NavLink>
               </li>
               <li>
-                <NavLink className="navlinkItem text-black block   md:hover:bg-transparent md:p-0      ">
+                <NavLink to='/blogs' className="navlinkItem text-black block   md:hover:bg-transparent md:p-0      ">
                   Blogs
                 </NavLink>
               </li>
