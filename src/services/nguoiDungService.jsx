@@ -1,0 +1,25 @@
+// import https from config
+import { https } from "./config";
+export const nguoiDungServ = {
+  dangNhap: (data) => {
+    return https.post("/api/QuanLyNguoiDung/DangNhap", data);
+  },
+  dangKy: (data) => {
+    return https.post("/api/QuanLyNguoiDung/DangKy", data);
+  },
+  getAllUser: () => {
+    return https.get("/api/QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=GP01");
+  },
+  deleteUser: (data) => {
+    return https.delete(`/api/QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${data}`);
+  },
+  addUser: (data) => {
+    return https.post("/api/QuanLyNguoiDung/ThemNguoiDung",data);
+  },
+  getInfoUser: (taiKhoan) => {
+    return https.post(`/api/QuanLyNguoiDung/LayThongTinNguoiDung?taiKhoan=${taiKhoan}`)
+  },
+  updateInfoUser: (formData)=>{
+    return https.post(`/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung`, formData)
+  }
+};

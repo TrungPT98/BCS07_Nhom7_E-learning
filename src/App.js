@@ -9,6 +9,7 @@ import KhDanhMuc from './Components/KhDanhMuc/KhDanhMuc';
 import Loading from './pages/Loading/Loading';
 import Blogs from './pages/Blogs/Blogs';
 import Page404 from "./pages/Page404/Page404";
+import Login from './pages/Login/Login';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path='/blogs' element={<Blogs/>} />
           <Route path='/detail/:id' element={<KhDetail/>} />
           <Route path='/danhMuc/:id' element={<KhDanhMuc/>} />
+          <Route path='/login' element={<Login/>} />
         </Route>
         <Route path="/info" element={<UserTemplate />}>
           <Route index element={<InfoPage />} />
