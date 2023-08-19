@@ -7,10 +7,16 @@ import * as Yup from "yup";
 // import { useHistory } from "react-router";
 import "./Login.scss";
 // import { LOADING_GLOBAL_HIDE, LOADING_GLOBAL_SHOW } from '../../Redux/types/isLoadingTypes'
+// import antdesign
+import { message } from "antd";
+import { nguoiDungServ } from "../../services/nguoiDungService";
+import { luuXuongLocal } from "../../util/localStore";
+import { useNavigate } from "react-router-dom";
+import { setName } from "../../redux/slices/nguoiDungSlice";
 
 export default function Login() {
   const dispatch = useDispatch();
-//   const history = useHistory();
+  //   const history = useHistory();
 
   // Xử lý giao diện
   const [classContainer, setClassContainer] = useState("container");
@@ -21,6 +27,7 @@ export default function Login() {
     setClassContainer("container");
   };
 
+  // Xử lý đăng ký
   const formikSignup = useFormik({
     initialValues: {
       taiKhoan: "",
@@ -61,54 +68,91 @@ export default function Login() {
           "Số điện thoại chưa đúng định đạng"
         ),
     }),
-    // onSubmit: handleSignup,
+    onSubmit: (values) => {
+      nguoiDungServ
+        .dangKy(values)
+        .then((res) => {
+          console.log(res);
+          messageApi.success("Đăng ký thành công.");
+          setTimeout(() => {
+            navigate("/login");
+          }, 3000);
+        })
+        .catch((err) => {
+          console.log(err);
+          messageApi.error(err.response.data);
+        });
+    },
   });
 
-  // Handle Login
-//   const handleLogin = async (values, formikLogin) => {
-//     const action = userLogin(values, formikLogin);
 
-//     await dispatch(action);
+  // useNavigate
+  const navigate = useNavigate();
 
-//     if (localStorage.getItem("credentials")) {
-//       dispatch({
-//         type: LOADING_GLOBAL_SHOW,
-//       });
-
-//       setTimeout(async () => {
-//         await dispatch({
-//           type: LOADING_GLOBAL_HIDE,
-//         });
-//         //
-//         let credentials = JSON.parse(localStorage.getItem("credentials"));
-//         // if(codeCourse){
-//         //     history.push(`/chitiet/${codeCourse}`)
-//         // }
-//         // else if (credentials.maLoaiNguoiDung === "GV") {
-//         //     history.push('/admin/quanlynguoidung')
-//         // } else if (credentials.maLoaiNguoiDung === "HV") {
-//         //     history.push('/trangchu')
-//         // }
-//         if (credentials && credentials.maLoaiNguoiDung === "GV") {
-//           history.push("/admin/quanlynguoidung");
-//         } else {
-//           history.goBack();
-//         }
-//       }, 2000);
-//     }
-//   };
-
-  const formikLogin = useFormik({
+  // message from ant design
+  const [messageApi, contextHolder] = message.useMessage();
+  const formik = useFormik({
     initialValues: {
       taiKhoan: "",
       matKhau: "",
     },
+    // values là dữ liệu từ input
+    onSubmit: (values) => {
+      //   console.log(vdalues);
 
-    // onSubmit: handleLogin,
+      // gửi dữ liệu lên server
+      nguoiDungServ
+        .dangNhap(values)
+        .then((res) => {
+          console.log(res);
+          if (res.data.maLoaiNguoiDung === "GV") {
+            messageApi.success("Đăng nhập thành công.");
+            // login thành công, lưu thông tin xuống local
+            luuXuongLocal("user", res.data);
+            // lưu thành công sẽ gửi dữ liệu lên redux
+            dispatch(setName(res.data));
+
+            //   set thời gian để thông báo message
+            setTimeout(() => {
+              navigate("/admin/user");
+            }, 2000);
+          } else {
+            messageApi.success("Đăng nhập thành công.");
+            // login thành công, lưu thông tin xuống local
+            luuXuongLocal("user", res.data);
+            // lưu thành công sẽ gửi dữ liệu lên redux
+            dispatch(setName(res.data));
+
+            //   set thời gian để thông báo message
+            setTimeout(() => {
+              navigate("/");
+            }, 1000);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+          messageApi.error(err.message);
+          // clear input khi nhập sai tk hoặc mk
+          formik.resetForm();
+        });
+    },
+    // dùng thư viện yup để validate
+    validationSchema: Yup.object({
+      taiKhoan: Yup.string().required(
+        "Vui lòng cung cấp thông tin bắt buộc trước khi tiếp tục."
+      ),
+      matKhau: Yup.string().required(
+        "Vui lòng cung cấp thông tin bắt buộc trước khi tiếp tục."
+      ),
+    }),
   });
+  const { handleSubmit, handleChange, errors, touched, handleBlur } = formik;
+
+  //   bóc tách
 
   return (
     <>
+      {contextHolder}
       <div className="loginBody container-fluid">
         <div className={classContainer} id="container">
           <div className="form-container sign-up-container">
@@ -209,30 +253,46 @@ export default function Login() {
             <form
               className="formLoginUser"
               action="#"
-              onSubmit={formikLogin.handleSubmit}
+              onSubmit={(event) => {
+                event.preventDefault();
+                handleSubmit();
+              }}
             >
               <h1>Đăng nhập</h1>
-              {/* <div className="social-container">
-                                <a href="#" className="social"><i className="fab fa-facebook-f" /></a>
-                                <a href="#" className="social"><i className="fab fa-google-plus-g" /></a>
-                                <a href="#" className="social"><i className="fab fa-linkedin-in" /></a>
-                            </div> */}
+
               <span>hoặc sử dụng tài khoản đã đăng ký của bạn</span>
               <input
-                onChange={formikLogin.handleChange}
+                onBlur={handleBlur}
+                onChange={handleChange}
                 type="text"
                 placeholder="Tài khoản"
                 name="taiKhoan"
-                value={formikLogin.values.taiKhoan}
+                value={formik.values.taiKhoan}
               />
+              {/* check khi người dùng nhập vô rồi mới báo lỗi (dùng touched) nếu không dùng sẽ báo lỗi khi chúng ta không đụng vào input */}
+              {errors.taiKhoan && touched.taiKhoan ? (
+                <p className="text-red-700 m-0 text-left mb-2">
+                  {errors.taiKhoan}
+                </p>
+              ) : (
+                ""
+              )}
 
               <input
-                onChange={formikLogin.handleChange}
+                onBlur={handleBlur}
+                onChange={handleChange}
                 type="password"
                 placeholder="Mật khẩu"
                 name="matKhau"
-                value={formikLogin.values.matKhau}
+                value={formik.values.matKhau}
               />
+              {errors.taiKhoan && touched.taiKhoan ? (
+                <p className="text-red-700 m-0 text-left mb-2">
+                  {errors.taiKhoan}
+                </p>
+              ) : (
+                ""
+              )}
               <a href="#">Quên mật khẩu?</a>
               <button type="submit">Đăng nhập</button>
             </form>
