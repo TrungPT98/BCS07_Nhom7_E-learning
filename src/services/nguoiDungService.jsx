@@ -8,7 +8,7 @@ export const nguoiDungServ = {
     return https.post("/api/QuanLyNguoiDung/DangKy", data);
   },
   getAllUser: () => {
-    return https.get("/api/QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=GP01");
+    return https.get("/api/QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=GP02");
   },
   deleteUser: (data) => {
     return https.delete(`/api/QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${data}`);

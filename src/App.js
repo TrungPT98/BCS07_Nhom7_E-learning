@@ -10,6 +10,8 @@ import Loading from './pages/Loading/Loading';
 import Blogs from './pages/Blogs/Blogs';
 import Page404 from "./pages/Page404/Page404";
 import Login from './pages/Login/Login';
+import AdminTemplate from './template/AdminTemplate';
+import Usermanagment from './pages/Usermanagment/Usermanagment';
 
 function App() {
   return (
@@ -31,6 +33,13 @@ function App() {
         </Route>
         <Route path='/loading' element={<Loading/>} />
         <Route path="*" element={<Page404 />} />
+
+      {/* AdminTemplate */}
+      <Route path='/admin' element={<AdminTemplate/>}>
+        <Route path='user' element={<Usermanagment/>  }/>
+
+      </Route>
+
       </Routes>
     </BrowserRouter>
   );

@@ -7,7 +7,7 @@ export const getAllUserThunk = createAsyncThunk(
   "nguoiDung/getAllUser",
   async () => {
     const res = await nguoiDungServ.getAllUser();
-    return res.data.content;
+    return res.data;
   }
 );
 
