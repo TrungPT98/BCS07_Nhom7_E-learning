@@ -12,6 +12,7 @@ import Page404 from "./pages/Page404/Page404";
 import Login from './pages/Login/Login';
 import AdminTemplate from './template/AdminTemplate';
 import Usermanagment from './pages/Usermanagment/Usermanagment';
+import EditUser from './Components/Admin/AdminUser/EditUser/EditUser';
 
 function App() {
   return (
@@ -37,7 +38,7 @@ function App() {
       {/* AdminTemplate */}
       <Route path='/admin' element={<AdminTemplate/>}>
         <Route path='user' element={<Usermanagment/>  }/>
-
+    <Route path='update/:maNhom/:taiKhoan' element={<EditUser/>}/>
       </Route>
 
       </Routes>

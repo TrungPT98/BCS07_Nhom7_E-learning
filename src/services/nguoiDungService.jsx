@@ -20,6 +20,9 @@ export const nguoiDungServ = {
     return https.post(`/api/QuanLyNguoiDung/LayThongTinNguoiDung?taiKhoan=${taiKhoan}`)
   },
   updateInfoUser: (formData)=>{
-    return https.post(`/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung`, formData)
+    return https.put(`/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung`, formData)
+  },
+  searchUser:(taiKhoan)=>{
+    return https.get(`/api/QuanLyNguoiDung/TimKiemNguoiDung?MaNhom=GP02&tuKhoa=${taiKhoan}`)
   }
 };
