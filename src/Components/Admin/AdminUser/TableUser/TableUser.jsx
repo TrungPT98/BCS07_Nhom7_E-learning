@@ -9,11 +9,9 @@ import { getAllUserThunk } from "../../../../redux/slices/nguoiDungSlice";
 
 // confirm antd
 const confirm = (e) => {
-  console.log(e);
   message.success("Click on Yes");
 };
 const cancel = (e) => {
-  console.log(e);
   message.error("Click on No");
 };
 const TableUser = () => {
@@ -65,9 +63,6 @@ const TableUser = () => {
       dataIndex: "maLoaiNguoiDung",
       key: "maLoaiNguoiDung",
       render: (text, record, index) => {
-        // console.log(text);
-        // console.log(record);
-        // console.log(index);
         if (text == "GV") {
           return <Tag color="gold">Giảng viên</Tag>;
         } else {
@@ -93,12 +88,19 @@ const TableUser = () => {
               className: "bg-blue-600",
             }}
           >
-            <NavLink className="py-2 px-3 bg-red-600 text-white rounded-lg hover:bg-red-400 duration-300 hover:text-white">
+            <NavLink
+              key={1}
+              className="py-2 px-3 bg-red-600 text-white rounded-lg hover:bg-red-400 duration-300 hover:text-white"
+            >
               Xoá
             </NavLink>
           </Popconfirm>
 
-          <NavLink className="py-2 px-3 bg-yellow-600 text-white rounded-lg hover:bg-yellow-400 duration-300 hover:text-white">
+          <NavLink
+            to={`/admin/update/GP02/${record.taiKhoan}`}
+            key={2}
+            className="py-2 px-3 bg-yellow-600 text-white rounded-lg hover:bg-yellow-400 duration-300 hover:text-white"
+          >
             Sửa
           </NavLink>
         </Space>
@@ -112,8 +114,7 @@ const TableUser = () => {
     nguoiDungServ
       .getAllUser()
       .then((res) => {
-        // console.log(res);
-        // const users =  res.data
+        console.log(res);
         dispatch(getAllUserThunk());
       })
       .catch((err) => {
@@ -123,19 +124,18 @@ const TableUser = () => {
 
   // biến chứa dữ liệu user
   const { users } = useSelector((state) => state.nguoiDung);
-  // console.log(users);
   // xoá user
   const handleDelete = (record) => {
     nguoiDungServ
       .deleteUser(record.taiKhoan)
       .then((res) => {
-        // console.log(res);
-        success()
+        console.log(res);
+        success();
         dispatch(getAllUserThunk());
       })
       .catch((err) => {
-        error()
-        // console.log(err);
+        error();
+        console.log(err);
       });
   };
 

@@ -3,6 +3,7 @@ import TableUser from "../../Components/Admin/AdminUser/TableUser/TableUser";
 
 // antd
 import { Button, Drawer, Radio, Space } from "antd";
+import FormAddUser from "../../Components/Admin/AdminUser/FormAddUser/FormAddUser";
 const Usermanagment = () => {
   const [open, setOpen] = useState(false);
   const [placement, setPlacement] = useState("right");
@@ -34,7 +35,9 @@ const Usermanagment = () => {
           onClose={onClose}
           open={open}
           size="large"
-        ></Drawer>
+        >
+          <FormAddUser/>
+        </Drawer>
       </div>
     </div>
   );
