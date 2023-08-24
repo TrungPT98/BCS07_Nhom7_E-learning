@@ -6,6 +6,8 @@ import { Dropdown, Space, Input } from "antd";
 import { khoaHocServ } from "../../services/khoaHocService";
 // main css
 import "./Header.scss";
+import { useSelector } from "react-redux";
+import { logout } from "../../util/localStore";
 // ant design
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -20,10 +22,8 @@ const Header = () => {
       .then((res) => {
         setDanhMuc(res.data);
       })
-      .catch((err) => {
-      });
+      .catch((err) => {});
   }, []);
-
 
   // add class sticky
   useEffect(() => {
@@ -51,6 +51,13 @@ const Header = () => {
     ),
     key: item.maDanhMuc,
   }));
+
+  // Hiển thị tên người dùng
+  const { name } = useSelector((state) => state.nguoiDung);
+  // console.log(name);
+  const handleLogout = () => {
+    logout();
+  }
   return (
     // header
     <header id="header" className="pt-3 m-0">
@@ -68,9 +75,23 @@ const Header = () => {
           <Input className="w-1/4 inputHeader" placeholder="Tìm kiếm" />
           <div className="flex items-center md:order-2">
             {/* button đăng nhập */}
-            <NavLink className="btnLogin text-white font-medium rounded-md text-md px-4 md:px-5 py-2 md:py-2.5 mr-2 ">
-              Đăng nhập
-            </NavLink>
+            {name != null ? (
+              <>
+              <NavLink to="/userinfo">Hi, {name.hoTen} 
+              {/* <button onClick={handleLogout}><i class="fa-solid fa-power-off"></i></button> */}
+              </NavLink>
+              <i onClick={handleLogout} className="fa-solid fa-power-off ml-3 text-red-500 text-xl cursor-pointer hover:text-blue-700 transition-all"></i>
+              </>
+            ) : (
+              <>
+                <NavLink
+                  to="/login"
+                  className="btnLogin text-white font-medium rounded-md text-md px-4 md:px-5 py-2 md:py-2.5 mr-2 "
+                >
+                  Đăng nhập
+                </NavLink>
+              </>
+            )}
 
             {/* buttom open Menu mobile */}
             <button
@@ -127,7 +148,10 @@ const Header = () => {
                 </NavLink>
               </li>
               <li>
-                <NavLink to='/blogs' className="navlinkItem text-black block   md:hover:bg-transparent md:p-0      ">
+                <NavLink
+                  to="/blogs"
+                  className="navlinkItem text-black block   md:hover:bg-transparent md:p-0      "
+                >
                   Blogs
                 </NavLink>
               </li>
