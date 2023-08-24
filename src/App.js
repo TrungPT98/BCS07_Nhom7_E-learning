@@ -13,6 +13,7 @@ import Login from './pages/Login/Login';
 import AdminTemplate from './template/AdminTemplate';
 import Usermanagment from './pages/Usermanagment/Usermanagment';
 import EditUser from './Components/Admin/AdminUser/EditUser/EditUser';
+import UserInfo from './pages/UserInfo/UserInfo';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path='/detail/:id' element={<KhDetail/>} />
           <Route path='/danhMuc/:id' element={<KhDanhMuc/>} />
           <Route path='/login' element={<Login/>} />
+          <Route path='/userinfo' element={<UserInfo/>}/>
         </Route>
         <Route path="/info" element={<UserTemplate />}>
           <Route index element={<InfoPage />} />

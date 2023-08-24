@@ -13,3 +13,11 @@ export const layDuLieuLocal = (name) => {
     return null;
   }
 };
+
+// xóa dữ liệu user trong localStorage
+export const logout = () => {
+  // Clear user information from local storage
+  localStorage.removeItem('user');
+  // Reload the page
+  window.location.reload();
+};
