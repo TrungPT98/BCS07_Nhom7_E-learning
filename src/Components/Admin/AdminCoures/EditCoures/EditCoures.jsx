@@ -26,7 +26,7 @@ import { getInfoCoures } from "../../../../redux/slices/couresSlice";
 const EditCoures = () => {
   // useParams
   const { maKhoaHoc } = useParams();
-  console.log(maKhoaHoc);
+  //   console.log(maKhoaHoc);
   //   useDispatch
   const dispatch = useDispatch();
   // message
@@ -34,7 +34,7 @@ const EditCoures = () => {
   const success = () => {
     messageApi.open({
       type: "success",
-      content: "Thêm thành công",
+      content: "Cập nhật thành công",
     });
   };
   const error = () => {
@@ -54,18 +54,18 @@ const EditCoures = () => {
       .catch((err) => {
         console.log(err);
       });
-  },[]);
+  }, []);
 
   // infoUser
   const { name } = useSelector((state) => state.nguoiDung);
-  // console.log(name);
+  //   console.log(name);
 
   //   infoCoures
   const { infoCoures } = useSelector((state) => state.coures);
-  console.log(infoCoures)
+  console.log(infoCoures);
 
   // state img
-    const [imgSrc, setImgSrc] = useState(null);
+  const [imgSrc, setImgSrc] = useState("");
 
   // tạo số ngẫu nhiên từ 0 tới 100
   const generateRandomNumber = () => {
@@ -77,49 +77,51 @@ const EditCoures = () => {
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
+      maNhom: GROUP_ID,
       maKhoaHoc: infoCoures?.maKhoaHoc,
       biDanh: infoCoures?.biDanh,
       tenKhoaHoc: infoCoures?.tenKhoaHoc,
       moTa: infoCoures?.moTa,
-      luotXem: infoCoures?.luotXem,
-      danhGia: infoCoures?.danhGia,
+      luotXem: 100,
+      danhGia: 100,
       hinhAnh: null,
-      maNhom:infoCoures?.maNhom,
+      maNhom: infoCoures?.maNhom,
       ngayTao: infoCoures?.ngayTao,
-      maDanhMucKhoaHoc: infoCoures?.maDanhMucKhoaHoc,
       taiKhoanNguoiTao: name.taiKhoan,
+      tenDanhMucKhoaHoc: infoCoures?.danhMucKhoaHoc?.tenDanhMucKhoaHoc,
     },
     validationSchema: Yup.object().shape({
-        maKhoaHoc: Yup.string().required("Mã khoá học không được để trống"),
-        biDanh: Yup.string().required("Bí danh không được để trống"),
-        tenKhoaHoc: Yup.string().required("Tên khoá học không được để trống"),
-        moTa: Yup.string().required("Mô tả không được để trống"),
-        maDanhMucKhoaHoc: Yup.string().required('Danh mục  không được để trống'),
-        // ngayTao:Yup.required('Ngày tạo không đẻ trống')
+      maKhoaHoc: Yup.string().required("Mã khoá học không được để trống"),
+      biDanh: Yup.string().required("Bí danh không được để trống"),
+      tenKhoaHoc: Yup.string().required("Tên khoá học không được để trống"),
+      moTa: Yup.string().required("Mô tả không được để trống"),
+      //   maDanhMucKhoaHoc: Yup.string().required("Danh mục  không được để trống"),
+      // ngayTao:Yup.required('Ngày tạo không đẻ trống')
     }),
     // addUser
     onSubmit: (values) => {
-      // console.log(values);
-      // tạo formData
-      //   let formData = new FormData();
-      //   for (let key in values) {
-      //     if (key !== "hinhAnh") {
-      //       formData.append(key, values[key]);
-      //     } else {
-      //       formData.append("File", values.hinhAnh, values.hinhAnh.name);
-      //     }
-      //   }
-      //   khoaHocServ
-      //     .themKhoahoc(formData)
-      //     .then((res) => {
-      //       console.log(res);
-      //       success()
-      //       resetForm()
-      //     })
-      //     .catch((err) => {
-      //       console.log(err);
-      //       error()
-      //     });
+      console.log(values);
+      let formData = new FormData();
+      for (let key in values) {
+        if (key !== "hinhAnh") {
+          formData.append(key, values[key]);
+        } else {
+          if (values.hinhAnh !== null) {
+            formData.append("File", values.hinhAnh, values.hinhAnh.name);
+          }
+        }
+      }
+
+        khoaHocServ
+          .chinhSuaKhoaHoc(formData)
+          .then((res) => {
+            console.log(res);
+            success();
+          })
+          .catch((err) => {
+            console.log(err);
+            error();
+          });
     },
   });
 
@@ -207,9 +209,11 @@ const EditCoures = () => {
             onBlur={handleBlur}
             value={values.maKhoaHoc}
           />
-          {errors.maKhoaHoc && touched.maKhoaHoc ? (
-          <p className="text-red-500">{errors.maKhoaHoc}</p>
-        ) : ''}
+          {/* {errors.maKhoaHoc && touched.maKhoaHoc ? (
+            <p className="text-red-500">{errors.maKhoaHoc}</p>
+          ) : (
+            ""
+          )} */}
         </Form.Item>
         <Form.Item className="ms-4" label="Bí danh">
           <Input
@@ -219,9 +223,11 @@ const EditCoures = () => {
             onBlur={handleBlur}
             value={values.biDanh}
           />
-          {errors.biDanh && touched.biDanh ? (
-          <p className="text-red-500">{errors.biDanh}</p>
-        ) : ''}
+          {/* {errors.biDanh && touched.biDanh ? (
+            <p className="text-red-500">{errors.biDanh}</p>
+          ) : (
+            ""
+          )} */}
         </Form.Item>
         <Form.Item className="ms-4" label="Tên khoá">
           <Input
@@ -231,9 +237,11 @@ const EditCoures = () => {
             onBlur={handleBlur}
             value={values.tenKhoaHoc}
           />
-          {errors.tenKhoaHoc && touched.tenKhoaHoc ? (
-          <p className="text-red-500">{errors.tenKhoaHoc}</p>
-        ) : ''}
+          {/* {errors.tenKhoaHoc && touched.tenKhoaHoc ? (
+            <p className="text-red-500">{errors.tenKhoaHoc}</p>
+          ) : (
+            ""
+          )} */}
         </Form.Item>
         <Form.Item className="ms-4" label="Mô tả">
           <Input.TextArea
@@ -243,20 +251,20 @@ const EditCoures = () => {
             onBlur={handleBlur}
             value={values.moTa}
           />
-          {errors.moTa && touched.moTa ? (
+          {/* {errors.moTa && touched.moTa ? (
             <p className="text-red-500">{errors.moTa}</p>
           ) : (
             ""
-          )}
+          )} */}
         </Form.Item>
         <Form.Item className="ms-4" label="Ngày tạo">
           <DatePicker
             format={"DD/MM/YYYY"}
-              onChange={handleChangeDatePicker}
+            onChange={handleChangeDatePicker}
             // name="ngayTao"
             className=""
             // onBlur={handleBlur}
-            value={moment(values.ngayTao)}
+            value={moment(values.ngayTao, "DD/MM/YYYY")}
           />
           {/* {errors.ngayTao && touched.ngayTao ? (
           <p className="text-red-500">{errors.ngayTao}</p>
@@ -265,13 +273,13 @@ const EditCoures = () => {
         <Form.Item className="ms-4" label="Danh mục">
           <Select
             onChange={(values) => {
-              setFieldValue("maDanhMucKhoaHoc", values);
+              setFieldValue("tenDanhMucKhoaHoc", values);
             }}
             className=""
-            name="maDanhMucKhoaHoc"
+            name="tenDanhMucKhoaHoc"
             placeholder="Chọn khóa học"
             onBlur={handleBlur}
-            value={values.maDanhMucKhoaHoc}
+            value={values.tenDanhMucKhoaHoc}
           >
             <Select.Option value="BackEnd">Lập trình Backend</Select.Option>
             <Select.Option value="FrontEnd">Lập trình Front end</Select.Option>
@@ -282,25 +290,29 @@ const EditCoures = () => {
             <Select.Option value="DiDong">Lập trình di động</Select.Option>
             <Select.Option value="TuDuy">Tư duy lập trình</Select.Option>
           </Select>
-          {errors.maDanhMucKhoaHoc && touched.maDanhMucKhoaHoc ? (
-          <p className="text-red-500">{errors.maDanhMucKhoaHoc}</p>
-        ) : ''}
+          {/* {errors.tenDanhMucKhoaHoc && touched.tenDanhMucKhoaHoc ? (
+            <p className="text-red-500">{errors.tenDanhMucKhoaHoc}</p>
+          ) : (
+            ""
+          )} */}
         </Form.Item>
         <Form.Item className="ms-4" label="Hình ảnh">
           <Input
             name="hinhAnh"
             type="file"
             className="p-0 "
-              onChange={handleChangeFile}
+            onChange={handleChangeFile}
             onBlur={handleBlur}
           />
-          {errors.hinhAnh && touched.hinhAnh ? (
-          <p className="text-red-500">{errors.hinhAnh}</p>
-        ) : ''}
+          {/* {errors.hinhAnh && touched.hinhAnh ? (
+            <p className="text-red-500">{errors.hinhAnh}</p>
+          ) : (
+            ""
+          )} */}
           <img
             accept="image/png, image/gif, image/jpeg"
             className="w-20 h-20 mt-3 "
-              src={imgSrc =='' ? infoCoures.hinhAnh : imgSrc}
+            src={imgSrc == "" ? infoCoures.hinhAnh : imgSrc}
             alt="..."
           />
         </Form.Item>
@@ -308,7 +320,7 @@ const EditCoures = () => {
           type="submit"
           className="bg-blue-600 text-white py-2 px-4  flex justify-center items-center hover:bg-blue-400 rounded-lg"
         >
-          Thêm
+          Cập nhật
         </button>
       </Form>
     </>

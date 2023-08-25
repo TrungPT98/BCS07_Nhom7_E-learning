@@ -24,7 +24,10 @@ export const khoaHocServ = {
         return https.delete(`/api/QuanLyKhoaHoc/XoaKhoaHoc?MaKhoaHoc=${data}`)
     },
     themKhoahoc: (formData) => {
-        return https.post(`https://elearningnew.cybersoft.edu.vn/api/QuanLyKhoaHoc/ThemKhoaHocUploadHinh`, formData)
+        return https.post(`/api/QuanLyKhoaHoc/ThemKhoaHocUploadHinh`, formData)
+    },
+    chinhSuaKhoaHoc: (formData) => {
+        return https.post(`/api/QuanLyKhoaHoc/CapNhatKhoaHocUpload`, formData)
     }
 
 }
