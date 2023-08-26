@@ -15,7 +15,7 @@ import {
   Select,
   Switch,
   TreeSelect,
-  message
+  message,
 } from "antd";
 import { useSelector } from "react-redux";
 import moment from "moment/moment";
@@ -49,11 +49,19 @@ const FormAddCoures = () => {
     return Math.floor(Math.random() * 101);
   };
 
+  // tạo ngẫu nhiên maKh
+  const toDay = new Date();
+  const date =
+    toDay.getDate() + "/" + (toDay.getMonth() + 1) + "/" + toDay.getFullYear();
+  const maKH = `${toDay.getDate()}${
+    toDay.getMonth() + 1
+  }${toDay.getFullYear()}${toDay.getHours()}${toDay.getMinutes()}${toDay.getMilliseconds()}`;
+
   // useFormik
   // Xử lý form
   const formik = useFormik({
     initialValues: {
-      maKhoaHoc: "",
+      maKhoaHoc: maKH.toString(15),
       biDanh: "",
       tenKhoaHoc: "",
       moTa: "",
@@ -66,13 +74,11 @@ const FormAddCoures = () => {
       taiKhoanNguoiTao: name.taiKhoan,
     },
     validationSchema: Yup.object().shape({
-      maKhoaHoc: Yup.string().required("Mã khoá học không được để trống"),
       biDanh: Yup.string().required("Bí danh không được để trống"),
       tenKhoaHoc: Yup.string().required("Tên khoá học không được để trống"),
       moTa: Yup.string().required("Mô tả không được để trống"),
-      maDanhMucKhoaHoc: Yup.string().required('Danh mục  không được để trống'),
-      ngayTao:Yup.date().required('Ngày tạo không đẻ trống')
-      
+      maDanhMucKhoaHoc: Yup.string().required("Danh mục  không được để trống"),
+      ngayTao: Yup.date().required("Ngày tạo không đẻ trống"),
     }),
     // addUser
     onSubmit: (values) => {
@@ -91,12 +97,12 @@ const FormAddCoures = () => {
         .themKhoahoc(formData)
         .then((res) => {
           console.log(res);
-          success()
-          resetForm()
+          success();
+          resetForm();
         })
         .catch((err) => {
           console.log(err);
-          error()
+          error();
         });
     },
   });
@@ -151,119 +157,141 @@ const FormAddCoures = () => {
   };
   return (
     <>
-    {contextHolder}
-    <Form
-      onSubmitCapture={handleSubmit}
-      labelCol={{
-        span: 4,
-      }}
-      wrapperCol={{
-        span: 14,
-      }}
-      layout="horizontal"
-      initialValues={{
-        size: componentSize,
-      }}
-      onValuesChange={onFormLayoutChange}
-      size={componentSize}
-      style={{
-        maxWidth: 600,
-      }}
-    >
-      <Form.Item className="ms-4" label="Form Size" name="size">
-        <Radio.Group>
-          <Radio.Button value="small">Small</Radio.Button>
-          <Radio.Button value="default">Default</Radio.Button>
-          <Radio.Button value="large">Large</Radio.Button>
-        </Radio.Group>
-      </Form.Item>
-      <Form.Item className="ms-4" label="Mã khoá">
-        <Input name="maKhoaHoc" className="" onChange={handleChange} onBlur={handleBlur} value={values.maKhoaHoc} />
-        {errors.maKhoaHoc && touched.maKhoaHoc ? (
-          <p className="text-red-500">{errors.maKhoaHoc}</p>
-        ) : ''}
-      </Form.Item>
-      <Form.Item className="ms-4" label="Bí danh">
-        <Input name="biDanh" className="" onChange={handleChange} onBlur={handleBlur} value={values.biDanh} />
-        {errors.biDanh && touched.biDanh ? (
-          <p className="text-red-500">{errors.biDanh}</p>
-        ) : ''}
-      </Form.Item>
-      <Form.Item className="ms-4" label="Tên khoá">
-        <Input name="tenKhoaHoc" className="" onChange={handleChange} onBlur={handleBlur} value={values.tenKhoaHoc}/>
-        {errors.tenKhoaHoc && touched.tenKhoaHoc ? (
-          <p className="text-red-500">{errors.tenKhoaHoc}</p>
-        ) : ''}
-      </Form.Item>
-      <Form.Item className="ms-4" label="Mô tả">
-        <Input.TextArea
-          name="moTa"
-          className=" resize-none"
-          onChange={handleChange}
-          onBlur={handleBlur} value={values.moTa}
-        />
-         {errors.moTa && touched.moTa ? (
-          <p className="text-red-500">{errors.moTa}</p>
-        ) : ''}
-      </Form.Item>
-      <Form.Item className="ms-4" label="Ngày tạo">
-        <DatePicker
-          format={"DD/MM/YYYY"}
-          onChange={handleChangeDatePicker}
-          name="ngayTao"
-          className=""
-          onBlur={handleBlur}
-        />
-         {errors.ngayTao && touched.ngayTao ? (
-          <p className="text-red-500">{errors.ngayTao}</p>
-        ) : ''}
-      </Form.Item>
-      <Form.Item className="ms-4" label="Danh mục">
-        <Select
-          onChange={(values) => {
-            setFieldValue("maDanhMucKhoaHoc", values);
-          }}
-          className=""
-          name="maDanhMucKhoaHoc"
-          placeholder="Chọn khóa học"
-          onBlur={handleBlur} value={values.maDanhMucKhoaHoc}
-        >
-          <Select.Option value="BackEnd">Lập trình Backend</Select.Option>
-          <Select.Option value="FrontEnd">Lập trình Front end</Select.Option>
-          <Select.Option value="FullStack">Lập trình Full Stack</Select.Option>
-          <Select.Option value="Design">Thiết kế Web</Select.Option>
-          <Select.Option value="DiDong">Lập trình di động</Select.Option>
-          <Select.Option value="TuDuy">Tư duy lập trình</Select.Option>
-        </Select>
-        {errors.maDanhMucKhoaHoc && touched.maDanhMucKhoaHoc ? (
-          <p className="text-red-500">{errors.maDanhMucKhoaHoc}</p>
-        ) : ''}
-      </Form.Item>
-      <Form.Item className="ms-4" label="Hình ảnh">
-        <Input
-          name="hinhAnh"
-          type="file"
-          className="p-0 "
-          onChange={handleChangeFile}
-          onBlur={handleBlur}
-        />
-        {errors.hinhAnh && touched.hinhAnh ? (
-          <p className="text-red-500">{errors.hinhAnh}</p>
-        ) : ''}
-        <img
-          accept="image/png, image/gif, image/jpeg"
-          className="w-20 h-20 mt-3 "
-          src={imgSrc}
-          alt="..."
-        />
-      </Form.Item>
-      <button
-        type="submit"
-        className="bg-blue-600 text-white py-2 px-4  flex justify-center items-center hover:bg-blue-400 rounded-lg"
+      {contextHolder}
+      <Form
+        onSubmitCapture={handleSubmit}
+        labelCol={{
+          span: 4,
+        }}
+        wrapperCol={{
+          span: 14,
+        }}
+        layout="horizontal"
+        initialValues={{
+          size: componentSize,
+        }}
+        onValuesChange={onFormLayoutChange}
+        size={componentSize}
+        style={{
+          maxWidth: 600,
+        }}
       >
-        Thêm
-      </button>
-    </Form>
+        <Form.Item className="ms-4" label="Form Size" name="size">
+          <Radio.Group>
+            <Radio.Button value="small">Small</Radio.Button>
+            <Radio.Button value="default">Default</Radio.Button>
+            <Radio.Button value="large">Large</Radio.Button>
+          </Radio.Group>
+        </Form.Item>
+        <Form.Item className="ms-4" label="Bí danh">
+          <Input
+            name="biDanh"
+            className=""
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.biDanh}
+          />
+          {errors.biDanh && touched.biDanh ? (
+            <p className="text-red-500">{errors.biDanh}</p>
+          ) : (
+            ""
+          )}
+        </Form.Item>
+        <Form.Item className="ms-4" label="Tên khoá">
+          <Input
+            name="tenKhoaHoc"
+            className=""
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.tenKhoaHoc}
+          />
+          {errors.tenKhoaHoc && touched.tenKhoaHoc ? (
+            <p className="text-red-500">{errors.tenKhoaHoc}</p>
+          ) : (
+            ""
+          )}
+        </Form.Item>
+        <Form.Item className="ms-4" label="Mô tả">
+          <Input.TextArea
+            name="moTa"
+            className=" resize-none"
+            onChange={handleChange}
+            onBlur={handleBlur}
+            value={values.moTa}
+          />
+          {errors.moTa && touched.moTa ? (
+            <p className="text-red-500">{errors.moTa}</p>
+          ) : (
+            ""
+          )}
+        </Form.Item>
+        <Form.Item className="ms-4" label="Ngày tạo">
+          <DatePicker
+            format={"DD/MM/YYYY"}
+            onChange={handleChangeDatePicker}
+            name="ngayTao"
+            className=""
+            onBlur={handleBlur}
+          />
+          {errors.ngayTao && touched.ngayTao ? (
+            <p className="text-red-500">{errors.ngayTao}</p>
+          ) : (
+            ""
+          )}
+        </Form.Item>
+        <Form.Item className="ms-4" label="Danh mục">
+          <Select
+            onChange={(values) => {
+              setFieldValue("maDanhMucKhoaHoc", values);
+            }}
+            className=""
+            name="maDanhMucKhoaHoc"
+            placeholder="Chọn khóa học"
+            onBlur={handleBlur}
+            value={values.maDanhMucKhoaHoc}
+          >
+            <Select.Option value="BackEnd">Lập trình Backend</Select.Option>
+            <Select.Option value="FrontEnd">Lập trình Front end</Select.Option>
+            <Select.Option value="FullStack">
+              Lập trình Full Stack
+            </Select.Option>
+            <Select.Option value="Design">Thiết kế Web</Select.Option>
+            <Select.Option value="DiDong">Lập trình di động</Select.Option>
+            <Select.Option value="TuDuy">Tư duy lập trình</Select.Option>
+          </Select>
+          {errors.maDanhMucKhoaHoc && touched.maDanhMucKhoaHoc ? (
+            <p className="text-red-500">{errors.maDanhMucKhoaHoc}</p>
+          ) : (
+            ""
+          )}
+        </Form.Item>
+        <Form.Item className="ms-4" label="Hình ảnh">
+          <Input
+            name="hinhAnh"
+            type="file"
+            className="p-0 "
+            onChange={handleChangeFile}
+            onBlur={handleBlur}
+          />
+          {errors.hinhAnh && touched.hinhAnh ? (
+            <p className="text-red-500">{errors.hinhAnh}</p>
+          ) : (
+            ""
+          )}
+          <img
+            accept="image/png, image/gif, image/jpeg"
+            className="w-20 h-20 mt-3 "
+            src={imgSrc}
+            alt="..."
+          />
+        </Form.Item>
+        <button
+          type="submit"
+          className="bg-blue-600 text-white py-2 px-4  flex justify-center items-center hover:bg-blue-400 rounded-lg"
+        >
+          Thêm
+        </button>
+      </Form>
     </>
   );
 };
