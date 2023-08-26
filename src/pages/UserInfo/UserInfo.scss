@@ -66,59 +66,6 @@
     animation: fadeEffect 1s;
 }
 
-/* Modal update */
-.infoPage .modal .modal-content {
-    // background: url(../../Assets/Img/imgCourse/hornor.gif);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
-.infoPage .modal .modalUpdate {
-    padding: 20px 50px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.infoPage .modal .modalUpdateHeader {
-    color: var(--colorWhite);
-    padding: 10px 50px;
-}
-
-.infoPage .modal .modalUpdate h6 {
-    padding-top: 10px;
-    color: var(--colorWhite);
-}
-
-.infoPage .modal .modalUpdate form {
-    width: 100%;
-}
-
-.infoPage .modal .modalUpdate input {
-    width: 100%;
-    margin: 5px 0;
-    padding: 5px 15px;
-    border-radius: 5px;
-    border: 2px solid var(--colorGlobal);
-    outline: none;
-}
-
-.infoPage .modal .modalUpdate .modal-footer {
-    border-top: none;
-}
-/* Btn */
-.btnSubmit {
-    background-color: var(--colorGlobal);
-    color: var(--colorWhite);
-    border: none;
-    padding: 10px;
-}
-
-.btnClose {
-    background-color: #dc3545;
-}
 
 /* css UserInfo */
 
