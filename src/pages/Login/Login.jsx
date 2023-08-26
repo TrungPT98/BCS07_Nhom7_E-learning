@@ -12,7 +12,7 @@ import { message } from "antd";
 import { nguoiDungServ } from "../../services/nguoiDungService";
 import { luuXuongLocal } from "../../util/localStore";
 import { useNavigate } from "react-router-dom";
-import { setName } from "../../redux/slices/nguoiDungSlice";
+import { getInfoUser, setName } from "../../redux/slices/nguoiDungSlice";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -111,7 +111,6 @@ export default function Login() {
             luuXuongLocal("user", res.data);
             // lưu thành công sẽ gửi dữ liệu lên redux
             dispatch(setName(res.data));
-
             //   set thời gian để thông báo message
             setTimeout(() => {
               navigate("/admin/user");

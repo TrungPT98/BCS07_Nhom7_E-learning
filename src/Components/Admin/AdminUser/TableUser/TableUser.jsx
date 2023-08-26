@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { nguoiDungServ } from "../../../../services/nguoiDungService";
 import { getAllUserThunk } from "../../../../redux/slices/nguoiDungSlice";
+import { GROUP_ID } from "../../../../services/khoaHocService";
 
 // confirm antd
 const confirm = (e) => {
@@ -15,6 +16,40 @@ const cancel = (e) => {
   message.error("Click on No");
 };
 const TableUser = () => {
+
+// dispatch
+  const dispatch = useDispatch();
+  // gọi dữ liệu users
+  useEffect(() => {
+    nguoiDungServ
+      .getAllUser()
+      .then((res) => {
+        console.log(res);
+        dispatch(getAllUserThunk());
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  // biến chứa dữ liệu user
+  const { users } = useSelector((state) => state.nguoiDung);
+  // xoá user
+  const handleDelete = (record) => {
+    nguoiDungServ
+      .deleteUser(record.taiKhoan)
+      .then((res) => {
+        console.log(res);
+        success();
+        dispatch(getAllUserThunk());
+      })
+      .catch((err) => {
+        error();
+        console.log(err);
+      });
+  };
+
+
   // message antd
   const [messageApi, contextHolder] = message.useMessage();
   const success = () => {
@@ -97,7 +132,7 @@ const TableUser = () => {
           </Popconfirm>
 
           <NavLink
-            to={`/admin/update/GP02/${record.taiKhoan}`}
+            to={`/admin/update/${GROUP_ID}/${record.taiKhoan}`}
             key={2}
             className="py-2 px-3 bg-yellow-600 text-white rounded-lg hover:bg-yellow-400 duration-300 hover:text-white"
           >
@@ -107,38 +142,7 @@ const TableUser = () => {
       ),
     },
   ];
-  // dispatch
-  const dispatch = useDispatch();
-  // gọi dữ liệu users
-  useEffect(() => {
-    nguoiDungServ
-      .getAllUser()
-      .then((res) => {
-        console.log(res);
-        dispatch(getAllUserThunk());
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
-
-  // biến chứa dữ liệu user
-  const { users } = useSelector((state) => state.nguoiDung);
-  // xoá user
-  const handleDelete = (record) => {
-    nguoiDungServ
-      .deleteUser(record.taiKhoan)
-      .then((res) => {
-        console.log(res);
-        success();
-        dispatch(getAllUserThunk());
-      })
-      .catch((err) => {
-        error();
-        console.log(err);
-      });
-  };
-
+  
   const newUser = users.map((item, index) => {
     return {
       ...item,
