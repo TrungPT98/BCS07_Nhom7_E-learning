@@ -67,28 +67,21 @@ const EditCoures = () => {
   // state img
   const [imgSrc, setImgSrc] = useState("");
 
-  // tạo số ngẫu nhiên từ 0 tới 100
-  const generateRandomNumber = () => {
-    return Math.floor(Math.random() * 101);
-  };
-
   // useFormik
   // Xử lý form
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      maNhom: GROUP_ID,
       maKhoaHoc: infoCoures?.maKhoaHoc,
-      biDanh: infoCoures?.biDanh,
       tenKhoaHoc: infoCoures?.tenKhoaHoc,
-      moTa: infoCoures?.moTa,
-      luotXem: 100,
-      danhGia: 100,
-      hinhAnh: null,
-      maNhom: infoCoures?.maNhom,
-      ngayTao: infoCoures?.ngayTao,
-      taiKhoanNguoiTao: name.taiKhoan,
       tenDanhMucKhoaHoc: infoCoures?.danhMucKhoaHoc?.tenDanhMucKhoaHoc,
+      moTa: infoCoures?.moTa,
+      hinhAnh: null,
+      maNhom: GROUP_ID,
+      biDanh: infoCoures?.biDanh,
+      ngayTao: infoCoures?.ngayTao,
+      danhGia: infoCoures?.danhGia || 0,
+      taiKhoanNguoiTao: name.taiKhoan,
     },
     validationSchema: Yup.object().shape({
       maKhoaHoc: Yup.string().required("Mã khoá học không được để trống"),
@@ -112,16 +105,17 @@ const EditCoures = () => {
         }
       }
 
-        khoaHocServ
-          .chinhSuaKhoaHoc(formData)
-          .then((res) => {
-            console.log(res);
-            success();
-          })
-          .catch((err) => {
-            console.log(err);
-            error();
-          });
+      khoaHocServ
+        .chinhSuaKhoaHoc(formData)
+        .then((res) => {
+          console.log(res);
+          dispatch(getInfoCoures(res.data));
+          success();
+        })
+        .catch((err) => {
+          error();
+          console.log(err);
+        });
     },
   });
 
@@ -135,7 +129,7 @@ const EditCoures = () => {
   };
 
   // image
-  const handleChangeFile = (e) => {
+  const handleChangeFile = async (e) => {
     // lấy file từ e
     let file = e.target.files[0];
     if (
@@ -143,18 +137,15 @@ const EditCoures = () => {
       file.type === "image/gif" ||
       file.type === "image/jpeg"
     ) {
+      // lưu formik
+      await setFieldValue("hinhAnh", file);
       // tạo đối tượng đọc file
       let reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = (e) => {
         setImgSrc(e.target.result);
       };
-      // lưu formik
-    } else {
-      setImgSrc(null);
-      setFieldValue("hinhAnh", null);
     }
-    setFieldValue("hinhAnh", file);
   };
 
   // boc tách
@@ -201,20 +192,6 @@ const EditCoures = () => {
             <Radio.Button value="large">Large</Radio.Button>
           </Radio.Group>
         </Form.Item>
-        <Form.Item className="ms-4" label="Mã khoá">
-          <Input
-            name="maKhoaHoc"
-            className=""
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.maKhoaHoc}
-          />
-          {/* {errors.maKhoaHoc && touched.maKhoaHoc ? (
-            <p className="text-red-500">{errors.maKhoaHoc}</p>
-          ) : (
-            ""
-          )} */}
-        </Form.Item>
         <Form.Item className="ms-4" label="Bí danh">
           <Input
             name="biDanh"
@@ -223,11 +200,11 @@ const EditCoures = () => {
             onBlur={handleBlur}
             value={values.biDanh}
           />
-          {/* {errors.biDanh && touched.biDanh ? (
+          {errors.biDanh && touched.biDanh ? (
             <p className="text-red-500">{errors.biDanh}</p>
           ) : (
             ""
-          )} */}
+          )}
         </Form.Item>
         <Form.Item className="ms-4" label="Tên khoá">
           <Input
@@ -237,11 +214,11 @@ const EditCoures = () => {
             onBlur={handleBlur}
             value={values.tenKhoaHoc}
           />
-          {/* {errors.tenKhoaHoc && touched.tenKhoaHoc ? (
+          {errors.tenKhoaHoc && touched.tenKhoaHoc ? (
             <p className="text-red-500">{errors.tenKhoaHoc}</p>
           ) : (
             ""
-          )} */}
+          )}
         </Form.Item>
         <Form.Item className="ms-4" label="Mô tả">
           <Input.TextArea
@@ -251,11 +228,11 @@ const EditCoures = () => {
             onBlur={handleBlur}
             value={values.moTa}
           />
-          {/* {errors.moTa && touched.moTa ? (
+          {errors.moTa && touched.moTa ? (
             <p className="text-red-500">{errors.moTa}</p>
           ) : (
             ""
-          )} */}
+          )}
         </Form.Item>
         <Form.Item className="ms-4" label="Ngày tạo">
           <DatePicker
