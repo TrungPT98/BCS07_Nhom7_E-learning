@@ -64,7 +64,7 @@ const Header = () => {
       <nav className=" border-gray-200 px-4 md:px-6 py-2 ">
         <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
           {/* logo */}
-          <NavLink to={"http://localhost:3000/"} className="flex items-center">
+          <NavLink to="/" className="flex items-center">
             <img
               src="./assets/image/headerLogo.png"
               className="mr-3 h-6 md:h-9"
@@ -77,10 +77,13 @@ const Header = () => {
             {/* button đăng nhập */}
             {name != null ? (
               <>
-              <NavLink to="/userinfo">Hi, {name.hoTen} 
+              <NavLink to={`/userinfo/${name.taiKhoan}`}>Hi, {name.hoTen}
               {/* <button onClick={handleLogout}><i class="fa-solid fa-power-off"></i></button> */}
               </NavLink>
-              <i onClick={handleLogout} className="fa-solid fa-power-off ml-3 text-red-500 text-xl cursor-pointer hover:text-blue-700 transition-all"></i>
+              <NavLink to="/" onClick={handleLogout} className="fa-solid fa-power-off ml-3 text-red-500 text-xl hover:text-blue-700 transition-all">
+              {/* <i onClick={handleLogout} className="fa-solid fa-power-off ml-3 text-red-500 text-xl hover:text-blue-700 transition-all"></i> */}
+
+              </NavLink>
               </>
             ) : (
               <>

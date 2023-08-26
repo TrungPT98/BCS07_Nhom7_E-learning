@@ -19,5 +19,8 @@ export const logout = () => {
   // Clear user information from local storage
   localStorage.removeItem('user');
   // Reload the page
-  window.location.reload();
+  setTimeout(() => {
+    window.location.reload();
+
+  }, 1000);
 };

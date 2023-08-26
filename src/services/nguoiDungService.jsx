@@ -20,7 +20,9 @@ export const nguoiDungServ = {
     return https.post("/api/QuanLyNguoiDung/ThemNguoiDung",data);
   },
   getInfoUser: (taiKhoan) => {
-    return https.post(`/api/QuanLyNguoiDung/LayThongTinNguoiDung?taiKhoan=${taiKhoan}`)
+    // return https.get(`/api/QuanLyNguoiDung/LayThongTinNguoiDung?taiKhoan=${taiKhoan}`);
+    return https.post(`/api/QuanLyNguoiDung/ThongTinNguoiDung?taiKhoan=${taiKhoan}`);
+
   },
   updateInfoUser: (formData)=>{
     return https.put(`/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung`, formData)
