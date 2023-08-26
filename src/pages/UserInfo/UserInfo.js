@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { Button, Modal } from "antd";
 import "./UserInfo.scss";
 
 const UserInfo = () => {
@@ -11,6 +12,22 @@ const UserInfo = () => {
       e.target.classList.add("active");
       document.querySelector(`#${id}`).classList.add("active");
     }
+  };
+
+  const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+  const showModal = () => {
+    setOpen(true);
+  };
+  const handleOk = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      setOpen(false);
+    }, 3000);
+  };
+  const handleCancel = () => {
+    setOpen(false);
   };
 
   return (
@@ -95,13 +112,15 @@ const UserInfo = () => {
                               HV
                             </span>
                           </p>
-                          <button
+                          <Button
                             data-toggle="modal"
                             data-target="#myModal"
                             className="btnGlobal"
+                            type="primary"
+                            onClick={showModal}
                           >
                             Cập nhật
-                          </button>
+                          </Button>
                         </div>
                       </div>
                     </div>
@@ -240,99 +259,119 @@ const UserInfo = () => {
           </div>
         </div>
         {/* Modal */}
-        <div className="modal fade" id="myModal" style={{ paddingLeft: "0" }}>
-          <div className="modal-dialog">
-            <div className="modal-content">
-              <div className="modal-header modalUpdateHeader">
-                <h5 className="modal-title">Chỉnh sửa thông tin cá nhân</h5>
-                <button type="button" className="close" data-dismiss="modal">
-                  &times;
-                </button>
-              </div>
-              <div className="modal-body modalUpdate">
-                <form
-                  action="#"
-                  // onSubmit={formik.handleSubmit}
-                >
-                  <h6>Họ và tên</h6>
-                  <input
-                    // onBlur={formik.handleBlur}
-                    // onChange={formik.handleChange}
-                    type="text"
-                    placeholder="Họ tên"
-                    name="hoTen"
-                    // value={formik.values.hoTen}
-                  />
-                  {/* {formik.errors.hoTen && formik.touched.hoTen ? (
+        <Modal
+          open={open}
+          onOk={handleOk}
+          onCancel={handleCancel}
+          footer={[
+            <Button key="back" onClick={handleCancel}>
+              Return
+            </Button>,
+            <Button
+              type="submit"
+              loading={loading}
+              onClick={handleOk}
+              className="bg-blue-700 text-white hover:bg-blue-500"
+            >
+              Submit
+            </Button>,
+          ]}
+        >
+          <h3 className="pb-3 mb-1 text-center border-b-2">Chỉnh sửa thông tin cá nhân</h3>
+          <form
+            action="#"
+            // onSubmit={formik.handleSubmit}
+          >
+            <div className="mb-4">
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Họ tên
+              </label>
+              <input
+                // onBlur={formik.handleBlur}
+                // onChange={formik.handleChange}
+                type="text"
+                placeholder="Họ tên"
+                name="hoTen"
+                // value={formik.values.hoTen}
+                className="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-indigo-300"
+              />
+              {/* {formik.errors.hoTen && formik.touched.hoTen ? (
                     <div className="errorMessage">{formik.errors.hoTen}</div>
                   ) : (
                     <div className="message"></div>
                   )} */}
-
-                  <h6>Mật khẩu</h6>
-                  <input
-                    // onBlur={formik.handleBlur}
-                    // onChange={formik.handleChange}
-                    type="password"
-                    placeholder="Mật khẩu"
-                    name="matKhau"
-                    // value={formik.values.matKhau}
-                  />
-                  {/* {formik.errors.matKhau && formik.touched.matKhau ? (
+            </div>
+            <div className="mb-4">
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Mật khẩu
+              </label>
+              <input
+                // onBlur={formik.handleBlur}
+                // onChange={formik.handleChange}
+                type="password"
+                placeholder="Mật khẩu"
+                name="matKhau"
+                // value={formik.values.matKhau}
+                className="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-indigo-300"
+              />
+              {/* {formik.errors.matKhau && formik.touched.matKhau ? (
                     <div className="errorMessage">{formik.errors.matKhau}</div>
                   ) : (
                     <div className="message"></div>
                   )} */}
-
-                  <h6>Email</h6>
-                  <input
-                    // onBlur={formik.handleBlur}
-                    // onChange={formik.handleChange}
-                    type="email"
-                    placeholder="Email"
-                    name="email"
-                    // value={formik.values.email}
-                  />
-                  {/* {formik.errors.email && formik.touched.email ? (
+            </div>
+            <div className="mb-4">
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Email
+              </label>
+              <input
+                // onBlur={formik.handleBlur}
+                // onChange={formik.handleChange}
+                type="email"
+                placeholder="Email"
+                name="email"
+                // value={formik.values.email}
+                className="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-indigo-300"
+              />
+              {/* {formik.errors.email && formik.touched.email ? (
                     <div className="errorMessage">{formik.errors.email}</div>
                   ) : (
                     <div className="message"></div>
                   )} */}
-
-                  <h6>Số điện thoại</h6>
-                  <input
-                    // onBlur={formik.handleBlur}
-                    // onChange={formik.handleChange}
-                    type="phone"
-                    placeholder="Số điện thoại"
-                    name="soDT"
-                    // value={formik.values.soDT}
-                  />
-                  {/* {formik.errors.soDT && formik.touched.soDT ? (
+            </div>
+            <div className="mb-4">
+              <label
+                htmlFor="number"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Số điện thoại
+              </label>
+              <input
+                // onBlur={formik.handleBlur}
+                // onChange={formik.handleChange}
+                type="phone"
+                placeholder="Số điện thoại"
+                name="soDT"
+                // value={formik.values.soDT}
+                className="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-indigo-300"
+              />
+              {/* {formik.errors.soDT && formik.touched.soDT ? (
                     <div className="errorMessage">{formik.errors.soDT}</div>
                   ) : (
                     <div className="message"></div>
                   )} */}
-
-                  {/* <input type="file" /> */}
-
-                  <div class="modal-footer">
-                    <button type="submit" className="btnSubmit">
-                      Hoàn thành
-                    </button>
-                    <button
-                      type="button"
-                      className="btnSubmit btnClose"
-                      data-dismiss="modal"
-                    >
-                      Đóng
-                    </button>
-                  </div>
-                </form>
-              </div>
             </div>
-          </div>
-        </div>
+          </form>
+        </Modal>
       </section>
     </>
   );
