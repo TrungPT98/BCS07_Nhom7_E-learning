@@ -5,23 +5,19 @@ import { useFormik } from "formik";
 // yup
 import * as Yup from "yup";
 import {
-  Button,
-  Cascader,
   DatePicker,
   Form,
   Input,
-  InputNumber,
   Radio,
   Select,
-  Switch,
-  TreeSelect,
   message,
 } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment/moment";
 import { GROUP_ID, khoaHocServ } from "../../../../services/khoaHocService";
 import { useParams } from "react-router-dom";
-import { getInfoCoures } from "../../../../redux/slices/couresSlice";
+import { getInfoCoures, getUpdateCoures } from "../../../../redux/slices/couresSlice";
+import { updateCoures } from "../../../../redux/actions/couresAction";
 
 const EditCoures = () => {
   // useParams
@@ -62,7 +58,7 @@ const EditCoures = () => {
 
   //   infoCoures
   const { infoCoures } = useSelector((state) => state.coures);
-  console.log(infoCoures);
+//   console.log(infoCoures);
 
   // state img
   const [imgSrc, setImgSrc] = useState("");
@@ -73,14 +69,14 @@ const EditCoures = () => {
     enableReinitialize: true,
     initialValues: {
       maKhoaHoc: infoCoures?.maKhoaHoc,
+      biDanh: infoCoures?.biDanh,
       tenKhoaHoc: infoCoures?.tenKhoaHoc,
-      tenDanhMucKhoaHoc: infoCoures?.danhMucKhoaHoc?.tenDanhMucKhoaHoc,
       moTa: infoCoures?.moTa,
+      danhGia: infoCoures?.danhGia || 0,
       hinhAnh: null,
       maNhom: GROUP_ID,
-      biDanh: infoCoures?.biDanh,
       ngayTao: infoCoures?.ngayTao,
-      danhGia: infoCoures?.danhGia || 0,
+      maDanhMucKhoaHoc: infoCoures?.maDanhMucKhoaHoc,
       taiKhoanNguoiTao: name.taiKhoan,
     },
     validationSchema: Yup.object().shape({
@@ -104,18 +100,16 @@ const EditCoures = () => {
           }
         }
       }
+    //   console.log(formData)
 
-      khoaHocServ
-        .chinhSuaKhoaHoc(formData)
-        .then((res) => {
-          console.log(res);
-          dispatch(getInfoCoures(res.data));
-          success();
-        })
-        .catch((err) => {
-          error();
-          console.log(err);
-        });
+      khoaHocServ.chinhSuaKhoaHoc(formData).then((res)=>{
+        console.log(res)
+        success()
+        dispatch(getUpdateCoures(res.data))
+      }).catch((err)=>{
+        console.log(err)
+        error()
+      })
     },
   });
 
@@ -128,21 +122,25 @@ const EditCoures = () => {
     setFieldValue("ngayTao", moment(value));
   };
 
+
+  
+
+
   // image
   const handleChangeFile = async (e) => {
     // lấy file từ e
     let file = e.target.files[0];
     if (
       file.type === "image/png" ||
-      file.type === "image/gif" ||
-      file.type === "image/jpeg"
+      file.type === "image/jpeg" ||
+      file.type === "image/jpg"
     ) {
       // lưu formik
       await setFieldValue("hinhAnh", file);
       // tạo đối tượng đọc file
       let reader = new FileReader();
       reader.readAsDataURL(file);
-      reader.onload = (e) => {
+       reader.onload = (e) => {
         setImgSrc(e.target.result);
       };
     }
@@ -192,20 +190,6 @@ const EditCoures = () => {
             <Radio.Button value="large">Large</Radio.Button>
           </Radio.Group>
         </Form.Item>
-        <Form.Item className="ms-4" label="Bí danh">
-          <Input
-            name="biDanh"
-            className=""
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.biDanh}
-          />
-          {errors.biDanh && touched.biDanh ? (
-            <p className="text-red-500">{errors.biDanh}</p>
-          ) : (
-            ""
-          )}
-        </Form.Item>
         <Form.Item className="ms-4" label="Tên khoá">
           <Input
             name="tenKhoaHoc"
@@ -250,13 +234,14 @@ const EditCoures = () => {
         <Form.Item className="ms-4" label="Danh mục">
           <Select
             onChange={(values) => {
-              setFieldValue("tenDanhMucKhoaHoc", values);
+              setFieldValue("maDanhMucKhoaHoc", values);
             }}
             className=""
-            name="tenDanhMucKhoaHoc"
+            name="maDanhMucKhoaHoc"
             placeholder="Chọn khóa học"
             onBlur={handleBlur}
-            value={values.tenDanhMucKhoaHoc}
+            defaultValue={values.maDanhMucKhoaHoc}
+            value={values.maDanhMucKhoaHoc}
           >
             <Select.Option value="BackEnd">Lập trình Backend</Select.Option>
             <Select.Option value="FrontEnd">Lập trình Front end</Select.Option>
@@ -279,7 +264,7 @@ const EditCoures = () => {
             type="file"
             className="p-0 "
             onChange={handleChangeFile}
-            onBlur={handleBlur}
+            // onBlur={handleBlur}
           />
           {/* {errors.hinhAnh && touched.hinhAnh ? (
             <p className="text-red-500">{errors.hinhAnh}</p>
@@ -287,7 +272,7 @@ const EditCoures = () => {
             ""
           )} */}
           <img
-            accept="image/png, image/gif, image/jpeg"
+            accept="image/png, image/jpg, image/jpeg"
             className="w-20 h-20 mt-3 "
             src={imgSrc == "" ? infoCoures.hinhAnh : imgSrc}
             alt="..."

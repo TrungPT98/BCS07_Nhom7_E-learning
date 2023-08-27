@@ -28,6 +28,9 @@ export const khoaHocServ = {
     },
     chinhSuaKhoaHoc: (formData) => {
         return https.post(`/api/QuanLyKhoaHoc/CapNhatKhoaHocUpload`, formData)
-    }
+    },
+    ghiDanhKhoaHoc: (data) => {
+        return https.post(`/api/QuanLyKhoaHoc/GhiDanhKhoaHoc`, data)
+    },
 
 }
