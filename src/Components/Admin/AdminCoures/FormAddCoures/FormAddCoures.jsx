@@ -17,9 +17,10 @@ import {
   TreeSelect,
   message,
 } from "antd";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import moment from "moment/moment";
 import { GROUP_ID, khoaHocServ } from "../../../../services/khoaHocService";
+import { setNameAdd } from "../../../../redux/slices/nguoiDungSlice";
 
 const FormAddCoures = () => {
   // message
@@ -39,7 +40,10 @@ const FormAddCoures = () => {
 
   // infoUser
   const { name } = useSelector((state) => state.nguoiDung);
+  const dispatch = useDispatch()
+  dispatch(setNameAdd(name.taiKhoan))
   // console.log(name);
+  console.log("name.taiKhoan:", name.taiKhoan)
 
   // state img
   const [imgSrc, setImgSrc] = useState(null);
