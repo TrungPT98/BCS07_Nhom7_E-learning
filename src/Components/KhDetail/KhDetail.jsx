@@ -2,11 +2,18 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { khoaHocServ } from "../../services/khoaHocService";
 // antd
-import { Button} from "antd";
 import KhPhoBien from "../../pages/HomePage/KhPhoBien/KhPhoBien";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  message,
+} from "antd";
 
-// loading 
+// formik
+import { useFormik } from "formik";
+// yup
+import * as Yup from "yup";
+
+// loading
 import {
   set_loading_ended,
   set_loading_started,
@@ -20,6 +27,7 @@ import "./KhDetail.scss";
 const KhDetail = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
+  const {name} = useSelector((state)=> state.nguoiDung)
   const [detail, setDetail] = useState([]);
   // gọi api
   useEffect(() => {
@@ -34,9 +42,56 @@ const KhDetail = () => {
         dispatch(set_loading_ended);
       });
   }, []);
+
+  // message
+  const [messageApi, contextHolder] = message.useMessage();
+  const success = () => {
+    messageApi.open({
+      type: "success",
+      content: "Ghi danh thành công",
+    });
+  };
+  const error = () => {
+    messageApi.open({
+      type: "error",
+      content: "Đã có lỗi xảy ra",
+    });
+  };
+
+
+  const formik = useFormik({
+    initialValues: {
+        maKhoaHoc: id,
+        taiKhoan: name.taiKhoan,
+    },
+    validationSchema: Yup.object().shape({
+    }),
+    // addUser
+    onSubmit: (values) => {
+      console.log(values);
+
+      khoaHocServ.ghiDanhKhoaHoc(values).then((res)=>{
+        console.log(res)
+        success()
+      }).catch((err)=>{
+        console.log(err)
+        error()
+      })
+    },
+  });
+  const {
+    handleSubmit,
+    handleChange,
+    errors,
+    touched,
+    handleBlur,
+    values,
+    resetForm,
+    setFieldValue,
+  } = formik;
   return (
     <>
-        {/* title */}
+      {/* title */}
       <div className="titleCourse">
         <Zoom>
           <h3>THÔNG TIN KHÓA HỌC</h3>
@@ -47,7 +102,9 @@ const KhDetail = () => {
       </div>
       {/* khoaHocDetails */}
       <div className="details">
+        
         <div className="detailsContent">
+      {contextHolder}
           {/* itemLeft */}
           <div className="detailsItemLeft  w-2/3">
             <h4 className="title">{detail?.tenKhoaHoc}</h4>
@@ -322,7 +379,9 @@ const KhDetail = () => {
             </div>
           </div>
           {/* itemRight */}
-          <div className="detailsItemRight w-1/3">
+          <form 
+          onSubmit={handleSubmit}
+          className="detailsItemRight w-1/3">
             <div className="itemRightSidebar">
               <img
                 className="sidebarImg"
@@ -372,10 +431,10 @@ const KhDetail = () => {
                     <i class="fa-solid fa-layer-group"></i>
                   </li>
                 </ul>
-                <Button className="btnSidebar w-full">Đăng ký</Button>
+                <button type="submit" className="btnSidebar w-full rounded-lg p-3">Đăng ký</button>
               </div>
             </div>
-          </div>
+          </form>
         </div>
 
         {/* khPhoBien */}
@@ -383,7 +442,7 @@ const KhDetail = () => {
           <KhPhoBien />
         </div>
       </div>
-      <BackToTop/>
+      <BackToTop />
     </>
   );
 };

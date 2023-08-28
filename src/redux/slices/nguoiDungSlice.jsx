@@ -15,6 +15,7 @@ const initialState = {
   name: layDuLieuLocal("user"),
   users: [],
   infoUser: {},
+  userAddCoures: {},
 };
 // setup reduxtoolkit
 export const nguoiDungSlice = createSlice({
@@ -31,6 +32,9 @@ export const nguoiDungSlice = createSlice({
     },
     getInfoUser: (state,action) => {
       state.infoUser = action.payload
+    },
+    setNameAdd: (state,action) => {
+      state.userAddCoures = action.payload
     }
   },
   extraReducers: (builder) => {
@@ -43,7 +47,7 @@ export const nguoiDungSlice = createSlice({
 });
 
 // sử dụng phương thức trong {} dưới component
-export const { setName, getInfoUser } = nguoiDungSlice.actions;
+export const { setName, getInfoUser, setNameAdd } = nguoiDungSlice.actions;
 
 // import vào store redux
 export default nguoiDungSlice.reducer;

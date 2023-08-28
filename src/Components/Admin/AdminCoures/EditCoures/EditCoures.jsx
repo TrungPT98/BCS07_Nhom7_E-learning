@@ -4,24 +4,16 @@ import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 // yup
 import * as Yup from "yup";
-import {
-  Button,
-  Cascader,
-  DatePicker,
-  Form,
-  Input,
-  InputNumber,
-  Radio,
-  Select,
-  Switch,
-  TreeSelect,
-  message,
-} from "antd";
+import { DatePicker, Form, Input, Radio, Select, message } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment/moment";
 import { GROUP_ID, khoaHocServ } from "../../../../services/khoaHocService";
 import { useParams } from "react-router-dom";
-import { getInfoCoures } from "../../../../redux/slices/couresSlice";
+import {
+  getInfoCoures,
+  getUpdateCoures,
+} from "../../../../redux/slices/couresSlice";
+import { updateCoures } from "../../../../redux/actions/couresAction";
 
 const EditCoures = () => {
   // useParams
@@ -29,6 +21,8 @@ const EditCoures = () => {
   //   console.log(maKhoaHoc);
   //   useDispatch
   const dispatch = useDispatch();
+  // state img
+  const [imgSrc, setImgSrc] = useState("");
   // message
   const [messageApi, contextHolder] = message.useMessage();
   const success = () => {
@@ -59,13 +53,40 @@ const EditCoures = () => {
   // infoUser
   const { name } = useSelector((state) => state.nguoiDung);
   //   console.log(name);
+  const { userAddCoures } = useSelector((state) => state.nguoiDung);
+  console.log(userAddCoures);
 
   //   infoCoures
   const { infoCoures } = useSelector((state) => state.coures);
-  console.log(infoCoures);
+  //   console.log(infoCoures);
 
-  // state img
-  const [imgSrc, setImgSrc] = useState("");
+  // moment date
+  const handleChangeDatePicker = (value) => {
+    // dùng moment để chuyển qua định dạng moment
+    // dùng format lại dd/mm/yyyy
+    // console.log("value", moment(value).format("DD/MM/YYYY"));
+    // dùng setFieldValue để input nhận dữ liệu
+    let ngayTao = moment(value);
+    setFieldValue("ngayTao", ngayTao);
+  };
+
+  // image
+  const handleChangeFile = async (e) => {
+    // lấy file từ e
+    if (e.target.files[0]) {
+      // lưu formik
+      await setFieldValue("hinhAnh", e.target.files[0]);
+      // tạo đối tượng đọc file
+      let reader = new FileReader();
+      reader.readAsDataURL(e.target.files[0]);
+      reader.onload = (e) => {
+        setImgSrc(e.target.result);
+      };
+    } else {
+      setFieldValue("hinhAnh", null);
+      setImgSrc("");
+    }
+  };
 
   // useFormik
   // Xử lý form
@@ -73,18 +94,19 @@ const EditCoures = () => {
     enableReinitialize: true,
     initialValues: {
       maKhoaHoc: infoCoures?.maKhoaHoc,
+      biDanh: infoCoures?.biDanh,
       tenKhoaHoc: infoCoures?.tenKhoaHoc,
-      tenDanhMucKhoaHoc: infoCoures?.danhMucKhoaHoc?.tenDanhMucKhoaHoc,
       moTa: infoCoures?.moTa,
+      danhGia: infoCoures?.danhGia || 0,
+      luotXem: infoCoures?.luotXem || 0,
       hinhAnh: null,
       maNhom: GROUP_ID,
-      biDanh: infoCoures?.biDanh,
       ngayTao: infoCoures?.ngayTao,
-      danhGia: infoCoures?.danhGia || 0,
+      tenDanhMucKhoaHoc: infoCoures?.danhMucKhoaHoc?.tenDanhMucKhoaHoc,
       taiKhoanNguoiTao: name.taiKhoan,
     },
     validationSchema: Yup.object().shape({
-      maKhoaHoc: Yup.string().required("Mã khoá học không được để trống"),
+      //   maKhoaHoc: Yup.string().required("Mã khoá học không được để trống"),
       biDanh: Yup.string().required("Bí danh không được để trống"),
       tenKhoaHoc: Yup.string().required("Tên khoá học không được để trống"),
       moTa: Yup.string().required("Mô tả không được để trống"),
@@ -94,6 +116,7 @@ const EditCoures = () => {
     // addUser
     onSubmit: (values) => {
       console.log(values);
+      values.maNhom = GROUP_ID;
       let formData = new FormData();
       for (let key in values) {
         if (key !== "hinhAnh") {
@@ -104,49 +127,21 @@ const EditCoures = () => {
           }
         }
       }
+      //   console.log(formData)
 
-      khoaHocServ
+        khoaHocServ
         .chinhSuaKhoaHoc(formData)
         .then((res) => {
           console.log(res);
-          dispatch(getInfoCoures(res.data));
           success();
+          dispatch(getUpdateCoures(res.data));
         })
         .catch((err) => {
-          error();
           console.log(err);
+          error();
         });
     },
   });
-
-  // moment date
-  const handleChangeDatePicker = (value) => {
-    // dùng moment để chuyển qua định dạng moment
-    // dùng format lại dd/mm/yyyy
-    // console.log("value", moment(value).format("DD/MM/YYYY"));
-    // dùng setFieldValue để input nhận dữ liệu
-    setFieldValue("ngayTao", moment(value));
-  };
-
-  // image
-  const handleChangeFile = async (e) => {
-    // lấy file từ e
-    let file = e.target.files[0];
-    if (
-      file.type === "image/png" ||
-      file.type === "image/gif" ||
-      file.type === "image/jpeg"
-    ) {
-      // lưu formik
-      await setFieldValue("hinhAnh", file);
-      // tạo đối tượng đọc file
-      let reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = (e) => {
-        setImgSrc(e.target.result);
-      };
-    }
-  };
 
   // boc tách
   const {
@@ -191,20 +186,6 @@ const EditCoures = () => {
             <Radio.Button value="default">Default</Radio.Button>
             <Radio.Button value="large">Large</Radio.Button>
           </Radio.Group>
-        </Form.Item>
-        <Form.Item className="ms-4" label="Bí danh">
-          <Input
-            name="biDanh"
-            className=""
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.biDanh}
-          />
-          {errors.biDanh && touched.biDanh ? (
-            <p className="text-red-500">{errors.biDanh}</p>
-          ) : (
-            ""
-          )}
         </Form.Item>
         <Form.Item className="ms-4" label="Tên khoá">
           <Input
@@ -256,7 +237,7 @@ const EditCoures = () => {
             name="tenDanhMucKhoaHoc"
             placeholder="Chọn khóa học"
             onBlur={handleBlur}
-            value={values.tenDanhMucKhoaHoc}
+            defaultValue={values.tenDanhMucKhoaHoc}
           >
             <Select.Option value="BackEnd">Lập trình Backend</Select.Option>
             <Select.Option value="FrontEnd">Lập trình Front end</Select.Option>
@@ -279,7 +260,7 @@ const EditCoures = () => {
             type="file"
             className="p-0 "
             onChange={handleChangeFile}
-            onBlur={handleBlur}
+            // onBlur={handleBlur}
           />
           {/* {errors.hinhAnh && touched.hinhAnh ? (
             <p className="text-red-500">{errors.hinhAnh}</p>
@@ -287,9 +268,9 @@ const EditCoures = () => {
             ""
           )} */}
           <img
-            accept="image/png, image/gif, image/jpeg"
+            accept="image/png, image/jpg, image/jpeg"
             className="w-20 h-20 mt-3 "
-            src={imgSrc == "" ? infoCoures.hinhAnh : imgSrc}
+            src={imgSrc === "" ? infoCoures.hinhAnh : imgSrc}
             alt="..."
           />
         </Form.Item>

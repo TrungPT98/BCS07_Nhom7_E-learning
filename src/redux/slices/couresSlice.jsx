@@ -14,6 +14,7 @@ export const layDanhSachKhoaHocThunk = createAsyncThunk(
 const initialState = {
   coures: [],
   infoCoures: {},
+  updateCoures: {},
 };
 // setup reduxtoolkit
 export const couresSlice = createSlice({
@@ -24,6 +25,9 @@ export const couresSlice = createSlice({
     
     getInfoCoures: (state,action) => {
       state.infoCoures = action.payload
+    },
+    getUpdateCoures: (state, action)=>{
+      state.updateCoures = action.payload
     }
   },
   extraReducers: (builder) => {
@@ -36,7 +40,7 @@ export const couresSlice = createSlice({
 });
 
 // sử dụng phương thức trong {} dưới component
-export const {getInfoCoures } = couresSlice.actions;
+export const {getInfoCoures, getUpdateCoures } = couresSlice.actions;
 
 // import vào store redux
 export default couresSlice.reducer;

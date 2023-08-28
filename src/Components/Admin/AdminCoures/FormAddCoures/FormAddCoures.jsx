@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 // formik
 import { useFormik } from "formik";
@@ -17,9 +17,10 @@ import {
   TreeSelect,
   message,
 } from "antd";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import moment from "moment/moment";
 import { GROUP_ID, khoaHocServ } from "../../../../services/khoaHocService";
+import { setNameAdd } from "../../../../redux/slices/nguoiDungSlice";
 
 const FormAddCoures = () => {
   // message
@@ -39,7 +40,10 @@ const FormAddCoures = () => {
 
   // infoUser
   const { name } = useSelector((state) => state.nguoiDung);
+  const dispatch = useDispatch()
+  dispatch(setNameAdd(name.taiKhoan))
   // console.log(name);
+  console.log("name.taiKhoan:", name.taiKhoan)
 
   // state img
   const [imgSrc, setImgSrc] = useState(null);
@@ -74,15 +78,14 @@ const FormAddCoures = () => {
       taiKhoanNguoiTao: name.taiKhoan,
     },
     validationSchema: Yup.object().shape({
-      biDanh: Yup.string().required("Bí danh không được để trống"),
       tenKhoaHoc: Yup.string().required("Tên khoá học không được để trống"),
       moTa: Yup.string().required("Mô tả không được để trống"),
       maDanhMucKhoaHoc: Yup.string().required("Danh mục  không được để trống"),
-      ngayTao: Yup.date().required("Ngày tạo không đẻ trống"),
+      // ngayTao: Yup.date().required("Ngày tạo không đẻ trống"),
     }),
     // addUser
     onSubmit: (values) => {
-      // console.log(values);
+      console.log(values);
       // tạo formData
       let formData = new FormData();
       for (let key in values) {
@@ -122,7 +125,7 @@ const FormAddCoures = () => {
     let file = e.target.files[0];
     if (
       file.type === "image/png" ||
-      file.type === "image/gif" ||
+      file.type === "image/jpg" ||
       file.type === "image/jpeg"
     ) {
       // tạo đối tượng đọc file
@@ -183,25 +186,19 @@ const FormAddCoures = () => {
             <Radio.Button value="large">Large</Radio.Button>
           </Radio.Group>
         </Form.Item>
-        <Form.Item className="ms-4" label="Bí danh">
-          <Input
-            name="biDanh"
-            className=""
-            onChange={handleChange}
-            onBlur={handleBlur}
-            value={values.biDanh}
-          />
-          {errors.biDanh && touched.biDanh ? (
-            <p className="text-red-500">{errors.biDanh}</p>
-          ) : (
-            ""
-          )}
-        </Form.Item>
         <Form.Item className="ms-4" label="Tên khoá">
           <Input
             name="tenKhoaHoc"
             className=""
-            onChange={handleChange}
+            onChange={(e) => {
+              handleChange(e);
+              const tenKhoaHoc = e.target.value;
+              const biDanh = tenKhoaHoc
+                .toLocaleLowerCase()
+                .replace(/\s+/g, "-");
+              setFieldValue("biDanh", biDanh);
+              // console.log(b)
+            }}
             onBlur={handleBlur}
             value={values.tenKhoaHoc}
           />
@@ -279,7 +276,7 @@ const FormAddCoures = () => {
             ""
           )}
           <img
-            accept="image/png, image/gif, image/jpeg"
+            accept="image/png, image/jpg, image/jpeg"
             className="w-20 h-20 mt-3 "
             src={imgSrc}
             alt="..."
