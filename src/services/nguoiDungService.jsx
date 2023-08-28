@@ -22,12 +22,11 @@ export const nguoiDungServ = {
   getInfoUser: (taiKhoan) => {
     // return https.get(`/api/QuanLyNguoiDung/LayThongTinNguoiDung?taiKhoan=${taiKhoan}`);
     return https.post(`/api/QuanLyNguoiDung/ThongTinNguoiDung?taiKhoan=${taiKhoan}`);
-
   },
   updateInfoUser: (formData)=>{
     return https.put(`/api/QuanLyNguoiDung/CapNhatThongTinNguoiDung`, formData)
   },
   searchUser:(taiKhoan)=>{
     return https.get(`/api/QuanLyNguoiDung/TimKiemNguoiDung?MaNhom=${GROUP_ID}&tuKhoa=${taiKhoan}`)
-  }
+  },
 };

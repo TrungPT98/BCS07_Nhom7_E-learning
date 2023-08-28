@@ -9,9 +9,11 @@ import { useEffect } from "react";
 import {
   getInfoUserAction,
   updateInfoUserAction,
+  userCancelCourse,
 } from "../../redux/actions/QuanLyUser";
 import "./UserInfo.scss";
 import { nguoiDungServ } from "../../services/nguoiDungService";
+import { khoaHocServ } from "../../services/khoaHocService";
 
 const UserInfo = () => {
   const [messageApi, contextHolder] = message.useMessage();
@@ -21,7 +23,7 @@ const UserInfo = () => {
   // const { taiKhoan } = userInfo;
   const { taiKhoan } = useParams();
 
-  console.log(taiKhoan);
+  // console.log(taiKhoan);
   const dispatch = useDispatch();
   useEffect(() => {
     if (taiKhoan) {
@@ -29,7 +31,7 @@ const UserInfo = () => {
     }
   }, []);
   const { infoUser } = useSelector((state) => state.nguoiDung);
-  // console.log(infoUser);
+  console.log(infoUser);
 
   // Formik form
   const formik = useFormik({
@@ -115,6 +117,100 @@ const UserInfo = () => {
   };
   const handleCancel = () => {
     setOpen(false);
+  };
+
+  const [searchTerm, setSearchTerm] = useState("");
+
+  // RenderCourser
+  const RenderUserCourses = () => {
+    if (infoUser.chiTietKhoaHocGhiDanh) {
+      return infoUser.chiTietKhoaHocGhiDanh
+        .filter((courses) => {
+          if (searchTerm.trim() === "") {
+            return courses;
+          } else if (
+            courses.tenKhoaHoc
+              .trim()
+              .toLocaleLowerCase()
+              .includes(searchTerm.trim().toLocaleLowerCase())
+          ) {
+            return courses;
+          }
+        })
+        .map((course, index) => {
+          return (
+            <div key={index} className="myCourseItem">
+              <div className="row">
+                <div className="col-xl-3 col-lg-4">
+                  <img
+                    className="imgNet"
+                    src={course.hinhAnh}
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src =
+                        "http://www.makeforum.org/wp-content/uploads/2021/04/ngon-ngu-lap-trinh-850x415.png";
+                    }}
+                    alt=""
+                  />
+                </div>
+                <div className="col-xl-7 col-lg-6 cardNetContent">
+                  <h6>{course.tenKhoaHoc}</h6>
+                  <p className="colorCardTitle">
+                    ES6 là một chuẩn Javascript mới được đưa ra vào năm 2015 với
+                    nhiều quy tắc và cách sử dụng khác nhau...
+                  </p>
+                  <div class="iconNetCard">
+                    <span class="textCardTitle">
+                      <i className="far fa-clock iconOclock"></i> 8 giờ
+                    </span>
+                    <span class="textCardTitle">
+                      <i className="far fa-calendar iconCalendar"></i> 23 giờ
+                    </span>
+                    <span class="textCardTitle">
+                      <i className="fas fa-signal iconLevel "></i> All level
+                    </span>
+                  </div>
+                  <p className="iconStarNet">
+                    <i className="fas fa-star"></i>
+                    <i className="fas fa-star"></i>
+                    <i className="fas fa-star"></i>
+                    <i className="fas fa-star"></i>
+                    <i className="fas fa-star"></i>
+                  </p>
+                  <div className="">
+                    <img
+                      className="imgNetFooter"
+                      src={
+                        require("../../assets/image/imgTeacher/Icardi.jpg")
+                          .default
+                      }
+                      alt=""
+                    />
+                    <span className="ml-2">Nguyễn Nam</span>
+                  </div>
+                </div>
+                <div className="col-xl-2 col-lg-2 cancelNet">
+                  <button
+                    onClick={() => {
+                      const action = userCancelCourse(course.maKhoaHoc);
+                      dispatch(action);
+                      setTimeout(() => {
+                        window.location.reload();
+                    
+                      }, 1000);
+                    }}
+                    className="btnGlobal"
+                  >
+                    Hủy khóa học
+                  </button>
+                </div>
+              </div>
+            </div>
+          );
+        });
+    } else {
+      return "";
+    }
   };
 
   return (
@@ -333,15 +429,15 @@ const UserInfo = () => {
                       <form action="">
                         <input
                           type="text"
-                          //   onChange={(e) => {
-                          //     setSearchTerm(e.target.value);
-                          //   }}
+                          onChange={(e) => {
+                            setSearchTerm(e.target.value);
+                          }}
                           className="searchForm"
                           placeholder="Tìm kiếm..."
                         />
                       </form>
                     </div>
-                    {/* {RenderUserCourses()} */}
+                    {RenderUserCourses()}
                   </section>
                 </div>
               </div>

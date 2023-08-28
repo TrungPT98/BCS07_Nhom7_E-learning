@@ -32,5 +32,8 @@ export const khoaHocServ = {
     ghiDanhKhoaHoc: (data) => {
         return https.post(`/api/QuanLyKhoaHoc/GhiDanhKhoaHoc`, data)
     },
+    huyGhiDanh: (huyKhoaHoc) => {
+        return https.post("/api/QuanLyKhoaHoc/HuyGhiDanh", huyKhoaHoc);
+    },
 
 }
