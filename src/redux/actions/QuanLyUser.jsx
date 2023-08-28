@@ -1,3 +1,4 @@
+import { khoaHocServ } from "../../services/khoaHocService";
 import { nguoiDungServ } from "../../services/nguoiDungService"
 import { getInfoUser } from "../slices/nguoiDungSlice";
 
@@ -23,4 +24,24 @@ export const updateInfoUserAction = (formData) =>{
 
         }
     }
+}
+
+export const userCancelCourse = (maKhoaHoc) =>{
+    return async (dispatch) => {
+        const credentailLocal = localStorage.getItem('user')
+        if (credentailLocal) {
+            const credentailvalues = JSON.parse(credentailLocal)
+
+            const cancleCoure = {
+                taiKhoan: credentailvalues.taiKhoan,
+                maKhoaHoc: maKhoaHoc
+            }
+        try{
+            const result = await khoaHocServ.huyGhiDanh(cancleCoure)
+            // console.log(result.data);
+            dispatch(getInfoUser(result.data));
+        }catch(err){
+            console.log(err)
+        }
+    }}
 }
