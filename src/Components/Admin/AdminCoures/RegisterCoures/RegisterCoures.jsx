@@ -24,6 +24,7 @@ const [btn, setBtn] = useState(false)
     console.log(stateBtn)
   const {name} = useSelector((state)=> state.nguoiDung)
   const {detail,id} = props 
+  
    // message
    const [messageApi, contextHolder] = message.useMessage();
    const success = () => {
@@ -53,6 +54,7 @@ const [btn, setBtn] = useState(false)
         console.log(res)
         success()
         setBtn(true)
+        
      }).catch((error)=>{
         console.log(error)
         error()
@@ -77,7 +79,6 @@ const [btn, setBtn] = useState(false)
     })
   },[])
   console.log(studentCoures)
-
 
 
 
