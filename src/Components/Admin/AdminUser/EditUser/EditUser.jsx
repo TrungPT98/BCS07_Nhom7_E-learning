@@ -54,7 +54,7 @@ const EditUser = () => {
       hoTen: infoUser?.hoTen,
       soDT: infoUser?.soDt,
       maLoaiNguoiDung: infoUser?.maLoaiNguoiDung,
-      maNhom: 'GP02',
+      maNhom: infoUser?.maNhom, // Trung sửa chỗ này
       email: infoUser?.email,
     },
     validationSchema: Yup.object().shape({
