@@ -37,7 +37,7 @@ export const userCancelCourse = (maKhoaHoc) =>{
                 maKhoaHoc: maKhoaHoc
             }
         try{
-            const result = await khoaHocServ.huyGhiDanh(cancleCoure)
+            const result = await khoaHocServ.huyGhiDanhKhoaHoc(cancleCoure)
             // console.log(result.data);
             dispatch(getInfoUser(result.data));
         }catch(err){

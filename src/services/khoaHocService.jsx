@@ -38,5 +38,10 @@ export const khoaHocServ = {
     hocVienKhoaHoc: (data) => {
         return https.get(`/api/QuanLyKhoaHoc/LayThongTinHocVienKhoaHoc?maKhoaHoc=${data}` )
     },
-
+    dangKyKhoaHoc: (data) => {
+        return https.post(`/api/QuanLyKhoaHoc/DangKyKhoaHoc`, data)
+    },
+    capNhatKhoaHoc: (formData) => {
+        return https.put(`/api/QuanLyKhoaHoc/CapNhatKhoaHoc`, formData)
+    },
 }

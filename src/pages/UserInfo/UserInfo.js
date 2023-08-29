@@ -180,10 +180,7 @@ const UserInfo = () => {
                   <div className="">
                     <img
                       className="imgNetFooter"
-                      src={
-                        require("../../assets/image/imgTeacher/Icardi.jpg")
-                          .default
-                      }
+                      src="../../assets/image/imgTeacher/VueLo.jpg"
                       alt=""
                     />
                     <span className="ml-2">Nguyễn Nam</span>
