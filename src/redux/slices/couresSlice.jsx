@@ -15,6 +15,7 @@ const initialState = {
   coures: [],
   infoCoures: {},
   updateCoures: {},
+  stateBtn: true,
 };
 // setup reduxtoolkit
 export const couresSlice = createSlice({
@@ -28,6 +29,9 @@ export const couresSlice = createSlice({
     },
     getUpdateCoures: (state, action)=>{
       state.updateCoures = action.payload
+    },
+    setStateBtn: (state, action)=>{
+      state.stateBtn = action.payload
     }
   },
   extraReducers: (builder) => {
@@ -40,7 +44,7 @@ export const couresSlice = createSlice({
 });
 
 // sử dụng phương thức trong {} dưới component
-export const {getInfoCoures, getUpdateCoures } = couresSlice.actions;
+export const {getInfoCoures, getUpdateCoures, setStateBtn } = couresSlice.actions;
 
 // import vào store redux
 export default couresSlice.reducer;

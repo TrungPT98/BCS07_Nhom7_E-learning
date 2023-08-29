@@ -4,14 +4,7 @@ import { khoaHocServ } from "../../services/khoaHocService";
 // antd
 import KhPhoBien from "../../pages/HomePage/KhPhoBien/KhPhoBien";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  message,
-} from "antd";
 
-// formik
-import { useFormik } from "formik";
-// yup
-import * as Yup from "yup";
 
 // loading
 import {
@@ -24,12 +17,12 @@ import Zoom from "react-reveal/Zoom";
 import BackToTop from "../../Components/BackToTop/BackToTop";
 // main css
 import "./KhDetail.scss";
+import RegisterCoures from "../Admin/AdminCoures/RegisterCoures/RegisterCoures";
 const KhDetail = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const {name} = useSelector((state)=> state.nguoiDung)
   const [detail, setDetail] = useState([]);
-  // gọi api
+  // gọi api render khoaHoc
   useEffect(() => {
     dispatch(set_loading_started);
     khoaHocServ
@@ -43,52 +36,12 @@ const KhDetail = () => {
       });
   }, []);
 
-  // message
-  const [messageApi, contextHolder] = message.useMessage();
-  const success = () => {
-    messageApi.open({
-      type: "success",
-      content: "Ghi danh thành công",
-    });
-  };
-  const error = () => {
-    messageApi.open({
-      type: "error",
-      content: "Đã có lỗi xảy ra",
-    });
-  };
 
+  
 
-  const formik = useFormik({
-    initialValues: {
-        maKhoaHoc: id,
-        taiKhoan: name.taiKhoan,
-    },
-    validationSchema: Yup.object().shape({
-    }),
-    // addUser
-    onSubmit: (values) => {
-      console.log(values);
+ 
 
-      khoaHocServ.ghiDanhKhoaHoc(values).then((res)=>{
-        console.log(res)
-        success()
-      }).catch((err)=>{
-        console.log(err)
-        error()
-      })
-    },
-  });
-  const {
-    handleSubmit,
-    handleChange,
-    errors,
-    touched,
-    handleBlur,
-    values,
-    resetForm,
-    setFieldValue,
-  } = formik;
+ 
   return (
     <>
       {/* title */}
@@ -104,7 +57,6 @@ const KhDetail = () => {
       <div className="details">
         
         <div className="detailsContent">
-      {contextHolder}
           {/* itemLeft */}
           <div className="detailsItemLeft  w-2/3">
             <h4 className="title">{detail?.tenKhoaHoc}</h4>
@@ -379,62 +331,7 @@ const KhDetail = () => {
             </div>
           </div>
           {/* itemRight */}
-          <form 
-          onSubmit={handleSubmit}
-          className="detailsItemRight w-1/3">
-            <div className="itemRightSidebar">
-              <img
-                className="sidebarImg"
-                src={detail?.hinhAnh}
-                alt={detail?.moTa}
-              />
-              <div className="sidebarPrice">
-                <i class="fa-solid fa-heart"></i>
-                <span className="priceTitle">500.000</span>
-                <span className="priceSubTitle">đ</span>
-              </div>
-              <div className="sidebarContent">
-                <ul>
-                  <li>
-                    <p>
-                      Ghi danh:
-                      <span>10 học viên</span>
-                    </p>
-                    <i class="fa-solid fa-graduation-cap"></i>
-                  </li>
-                  <li>
-                    <p>
-                      Thời gian:
-                      <span>18 giờ</span>
-                    </p>
-                    <i class="fa-solid fa-clock"></i>
-                  </li>
-                  <li>
-                    <p>
-                      Bài học:
-                      <span>10</span>
-                    </p>
-                    <i class="fa-solid fa-book"></i>
-                  </li>
-                  <li>
-                    <p>
-                      Video:
-                      <span>14</span>
-                    </p>
-                    <i class="fa-solid fa-film"></i>
-                  </li>
-                  <li>
-                    <p>
-                      Trình độ:
-                      <span>Người mới bắt đầu</span>
-                    </p>
-                    <i class="fa-solid fa-layer-group"></i>
-                  </li>
-                </ul>
-                <button type="submit" className="btnSidebar w-full rounded-lg p-3">Đăng ký</button>
-              </div>
-            </div>
-          </form>
+         <RegisterCoures id={id} detail={detail}/>
         </div>
 
         {/* khPhoBien */}
