@@ -1,8 +1,96 @@
 import React, { useState } from "react";
-import { Button, Modal } from "antd";
+import { Button, Modal, message } from "antd";
+import { useParams } from "react-router-dom";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { layDuLieuLocal, luuXuongLocal } from "../../util/localStore";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import {
+  getInfoUserAction,
+  updateInfoUserAction,
+  userCancelCourse,
+} from "../../redux/actions/QuanLyUser";
 import "./UserInfo.scss";
+import { nguoiDungServ } from "../../services/nguoiDungService";
+import { khoaHocServ } from "../../services/khoaHocService";
 
 const UserInfo = () => {
+  const [messageApi, contextHolder] = message.useMessage();
+  // const userInfo = layDuLieuLocal("user");
+  // console.log(userInfo);
+
+  // const { taiKhoan } = userInfo;
+  const { taiKhoan } = useParams();
+
+  // console.log(taiKhoan);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (taiKhoan) {
+      dispatch(getInfoUserAction(taiKhoan));
+    }
+  }, []);
+  const { infoUser } = useSelector((state) => state.nguoiDung);
+  console.log(infoUser);
+
+  // Formik form
+  const formik = useFormik({
+    enableReinitialize: true,
+    initialValues: {
+      taiKhoan: infoUser.taiKhoan,
+      matKhau: infoUser.matKhau,
+      hoTen: infoUser?.hoTen,
+      email: infoUser?.email,
+      soDT: infoUser.soDT,
+      maLoaiNguoiDung: infoUser?.maLoaiNguoiDung,
+      maNhom: infoUser.maNhom,
+    },
+    validationSchema: Yup.object().shape({
+      matKhau: Yup.string()
+        .required("Tài khoản không được để trống")
+        .matches(
+          /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
+          "Mật khẩu phải ít nhất 8 tự gồm chữ, số, và kí tự đặc biệt"
+        ),
+
+      hoTen: Yup.string()
+        .required("Tên không được để trống")
+        .matches(
+          /^[a-zA-Z_ÀÁÂÃÈÉÊẾÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶ" + "ẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợ" + "ụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹý\\s]+$/,
+          "Chỉ nhập kí tự chữ"
+        ),
+
+      email: Yup.string()
+        .email("Email không hợp lệ")
+        .required("Email không được để trống"),
+
+      soDT: Yup.string()
+        .required("Số điện thoại không được để trống")
+        .matches(
+          /([\+84|84|0]+(3|5|7|8|9|1[2|6|8|9]))+([0-9]{8})\b/,
+          "Số điện thoại chưa đúng định đạng"
+        ),
+    }),
+    onSubmit: (values) => {
+      console.log(values);
+
+      dispatch(updateInfoUserAction(values));
+      messageApi.success("Cập nhật thành công, vui lòng đăng nhập lại");
+      localStorage.removeItem("user");
+
+      // Sau khi Cập nhật thì sẽ reload lại trang để có thông tin mới
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500);
+    },
+  });
+
+  //   bóc tách
+  const { handleSubmit, handleChange, errors, touched, handleBlur, values } =
+    formik;
+  // console.log(formik);
+
+  // Xử lý giao diện Tab
   const openTab = (e, id) => {
     if (!e.target.classList.contains("active")) {
       document.querySelector(".tabLink.active").classList.remove("active");
@@ -14,6 +102,7 @@ const UserInfo = () => {
     }
   };
 
+  // Xử lý giao diện Modal
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const showModal = () => {
@@ -30,8 +119,103 @@ const UserInfo = () => {
     setOpen(false);
   };
 
+  const [searchTerm, setSearchTerm] = useState("");
+
+  // RenderCourser
+  const RenderUserCourses = () => {
+    if (infoUser.chiTietKhoaHocGhiDanh) {
+      return infoUser.chiTietKhoaHocGhiDanh
+        .filter((courses) => {
+          if (searchTerm.trim() === "") {
+            return courses;
+          } else if (
+            courses.tenKhoaHoc
+              .trim()
+              .toLocaleLowerCase()
+              .includes(searchTerm.trim().toLocaleLowerCase())
+          ) {
+            return courses;
+          }
+        })
+        .map((course, index) => {
+          return (
+            <div key={index} className="myCourseItem">
+              <div className="row">
+                <div className="col-xl-3 col-lg-4">
+                  <img
+                    className="imgNet"
+                    src={course.hinhAnh}
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src =
+                        "http://www.makeforum.org/wp-content/uploads/2021/04/ngon-ngu-lap-trinh-850x415.png";
+                    }}
+                    alt=""
+                  />
+                </div>
+                <div className="col-xl-7 col-lg-6 cardNetContent">
+                  <h6>{course.tenKhoaHoc}</h6>
+                  <p className="colorCardTitle">
+                    ES6 là một chuẩn Javascript mới được đưa ra vào năm 2015 với
+                    nhiều quy tắc và cách sử dụng khác nhau...
+                  </p>
+                  <div class="iconNetCard">
+                    <span class="textCardTitle">
+                      <i className="far fa-clock iconOclock"></i> 8 giờ
+                    </span>
+                    <span class="textCardTitle">
+                      <i className="far fa-calendar iconCalendar"></i> 23 giờ
+                    </span>
+                    <span class="textCardTitle">
+                      <i className="fas fa-signal iconLevel "></i> All level
+                    </span>
+                  </div>
+                  <p className="iconStarNet">
+                    <i className="fas fa-star"></i>
+                    <i className="fas fa-star"></i>
+                    <i className="fas fa-star"></i>
+                    <i className="fas fa-star"></i>
+                    <i className="fas fa-star"></i>
+                  </p>
+                  <div className="">
+                    <img
+                      className="imgNetFooter"
+                      src={
+                        require("../../assets/image/imgTeacher/Icardi.jpg")
+                          .default
+                      }
+                      alt=""
+                    />
+                    <span className="ml-2">Nguyễn Nam</span>
+                  </div>
+                </div>
+                <div className="col-xl-2 col-lg-2 cancelNet">
+                  <button
+                    onClick={() => {
+                      const action = userCancelCourse(course.maKhoaHoc);
+                      dispatch(action);
+                      setTimeout(() => {
+                        window.location.reload();
+                    
+                      }, 1000);
+                    }}
+                    className="btnGlobal"
+                  >
+                    Hủy khóa học
+                  </button>
+                </div>
+              </div>
+            </div>
+          );
+        });
+    } else {
+      return "";
+    }
+  };
+
   return (
     <>
+      {contextHolder}
       <section className="infoPage">
         <div className="titleCourse">
           <h3>Thông tin cá nhân</h3>
@@ -51,7 +235,7 @@ const UserInfo = () => {
                   }}
                   alt=""
                 />
-                <h6>Robert Nguyễn</h6>
+                <h6>{infoUser.hoTen}</h6>
                 <p>Lập trình viên Front-end</p>
                 <button className="btnInfo">Hồ sơ cá nhân</button>
               </div>
@@ -86,30 +270,32 @@ const UserInfo = () => {
                           <div>
                             <p>
                               Email:
-                              <span class="ml-2">email</span>
+                              <span class="ml-2">{infoUser.email}</span>
                             </p>
                             <p>
-                              Họ và tên: <span class="ml-2">hoTen</span>
+                              Họ và tên:{" "}
+                              <span class="ml-2">{infoUser.hoTen}</span>
                             </p>
                             <p>
-                              Số điện thoại: <span class="ml-2">soDt</span>
+                              Số điện thoại:{" "}
+                              <span class="ml-2">{infoUser.soDT}</span>
                             </p>
                           </div>
                         </div>
                         <div class="col-md-5">
                           <p>
-                            Tài khoản: <span class="ml-2">taiKhoan</span>
+                            Tài khoản:{" "}
+                            <span class="ml-2">{infoUser.taiKhoan}</span>
                           </p>
                           <p>
-                            Nhóm: <span class="ml-2">maNhom</span>
+                            Nhóm: <span class="ml-2">{infoUser.maNhom}</span>
                           </p>
                           <p>
                             Đối tượng:{" "}
                             <span class="ml-2">
-                              {/* {userPersonalInfo.maLoaiNguoiDung === "HV"
+                              {infoUser.maLoaiNguoiDung === "HV"
                                 ? " Học viên"
-                                : " Giáo viên"} */}
-                              HV
+                                : " Giáo viên"}
                             </span>
                           </p>
                           <Button
@@ -243,15 +429,15 @@ const UserInfo = () => {
                       <form action="">
                         <input
                           type="text"
-                          //   onChange={(e) => {
-                          //     setSearchTerm(e.target.value);
-                          //   }}
+                          onChange={(e) => {
+                            setSearchTerm(e.target.value);
+                          }}
                           className="searchForm"
                           placeholder="Tìm kiếm..."
                         />
                       </form>
                     </div>
-                    {/* {RenderUserCourses()} */}
+                    {RenderUserCourses()}
                   </section>
                 </div>
               </div>
@@ -267,21 +453,12 @@ const UserInfo = () => {
             <Button key="back" onClick={handleCancel}>
               Return
             </Button>,
-            <Button
-              type="submit"
-              loading={loading}
-              onClick={handleOk}
-              className="bg-blue-700 text-white hover:bg-blue-500"
-            >
-              Submit
-            </Button>,
           ]}
         >
-          <h3 className="pb-3 mb-1 text-center border-b-2">Chỉnh sửa thông tin cá nhân</h3>
-          <form
-            action="#"
-            // onSubmit={formik.handleSubmit}
-          >
+          <h3 className="pb-3 mb-1 text-center border-b-2">
+            Chỉnh sửa thông tin cá nhân
+          </h3>
+          <form action="#" onSubmitCapture={handleSubmit}>
             <div className="mb-4">
               <label
                 htmlFor="name"
@@ -290,19 +467,19 @@ const UserInfo = () => {
                 Họ tên
               </label>
               <input
-                // onBlur={formik.handleBlur}
-                // onChange={formik.handleChange}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.hoTen}
                 type="text"
                 placeholder="Họ tên"
                 name="hoTen"
-                // value={formik.values.hoTen}
                 className="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-indigo-300"
               />
-              {/* {formik.errors.hoTen && formik.touched.hoTen ? (
-                    <div className="errorMessage">{formik.errors.hoTen}</div>
-                  ) : (
-                    <div className="message"></div>
-                  )} */}
+              {errors.hoTen && touched.hoTen ? (
+                <div className="errorMessage">{errors.hoTen}</div>
+              ) : (
+                <div className="message"></div>
+              )}
             </div>
             <div className="mb-4">
               <label
@@ -312,19 +489,19 @@ const UserInfo = () => {
                 Mật khẩu
               </label>
               <input
-                // onBlur={formik.handleBlur}
-                // onChange={formik.handleChange}
+                onChange={handleChange}
+                onBlur={handleBlur}
                 type="password"
                 placeholder="Mật khẩu"
                 name="matKhau"
-                // value={formik.values.matKhau}
+                value={values.matKhau}
                 className="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-indigo-300"
               />
-              {/* {formik.errors.matKhau && formik.touched.matKhau ? (
-                    <div className="errorMessage">{formik.errors.matKhau}</div>
-                  ) : (
-                    <div className="message"></div>
-                  )} */}
+              {errors.matKhau && touched.matKhau ? (
+                <div className="errorMessage">{errors.matKhau}</div>
+              ) : (
+                <div className="message"></div>
+              )}
             </div>
             <div className="mb-4">
               <label
@@ -334,19 +511,19 @@ const UserInfo = () => {
                 Email
               </label>
               <input
-                // onBlur={formik.handleBlur}
-                // onChange={formik.handleChange}
+                onBlur={handleBlur}
+                onChange={handleChange}
                 type="email"
                 placeholder="Email"
                 name="email"
-                // value={formik.values.email}
+                value={values.email}
                 className="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-indigo-300"
               />
-              {/* {formik.errors.email && formik.touched.email ? (
-                    <div className="errorMessage">{formik.errors.email}</div>
-                  ) : (
-                    <div className="message"></div>
-                  )} */}
+              {errors.email && touched.email ? (
+                <div className="errorMessage">{errors.email}</div>
+              ) : (
+                <div className="message"></div>
+              )}
             </div>
             <div className="mb-4">
               <label
@@ -356,20 +533,26 @@ const UserInfo = () => {
                 Số điện thoại
               </label>
               <input
-                // onBlur={formik.handleBlur}
-                // onChange={formik.handleChange}
+                onBlur={handleBlur}
+                onChange={handleChange}
                 type="phone"
                 placeholder="Số điện thoại"
                 name="soDT"
-                // value={formik.values.soDT}
+                value={values.soDT}
                 className="mt-1 p-2 w-full border rounded-md focus:ring focus:ring-indigo-300"
               />
-              {/* {formik.errors.soDT && formik.touched.soDT ? (
-                    <div className="errorMessage">{formik.errors.soDT}</div>
-                  ) : (
-                    <div className="message"></div>
-                  )} */}
+              {errors.soDT && touched.soDT ? (
+                <div className="errorMessage">{errors.soDT}</div>
+              ) : (
+                <div className="message"></div>
+              )}
             </div>
+            <button
+              type="submit"
+              className="text-white bg-blue-700  focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-cente hover:bg-blue-800"
+            >
+              Cập nhật
+            </button>
           </form>
         </Modal>
       </section>
