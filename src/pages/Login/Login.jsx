@@ -85,7 +85,6 @@ export default function Login() {
     },
   });
 
-
   // useNavigate
   const navigate = useNavigate();
 
@@ -125,6 +124,7 @@ export default function Login() {
             //   set thời gian để thông báo message
             setTimeout(() => {
               navigate("/");
+              window.location.reload();
             }, 1000);
           }
         })

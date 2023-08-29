@@ -32,7 +32,7 @@ function App() {
           <Route path="/danhMuc/:id" element={<KhDanhMuc />} />
           <Route path="/login" element={<Login />} />
 
-          <Route path='/userinfo' element={<UserInfo/>}/>
+          <Route path='/userinfo/:taiKhoan' element={<UserInfo/>}/>
         </Route>
         <Route path="/info" element={<UserTemplate />}>
           <Route index element={<InfoPage />} />
