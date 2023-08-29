@@ -2,14 +2,29 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 // antd
-import { Space, Table, Tag, Button, message, Popconfirm } from "antd";
+import { Space, Table,Input, message, Popconfirm } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { khoaHocServ } from "../../../../services/khoaHocService";
-import { layDanhSachKhoaHocThunk } from "../../../../redux/slices/couresSlice";
+import { getAllCoures, layDanhSachKhoaHocThunk } from "../../../../redux/slices/couresSlice";
 import { Fragment } from "react";
+import { useRef } from "react";
+import { useState } from "react";
 
 const TableCoures = () => {
+   // biến chứa dữ liệu coures
+   const { coures } = useSelector((state) => state.coures);
+   //   console.log(coures);
+  const [newCoures, setNewCoures] = useState([]);
+
+   useEffect(()=>{
+      const updateCoures = coures.map((item,index)=>({
+          ...item,
+          id: index,
+      }))
+      setNewCoures(updateCoures)
+   },[coures])
+
   // confirm antd
   const confirm = (e) => {
     message.success("Click on Yes");
@@ -36,22 +51,35 @@ const TableCoures = () => {
   // dispatch
   const dispatch = useDispatch();
 
-  // gọi dữ liệu khoá học
-  useEffect(() => {
+ // gọi dữ liệu khoá học
+ useEffect(() => {
+  khoaHocServ
+    .layDanhSachKhoaHoc()
+    .then((res) => {
+      // console.log(res);
+      dispatch(getAllCoures(res.data));
+    })
+    .catch((err) => {
+      // console.log(err);
+    });
+}, []);
+  // search antd
+  const { Search } = Input;
+  const onSearch = (value) => {
+    console.log(value);
     khoaHocServ
-      .layDanhSachKhoaHoc()
+      .layDanhSachKhoaHoc(value)
       .then((res) => {
-        // console.log(res);
-        dispatch(layDanhSachKhoaHocThunk());
+        console.log(res);
+        // console.log(res.data)
+        dispatch(getAllCoures(res.data));
       })
       .catch((err) => {
-        // console.log(err);
+        console.log(err);
       });
-  }, []);
-  // biến chứa dữ liệu coures
-  const { coures } = useSelector((state) => state.coures);
-  //   console.log(coures);
-
+  };
+ 
+ 
   //   xoá khoá học
   const handleDelete = (record) => {
     khoaHocServ
@@ -59,7 +87,7 @@ const TableCoures = () => {
       .then((res) => {
         // console.log(res);
         success();
-        dispatch(layDanhSachKhoaHocThunk());
+        dispatch(getAllCoures(res.data));
       })
       .catch((err) => {
           console.log(err.response.data);
@@ -156,15 +184,20 @@ const TableCoures = () => {
       ),
     },
   ];
-  const newCoures = coures.map((item, index) => {
-    return {
-      ...item,
-      id: index,
-    };
-  });
+  
   return (
     <>
       {contextHolder}
+      <h3 className="my-3">Quản lý khoá học</h3>
+      <Search
+        placeholder="Tìm khoá học"
+        allowClear
+        onSearch={onSearch}
+        style={{
+          width: "100%",
+          marginBottom: "30px",
+        }}
+      />
       <Table columns={columns} dataSource={newCoures} />
     </>
   );

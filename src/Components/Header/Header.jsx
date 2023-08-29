@@ -10,6 +10,20 @@ import { useSelector } from "react-redux";
 import { logout } from "../../util/localStore";
 // ant design
 const Header = () => {
+  // set trạng thái navLink giảng viên
+  const [admin, setAdmin] = useState(true)
+  // lấy maNguoiDung ở dưới localStorge
+  const userData = JSON.parse(localStorage.getItem("user"))
+  // kiểm tra loaiNguoiDung
+  const giangVien = userData && userData.maLoaiNguoiDung === "GV"
+  useEffect(()=>{
+    if(giangVien){
+      setAdmin(false)
+    }else{
+      setAdmin(true)
+    }
+  },[giangVien])
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -166,6 +180,11 @@ const Header = () => {
               <li>
                 <NavLink className="navlinkItem text-black block     hover:bg-gray-50 ">
                   Thông tin
+                </NavLink>
+              </li>
+              <li className={`${admin ? 'hidden' : 'block'}`}>
+                <NavLink to={'http://localhost:3000/admin/user'} className="navlinkItem text-black block hover:bg-gray-50">
+                  Giảng viên
                 </NavLink>
               </li>
               <li>

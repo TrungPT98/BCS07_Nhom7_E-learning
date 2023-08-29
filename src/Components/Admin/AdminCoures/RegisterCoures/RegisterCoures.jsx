@@ -76,7 +76,7 @@ const RegisterCoures = (props) => {
         console.log(err);
       });
   }, []);
-//   console.log(studentCoures);
+  console.log(studentCoures);
 
   // kiểm tra xem tài khoản đăng nhập đã đăng ký chưa
   // nếu có thì sẽ disabled button
@@ -160,6 +160,7 @@ const RegisterCoures = (props) => {
               Đăng ký
             </button>
 
+            <CancelCoures couresId={id} />
           </div>
         </div>
       </form>

@@ -8,8 +8,12 @@ export const khoaHocServ = {
     layDanhMucKhocHoc: () =>{
         return https.get('/api/QuanLyKhoaHoc/LayDanhMucKhoaHoc')
     },
-    layDanhSachKhoaHoc: () =>{
-        return https.get(`/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc?MaNhom=${GROUP_ID}`)
+    layDanhSachKhoaHoc: (tenKhoaHoc = '') =>{
+        if(tenKhoaHoc != ''){
+            return https.get(`/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc?tenKhoaHoc=${tenKhoaHoc}&MaNhom=${GROUP_ID}`)
+        }else{
+            return https.get(`/api/QuanLyKhoaHoc/LayDanhSachKhoaHoc?MaNhom=${GROUP_ID}`)
+        }
     },
     layKhoaHocTheoDanhMuc: (data) =>{
         return https.get(`https://elearningnew.cybersoft.edu.vn/api/QuanLyKhoaHoc/LayKhoaHocTheoDanhMuc?maDanhMuc=${data}&MaNhom=${GROUP_ID}`)

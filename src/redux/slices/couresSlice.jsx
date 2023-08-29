@@ -3,13 +3,13 @@ import { khoaHocServ } from "../../services/khoaHocService";
 
 
 // createAsynThunk xử lý bất đồng bộ
-export const layDanhSachKhoaHocThunk = createAsyncThunk(
-  "coures/layDanhSachKhoaHoc",
-  async () => {
-    const res = await khoaHocServ.layDanhSachKhoaHoc();
-    return res.data;
-  }
-);
+// export const layDanhSachKhoaHocThunk = createAsyncThunk(
+//   "coures/layDanhSachKhoaHoc",
+//   async () => {
+//     const res = await khoaHocServ.layDanhSachKhoaHoc();
+//     return res.data;
+//   }
+// );
 
 const initialState = {
   coures: [],
@@ -32,19 +32,22 @@ export const couresSlice = createSlice({
     },
     setStateBtn: (state, action)=>{
       state.stateBtn = action.payload
+    },
+    getAllCoures: (state, action)=>{
+      state.coures = action.payload
     }
   },
-  extraReducers: (builder) => {
-    builder.addCase(layDanhSachKhoaHocThunk.fulfilled, (state, action) => {
-      // console.log(action);
-      // console.log(state);
-      state.coures = action.payload;
-    });
-  },
+  // extraReducers: (builder) => {
+  //   builder.addCase(layDanhSachKhoaHocThunk.fulfilled, (state, action) => {
+  //     // console.log(action);
+  //     // console.log(state);
+  //     state.coures = action.payload;
+  //   });
+  // },
 });
 
 // sử dụng phương thức trong {} dưới component
-export const {getInfoCoures, getUpdateCoures, setStateBtn } = couresSlice.actions;
+export const {getInfoCoures, getUpdateCoures, setStateBtn,getAllCoures } = couresSlice.actions;
 
 // import vào store redux
 export default couresSlice.reducer;
