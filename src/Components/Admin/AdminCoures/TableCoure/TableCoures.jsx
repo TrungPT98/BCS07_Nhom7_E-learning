@@ -18,11 +18,13 @@ const TableCoures = () => {
   const [newCoures, setNewCoures] = useState([]);
 
    useEffect(()=>{
+    if (Array.isArray(coures)) {
       const updateCoures = coures.map((item,index)=>({
           ...item,
           id: index,
       }))
       setNewCoures(updateCoures)
+    }
    },[coures])
 
   // confirm antd

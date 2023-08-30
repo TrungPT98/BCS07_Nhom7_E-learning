@@ -22,44 +22,47 @@ const TableUser = () => {
   // biến chứa dữ liệu user
   const { users } = useSelector((state) => state.nguoiDung);
   const [newUser, setNewUser] = useState([]);
-  // console.log(users)
+  // console.log(users);
   const dispatch = useDispatch();
-// message antd
-const [messageApi, contextHolder] = message.useMessage();
-const success = () => {
-  messageApi.open({
-    type: "success",
-    content: "Xoá thành công",
-  });
-};
-const error = (data) => {
-  messageApi.open({
-    type: "error",
-    content: data,
-  });
-};
-  useEffect(() => {
-    const updateUser = users.map((item, index) => ({
-      ...item,
-      id: index,
-    }));
-    setNewUser(updateUser);
-  }, [users]);
+  // message antd
+  const [messageApi, contextHolder] = message.useMessage();
+  const success = () => {
+    messageApi.open({
+      type: "success",
+      content: "Xoá thành công",
+    });
+  };
+  const errorMes = (data) => {
+    messageApi.open({
+      type: "error",
+      content: data,
+    });
+  };
   //  console.log(newUser)
   // dispatch
   // gọi dữ liệu users
   useEffect(() => {
     nguoiDungServ
-      .getAllUser()
-      .then((res) => {
-        console.log(res);
-        dispatch(getAllUser(res.data));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    .getAllUser()
+    .then((res) => {
+      console.log(res);
+      dispatch(getAllUser(res.data));
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   }, []);
+  
+  useEffect(() => {
+    if (Array.isArray(users)) {
+      const updateUser = users.map((item, index) => ({
+        ...item,
+        id: index,
+      }));
+      setNewUser(updateUser);
 
+    }
+  }, [users]);
   // xoá user
   const handleDelete = (record) => {
     nguoiDungServ
@@ -71,11 +74,9 @@ const error = (data) => {
       })
       .catch((err) => {
         console.log(err.response.data);
-  error(err.response.data)
+        errorMes(err.response.data);
       });
   };
-
-  
 
   // search antd
   const { Search } = Input;
@@ -90,7 +91,6 @@ const error = (data) => {
       })
       .catch((err) => {
         console.log(err);
-        
       });
   };
   const columns = [
