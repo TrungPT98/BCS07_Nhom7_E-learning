@@ -183,7 +183,7 @@ const Header = () => {
                 </NavLink>
               </li>
               <li className={`${admin ? 'hidden' : 'block'}`}>
-                <NavLink to={'http://localhost:3000/admin/user'} className="navlinkItem text-black block hover:bg-gray-50">
+                <NavLink to="/admin/user" className="navlinkItem text-black block hover:bg-gray-50">
                   Giảng viên
                 </NavLink>
               </li>
