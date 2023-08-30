@@ -91,11 +91,7 @@ const TableCoures = () => {
       })
       .catch((err) => {
           console.log(err.response.data);
-        if(err.response.data === 'Khóa học đã ghi danh học viên không thể xóa!'){
-                return error('Khóa học đã ghi danh học viên không thể xóa!')
-        }else{
-            return error('Có lỗi xảy ra')
-        }
+        error(err.response.data)
       });
   };
 

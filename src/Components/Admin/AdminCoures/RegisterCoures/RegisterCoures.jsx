@@ -51,10 +51,12 @@ const RegisterCoures = (props) => {
         .then((res) => {
           console.log(res);
           success();
+          alert("Ghi danh thành công");
           setBtn(true);
         })
         .catch((error) => {
           console.log(error);
+          alert("Có lỗi xảy ra");
           errorMessage();
         });
     },

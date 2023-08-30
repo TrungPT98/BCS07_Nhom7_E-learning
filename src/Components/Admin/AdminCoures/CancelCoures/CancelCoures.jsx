@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import "./CancelCoures.scss";
 import { useState } from "react";
 
-import { message } from "antd";
+import { message, Space } from "antd";
 
 // formik
 import { useFormik } from "formik";
@@ -13,14 +13,14 @@ import { khoaHocServ } from "../../../../services/khoaHocService";
 import { setStateBtn } from "../../../../redux/slices/couresSlice";
 
 const CancelCoures = (props) => {
-    const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [studentCoures, setStudentCoures] = useState([]);
   const { name } = useSelector((state) => state.nguoiDung);
   const { couresId } = props;
-//   console.log(couresId);
-    const {stateBtn} = useSelector((state)=>state.coures)
-    console.log(stateBtn)
-// message
+  //   console.log(couresId);
+  const { stateBtn } = useSelector((state) => state.coures);
+  console.log(stateBtn);
+  // message
   const [messageApi, contextHolder] = message.useMessage();
   const success = () => {
     messageApi.open({
@@ -73,11 +73,13 @@ const CancelCoures = (props) => {
         .then((res) => {
           console.log(res);
           success();
-          setBtn(true)
+          setBtn(true);
+          alert("Huỷ thành công");
         })
         .catch((err) => {
           error();
           console.log(err);
+          alert("Có lỗi xảy ra");
         });
     },
   });
