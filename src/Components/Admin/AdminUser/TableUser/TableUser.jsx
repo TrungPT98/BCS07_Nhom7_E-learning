@@ -24,7 +24,20 @@ const TableUser = () => {
   const [newUser, setNewUser] = useState([]);
   // console.log(users)
   const dispatch = useDispatch();
-
+// message antd
+const [messageApi, contextHolder] = message.useMessage();
+const success = () => {
+  messageApi.open({
+    type: "success",
+    content: "Xoá thành công",
+  });
+};
+const error = (data) => {
+  messageApi.open({
+    type: "error",
+    content: data,
+  });
+};
   useEffect(() => {
     const updateUser = users.map((item, index) => ({
       ...item,
@@ -57,25 +70,12 @@ const TableUser = () => {
         dispatch(getAllUser(res.data));
       })
       .catch((err) => {
-        error();
-        console.log(err);
+        console.log(err.response.data);
+  error(err.response.data)
       });
   };
 
-  // message antd
-  const [messageApi, contextHolder] = message.useMessage();
-  const success = () => {
-    messageApi.open({
-      type: "success",
-      content: "Xoá thành công",
-    });
-  };
-  const error = () => {
-    messageApi.open({
-      type: "error",
-      content: "Đã có lỗi xảy ra",
-    });
-  };
+  
 
   // search antd
   const { Search } = Input;
@@ -90,6 +90,7 @@ const TableUser = () => {
       })
       .catch((err) => {
         console.log(err);
+        
       });
   };
   const columns = [

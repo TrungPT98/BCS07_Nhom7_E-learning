@@ -23,10 +23,10 @@ const EditUser = () => {
        content: "Cập nhật thành công",
      });
    };
-   const error = () => {
+   const error = (data) => {
      messageApi.open({
        type: "error",
-       content: "Đã có lỗi xảy ra",
+       content: data,
      });
    };
 
@@ -93,7 +93,7 @@ const EditUser = () => {
       success()
      }).catch((err)=>{
       console.log(err)
-      error()
+      error(err.response.data)
      })
     },
   });
