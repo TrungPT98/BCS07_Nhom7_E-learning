@@ -29,7 +29,7 @@ const Usermanagment = () => {
           Thêm mới
         </button>
         <NavLink
-        to={'http://localhost:3000/'}
+        to="/"
           className="ms-4 bg-blue-600 py-2 px-5 rounded-lg  text-white hover:opacity-80 transition-all duration-300"
         >
           Quay về trang chủ
