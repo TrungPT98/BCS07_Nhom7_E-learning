@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-
+import headerLogo from "../../assets/image/headerLogo.png"
 // antd
 import { Dropdown, Space, Input } from "antd";
 import { khoaHocServ } from "../../services/khoaHocService";
@@ -80,7 +80,7 @@ const Header = () => {
           {/* logo */}
           <NavLink to="/" className="flex items-center">
             <img
-              src="./assets/image/headerLogo.png"
+              src={headerLogo}
               className="mr-3 h-6 md:h-9"
               alt="dadad"
             />
@@ -173,12 +173,12 @@ const Header = () => {
                 </NavLink>
               </li>
               <li>
-                <NavLink className="navlinkItem text-black block      md:p-0    ">
+                <NavLink to="/event" className="navlinkItem text-black block md:p-0 ">
                   Sự kiện
                 </NavLink>
               </li>
               <li>
-                <NavLink className="navlinkItem text-black block     hover:bg-gray-50 ">
+                <NavLink to="/info" className="navlinkItem text-black block hover:bg-gray-50 ">
                   Thông tin
                 </NavLink>
               </li>
