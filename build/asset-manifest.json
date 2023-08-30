@@ -1,0 +1,38 @@
+{
+  "files": {
+    "main.css": "/static/css/main.aa73adda.css",
+    "main.js": "/static/js/main.fc66273b.js",
+    "static/media/bgAbout.png": "/static/media/bgAbout.19ac825c933a0f05dfbf.png",
+    "static/media/high-techbrain.png": "/static/media/high-techbrain.2f38d2ab3661cec51dd5.png",
+    "static/media/lightTech.jpg": "/static/media/lightTech.32807735362e8ecff848.jpg",
+    "static/media/Google-logo.jpg": "/static/media/Google-logo.f11902b590b5a3a7b159.jpg",
+    "static/media/it.png": "/static/media/it.ef68b551c5162a495664.png",
+    "static/media/education-hero.png": "/static/media/education-hero.62147e5cae5a014b343c.png",
+    "static/media/headerLogo.png": "/static/media/headerLogo.58a291ee6133a0ea4937.png",
+    "static/media/meta.jpg": "/static/media/meta.10fa2fa1792f36d595d2.jpg",
+    "static/media/amazon.jpg": "/static/media/amazon.996890c42037debe5b75.jpg",
+    "static/media/olstudy.png": "/static/media/olstudy.963780861ab718358163.png",
+    "static/media/instrutor11.jpg": "/static/media/instrutor11.0387fe65bc7b2138497a.jpg",
+    "static/media/microsoft.jpg": "/static/media/microsoft.318b3280e7de994e973b.jpg",
+    "static/media/instrutor10.jpg": "/static/media/instrutor10.89946c439ca62de42014.jpg",
+    "static/media/instrutor12.jpg": "/static/media/instrutor12.90a808204f0bd490652e.jpg",
+    "static/media/backroundTech.jpg": "/static/media/backroundTech.a989a5f88fbe2637667e.jpg",
+    "static/media/students.png": "/static/media/students.fc2d9ab750cdd9aaec4a.png",
+    "static/media/instrutor5.jpg": "/static/media/instrutor5.2e4bd1e687b8575cb364.jpg",
+    "static/media/solutions-hero-royalBlue-bg.e6aa17e0.svg": "/static/media/solutions-hero-royalBlue-bg.e6aa17e0.0a5dab0b23f57d575da2.svg",
+    "static/media/solutions-hero-green-bg.15753edf.svg": "/static/media/solutions-hero-green-bg.15753edf.5db59af68fea81e32c2a.svg",
+    "static/media/hero-flex.png": "/static/media/hero-flex.553afb64538905738c6a.png",
+    "static/media/instrutor8.jpg": "/static/media/instrutor8.aec2f5261525c4f689a2.jpg",
+    "static/media/instrutor9.jpg": "/static/media/instrutor9.504ea6c5161e2510e702.jpg",
+    "static/media/instrutor7.jpg": "/static/media/instrutor7.edd00a0303872ab94ae2.jpg",
+    "static/media/instrutor6.jpg": "/static/media/instrutor6.64041dcadd0ea7a26b02.jpg",
+    "static/media/bg-all.png": "/static/media/bg-all.2b72c7ac12579024c723.png",
+    "index.html": "/index.html",
+    "main.aa73adda.css.map": "/static/css/main.aa73adda.css.map",
+    "main.fc66273b.js.map": "/static/js/main.fc66273b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.aa73adda.css",
+    "static/js/main.fc66273b.js"
+  ]
+}
