@@ -3,13 +3,13 @@ import { layDuLieuLocal } from "../../util/localStore";
 import { nguoiDungServ } from "../../services/nguoiDungService";
 
 // createAsynThunk xử lý bất đồng bộ
-export const getAllUserThunk = createAsyncThunk(
-  "nguoiDung/getAllUser",
-  async () => {
-    const res = await nguoiDungServ.getAllUser();
-    return res.data;
-  }
-);
+// export const getAllUserThunk = createAsyncThunk(
+//   "nguoiDung/getAllUser",
+//   async () => {
+//     const res = await nguoiDungServ.getAllUser();
+//     return res.data;
+//   }
+// );
 
 const initialState = {
   name: layDuLieuLocal("user"),
@@ -35,19 +35,22 @@ export const nguoiDungSlice = createSlice({
     },
     setNameAdd: (state,action) => {
       state.userAddCoures = action.payload
-    }
+    },
+    getAllUser: (state,action) => {
+      state.users = action.payload
+    }, 
   },
-  extraReducers: (builder) => {
-    builder.addCase(getAllUserThunk.fulfilled, (state, action) => {
-      // console.log(action);
-      // console.log(state);
-      state.users = action.payload;
-    });
-  },
+  // extraReducers: (builder) => {
+  //   builder.addCase(getAllUserThunk.fulfilled, (state, action) => {
+  //     // console.log(action);
+  //     // console.log(state);
+  //     state.users = action.payload;
+  //   });
+  // },
 });
 
 // sử dụng phương thức trong {} dưới component
-export const { setName, getInfoUser, setNameAdd } = nguoiDungSlice.actions;
+export const { setName, getInfoUser, setNameAdd,getAllUser } = nguoiDungSlice.actions;
 
 // import vào store redux
 export default nguoiDungSlice.reducer;

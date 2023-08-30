@@ -4,6 +4,7 @@ import TableUser from "../../Components/Admin/AdminUser/TableUser/TableUser";
 // antd
 import { Button, Drawer, Radio, Space } from "antd";
 import FormAddUser from "../../Components/Admin/AdminUser/FormAddUser/FormAddUser";
+import { NavLink } from "react-router-dom";
 const Usermanagment = () => {
   const [open, setOpen] = useState(false);
   const [placement, setPlacement] = useState("right");
@@ -23,10 +24,16 @@ const Usermanagment = () => {
       <div>
         <button
           onClick={showDrawer}
-          className="bg-green-600 py-2 px-5 rounded-lg mb-5 text-white"
+          className="bg-green-600 py-2 px-5 rounded-lg  text-white hover:opacity-80 transition-all duration-300"
         >
           Thêm mới
         </button>
+        <NavLink
+        to={'http://localhost:3000/'}
+          className="ms-4 bg-blue-600 py-2 px-5 rounded-lg  text-white hover:opacity-80 transition-all duration-300"
+        >
+          Quay về trang chủ
+        </NavLink>
         <TableUser />
         <Drawer
           title="Thêm người dùng"

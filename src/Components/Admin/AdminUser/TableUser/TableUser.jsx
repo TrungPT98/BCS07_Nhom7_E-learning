@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 // antd
-import { Space, Table, Tag, Button, message, Popconfirm } from "antd";
+import { Space, Table, Tag, message, Popconfirm, Input } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { nguoiDungServ } from "../../../../services/nguoiDungService";
-import { getAllUserThunk } from "../../../../redux/slices/nguoiDungSlice";
+import {
+  getAllUser,
+  getAllUserThunk,
+} from "../../../../redux/slices/nguoiDungSlice";
 import { GROUP_ID } from "../../../../services/khoaHocService";
 
 // confirm antd
@@ -16,24 +19,34 @@ const cancel = (e) => {
   message.error("Click on No");
 };
 const TableUser = () => {
-
-// dispatch
+  // biến chứa dữ liệu user
+  const { users } = useSelector((state) => state.nguoiDung);
+  const [newUser, setNewUser] = useState([]);
+  // console.log(users)
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const updateUser = users.map((item, index) => ({
+      ...item,
+      id: index,
+    }));
+    setNewUser(updateUser);
+  }, [users]);
+  //  console.log(newUser)
+  // dispatch
   // gọi dữ liệu users
   useEffect(() => {
     nguoiDungServ
       .getAllUser()
       .then((res) => {
         console.log(res);
-        dispatch(getAllUserThunk());
+        dispatch(getAllUser(res.data));
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
 
-  // biến chứa dữ liệu user
-  const { users } = useSelector((state) => state.nguoiDung);
   // xoá user
   const handleDelete = (record) => {
     nguoiDungServ
@@ -41,14 +54,13 @@ const TableUser = () => {
       .then((res) => {
         console.log(res);
         success();
-        dispatch(getAllUserThunk());
+        dispatch(getAllUser(res.data));
       })
       .catch((err) => {
         error();
         console.log(err);
       });
   };
-
 
   // message antd
   const [messageApi, contextHolder] = message.useMessage();
@@ -65,6 +77,21 @@ const TableUser = () => {
     });
   };
 
+  // search antd
+  const { Search } = Input;
+  const onSearch = (value) => {
+    console.log(value);
+    nguoiDungServ
+      .getAllUser(value)
+      .then((res) => {
+        console.log(res);
+        // console.log(res.data)
+        dispatch(getAllUser(res.data));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   const columns = [
     {
       title: "ID",
@@ -142,16 +169,20 @@ const TableUser = () => {
       ),
     },
   ];
-  
-  const newUser = users.map((item, index) => {
-    return {
-      ...item,
-      id: index,
-    };
-  });
+
   return (
     <>
       {contextHolder}
+      <h3 className="my-4">Quản lý người dùng</h3>
+      <Search
+        placeholder="Tìm người dùng"
+        allowClear
+        onSearch={onSearch}
+        style={{
+          width: "100%",
+          marginBottom: "30px",
+        }}
+      />
       <Table columns={columns} dataSource={newUser} />
     </>
   );

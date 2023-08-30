@@ -27,7 +27,7 @@ const RegisterCoures = (props) => {
   const success = () => {
     messageApi.open({
       type: "success",
-      content: "Ghi danh thành công",
+      content: "Đăng ký thành công",
     });
   };
   const errorMessage = () => {
@@ -157,7 +157,7 @@ const RegisterCoures = (props) => {
                 btn ? "opacity-60" : "hover:opacity-75"
               }`}
             >
-              Ghi danh
+              Đăng ký
             </button>
 
             <CancelCoures couresId={id} />
