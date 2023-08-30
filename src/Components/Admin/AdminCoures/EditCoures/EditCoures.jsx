@@ -8,7 +8,7 @@ import { DatePicker, Form, Input, Radio, Select, message } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment/moment";
 import { GROUP_ID, khoaHocServ } from "../../../../services/khoaHocService";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   getInfoCoures,
   getUpdateCoures,
@@ -21,6 +21,8 @@ const EditCoures = () => {
   //   console.log(maKhoaHoc);
   //   useDispatch
   const dispatch = useDispatch();
+  // useNavigate
+  const navigate = useNavigate()
   // state img
   const [imgSrc, setImgSrc] = useState("");
   // message
@@ -134,6 +136,7 @@ const EditCoures = () => {
         .then((res) => {
           console.log(res);
           success();
+          navigate('http://localhost:3000/admin/coures')
           dispatch(getUpdateCoures(res.data));
         })
         .catch((err) => {

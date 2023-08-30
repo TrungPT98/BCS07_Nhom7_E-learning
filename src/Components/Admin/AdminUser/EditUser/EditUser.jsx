@@ -8,13 +8,13 @@ import * as Yup from "yup";
 
 // antd
 import {Button, message } from "antd";
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { nguoiDungServ } from '../../../../services/nguoiDungService';
 import { useState } from 'react';
 
 const EditUser = () => {
-
+  const navigate = useNavigate()
    // message
    const [messageApi, contextHolder] = message.useMessage();
    const success = () => {
@@ -91,6 +91,7 @@ const EditUser = () => {
      nguoiDungServ.updateInfoUser(values).then((res)=>{
       console.log(res)
       success()
+      navigate('http://localhost:3000/admin/user')
      }).catch((err)=>{
       console.log(err)
       error(err.response.data)
